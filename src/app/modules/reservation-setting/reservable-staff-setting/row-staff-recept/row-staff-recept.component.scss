@@ -1,0 +1,75 @@
+
+.input-number {
+  width: 120px;
+}
+
+.combobox2 {
+  width: 120px;
+}
+
+.combobox1 {
+  width: 80px;
+}
+
+.input-group__label {
+  padding-top: 0 !important;
+  padding-bottom: 10px !important;
+}
+
+input[type="number"] {
+  text-align: right !important;
+  padding: 8px 5px;
+}
+
+.btn-area .bt.next {
+  width: 100%;
+}
+
+.lable {
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 767px) {
+  .input-number {
+    width: 90px;
+  }
+
+  .combobox2 {
+    width: 75px;
+  }
+
+  .combobox1 {
+    width: 60px;
+  }
+}
+.row_data {
+  display: flex;
+  justify-content: space-around;
+  div:not(:first-child) {
+    text-align: center;
+  }
+}
+.w-35 {
+  width: 35%;
+}
+.w-15 {
+  width: 15%;
+  text-align: center;
+}
+.w-25 {
+  width: 25%;
+}
+.my-input {
+  width: 100% !important;
+}
+.input-error {
+  border: 1px solid #ff648c;
+  background: #ffecf1;
+}
+.my-input.input-error {
+  border: 1px solid #ff648c !important;
+  background: #ffecf1 !important;
+}
+.pl-100{
+  padding-left: 100px !important;
+}

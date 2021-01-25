@@ -1,0 +1,31 @@
+.list_header_special {
+  display: flex;
+  font-size: 14px;
+  font-size: 1.4rem;
+  justify-content: space-around;
+  text-align: center;
+}
+.row-data {
+  display: flex;
+  justify-content: space-around;
+  div {
+    text-align: center;
+  }
+}
+.w-40 {
+  width: 40% !important;
+  padding: 0 5px;
+}
+.w-30 {
+  width: 30% !important;
+  margin: 0 5px;
+}
+.col-12 {
+  margin-top: 0 !important;
+}
+.input-group.single.w-40 {
+  padding: 10px 5px 0px 0px !important;
+}
+.input-group.single.w-30 {
+  padding: 20px 5px 0px 0px !important;
+}

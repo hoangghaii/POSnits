@@ -1,0 +1,205 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="customer-info-tab">
+        <div class="flex-row">
+          <div class="col-12 mt-0">
+            <h2 class="title title-bold pl-10">
+              <span>{{'saleTotal.salesTotal' | translate}}</span>
+            </h2>
+          </div>
+          <div class="col-12">
+            <form [formGroup]="form">
+              <div class="white-box pt-15 pb-20 radius-none">
+                <div class="pl-15 pr-15 pb-15">
+                  <app-top-error  *ngIf="submitted" [form]="form" [formMap]="formMap"></app-top-error>
+                </div>
+                <div class="item-group">
+                  <div class="left">
+                    <label>{{"saleTotal.specifyPeriod" | translate}}</label>
+                  </div>
+                  <div class="right">
+                    <div class="group-date">
+                      <div class="input-group">
+                        <input type="date" class="input-date" formControlName="target_day_from"
+                        [ngClass]="{'input-error': submitted && form.controls.target_day_from.errors}">
+                      </div>
+                      <label>～</label>
+                      <div class="input-group">
+                        <input type="date" class="input-date" formControlName="target_day_to"
+                        [ngClass]="{'input-error': submitted && form.controls.target_day_to.errors}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="item-group">
+                  <div class="left">
+                    <label>{{"saleTotal.personInCharge" | translate}}</label>
+                  </div>
+                  <div class="right">
+                    <div class="group-date">
+                      <div class="input-group">
+                        <div class="input-group__label mt-0 pt-0"></div>
+                        <select name="" id="" formControlName="staff_id" (change)="getStaffName()"
+                        [ngClass]="{'input-error': submitted && form.controls.staff_id.errors}">
+                          <option *ngFor="let item of listStaff" [value]="item.id">{{item.name}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group single" style="text-align: center;">
+                  <button class="btn mt-20 mb-15" (click)="search()"
+                    style="width: 40%;">{{"saleTotal.btnCreateSalesSummary" | translate}}</button>
+                </div>
+                <div *ngIf="isSearch">
+                  <div class="item-group label">
+                    <div class="left">
+                      <label>{{"saleTotal.specifyPeriod" | translate}}</label>
+                    </div>
+                    <div class="right">
+                      <div class="group-date">
+                        <label>{{form.get('target_day_from').value != '' ? form.get('target_day_from').value : '-'}}</label>
+                        <label>～</label>
+                        <label>{{form.get('target_day_to').value != '' ? form.get('target_day_to').value : '-'}}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-group label">
+                    <div class="left">
+                      <label>{{"saleTotal.personInCharge" | translate}}</label>
+                    </div>
+                    <div class="right">
+                      <div class="group-date">
+                        <label>{{form.get('staff_name').value != '' ? form.get('staff_name').value : '-'}}</label>
+                        <button class="btn btn-down" (click)="download()">{{"saleTotal.btnSalesSummaryDownload" | translate}}</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="white-box--links">
+                    <h3 class="mb-5" style="border-bottom: unset;">{{"saleTotal.salesStatus" | translate}}</h3>
+                    <table class="table-border">
+                      <tbody>
+                        <tr>
+                          <td>{{"saleTotal.technologySales" | translate}}</td>
+                          <td class="number">{{saleTotal?.moneySkillSales | number}}</td>
+                          <td>{{"saleTotal.technicalUnitPrice" | translate}}</td>
+                          <td class="number">{{saleTotal?.averageSkill | number}}</td>
+                        </tr>
+                        <tr>
+                          <td>{{"saleTotal.productSales" | translate}}</td>
+                          <td class="number">{{saleTotal?.moneyItemSales | number}}</td>
+                          <td>{{"saleTotal.productUnitPrice" | translate}}</td>
+                          <td class="number">{{saleTotal?.averageItem | number}}</td>
+                        </tr>
+                        <tr>
+                          <td>{{"saleTotal.totalSales" | translate}}</td>
+                          <td class="number">{{saleTotal?.totalSales | number}}</td>
+                          <td>{{"saleTotal.customerUnitPrice" | translate}}</td>
+                          <td class="number">{{saleTotal?.averageItemSkill | number}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="white-box--links">
+                    <h3 class="mb-5" style="border-bottom: unset;">{{"saleTotal.contractDigestionStatus" | translate}}
+                    </h3>
+                    <table class="table-border">
+                      <tbody>
+                        <tr>
+                          <td>{{"saleTotal.contractAmount" | translate}}</td>
+                          <td class="number">{{saleTotal?.moneyCourseSales | number}}</td>
+                          <td>{{"saleTotal.numberOfContractCustomers" | translate}}</td>
+                          <td class="number">{{saleTotal?.averageCourses | number}}</td>
+                        </tr>
+                        <tr>
+                          <td>{{"saleTotal.digestionAmount" | translate}}</td>
+                          <td class="number">{{saleTotal?.moneyUseCourseSales | number}}</td>
+                          <td>{{"saleTotal.numberOfDigestedCustomers" | translate}}</td>
+                          <td class="number">{{saleTotal?.customersUseCourseSales | number}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="white-box--links">
+                    <h3 class="mb-5" style="border-bottom: unset;">{{"saleTotal.customerStatus" | translate}}</h3>
+                    <table class="table-border">
+                      <tbody>
+                        <tr>
+                          <td>{{"saleTotal.numberOfVisitors" | translate}}</td>
+                          <td class="number">{{saleTotal?.totalCustomer | number}}</td>
+                          <td>{{"saleTotal.numberOfNewCustomers" | translate}}</td>
+                          <td class="number">{{saleTotal?.customersNew | number}}</td>
+                        </tr>
+                        <tr>
+                          <td>{{"saleTotal.numberOfTechnicalCustomers" | translate}}</td>
+                          <td class="number">{{saleTotal?.customerSkills | number}}</td>
+                          <td>{{"saleTotal.fixedNumberOfCustomers" | translate}}</td>
+                          <td class="number">{{saleTotal?.customersMember | number}}</td>
+                        </tr>
+                        <tr>
+                          <td>{{"saleTotal.numberOfCustomersPurchasingProducts" | translate}}</td>
+                          <td class="number">{{saleTotal?.customerItems | number}}</td>
+                          <td class="unset-border-bottom">&#8866; {{"saleTotal.times" | translate: {number: 2} }} </td>
+                          <td class="unset-border-bottom number">{{saleTotal?.visit2 | number}}</td>
+                        </tr>
+                        <tr>
+                          <td>{{"saleTotal.numberOfReservationCustomers" | translate}}</td>
+                          <td class="number">{{saleTotal?.customersWeb | number}}</td>
+                          <td class="unset-border-top unset-border-bottom">&#8866;
+                            {{"saleTotal.times" | translate: {number: 3} }}</td>
+                          <td class="unset-border-top unset-border-bottom number">{{saleTotal?.visit3 | number}}</td>
+                        </tr>
+                        <tr>
+                          <td>{{"saleTotal.male" | translate}}</td>
+                          <td class="number">{{saleTotal?.count_male | number}}</td>
+                          <td class="unset-border-top unset-border-bottom">&#8866;
+                            {{"saleTotal.times" | translate: {number: 4} }}</td>
+                          <td class="unset-border-top unset-border-bottom number">{{saleTotal?.visit4 | number}}</td>
+                        </tr>
+                        <tr>
+                          <td>{{"saleTotal.female" | translate}}</td>
+                          <td class="number">{{saleTotal?.count_female | number}}</td>
+                          <td class="unset-border-top">&#8735; {{"saleTotal.timesOrMore" | translate: {number: 5} }} </td>
+                          <td class="unset-border-top number">{{saleTotal?.visit5 | number}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="col-8 mt-0">
+                    <div class="white-box--links">
+                      <h3 class="mb-5" style="border-bottom: unset;">{{"saleTotal.cashierCheckout" | translate}}</h3>
+                      <table class="table-border">
+                        <tbody>
+                          <tr>
+                            <td style="text-align: left;">{{"saleTotal.amountOfMoney" | translate}}</td>
+                            <td class="number">{{saleTotal?.cash | number}}</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left;">{{"saleTotal.credit" | translate}}</td>
+                            <td class="number">{{saleTotal?.credit | number}}</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left;">{{"saleTotal.barcode" | translate}}</td>
+                            <td class="number">{{saleTotal?.barcode | number}}</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left;">{{"saleTotal.couponsAndOthers" | translate}}</td>
+                            <td class="number">{{saleTotal?.coupon + saleTotal?.other | number}} </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="btn-area flex-row">
+        <div routerLink="/analytics" class="bt skip next_full open_dialog">{{"customer.btnBack" | translate}}</div>
+      </div>
+    </section>
+  </article>
+</main>

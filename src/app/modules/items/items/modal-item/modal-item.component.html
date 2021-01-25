@@ -1,0 +1,141 @@
+<div class="create-modal" [ngClass]="open ? 'open' : null">
+  <div class="create-modal-overlay" (click)="closeModal()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">
+      {{ "product.headerModal" | translate }}<span class="create-modal__header-close" (click)="closeModal()">&times;</span>
+    </div>
+    <div class="create-modal__body">
+      <form [formGroup]="productForm">
+        <div class="err">
+          <app-top-error *ngIf="submitted" [form]="productForm" [formMap]="formMap"></app-top-error>
+        </div>
+        <div class="input-group">
+          <label for="" class="input-group__label">{{
+            "product.selectClassId" | translate
+            }}</label>
+          <select
+            class="select-form mt-10"
+            formControlName="classId"
+            [ngClass]="{
+              'input-error': submitted && f.classId.errors
+            }"
+          >
+            <option *ngFor="let item of listClass" value="{{ item.id }}">
+              {{ item.name }}
+            </option>
+          </select>
+        </div>
+        <!-- <app-show-errors
+          *ngIf="submitted"
+          [ctrl]="f.classId"
+          [nameControll]="'商品分類'"
+        ></app-show-errors> -->
+
+        <div class="input-group single mt-15">
+          <label for="" class="input-group__label">{{
+            "product.nameProduct" | translate
+            }}</label>
+          <input
+            type="text"
+            class="input-text"
+            placeholder="{{ 'product.placeholderNameProduct' | translate }}"
+            formControlName="name"
+            [ngClass]="{
+              'input-error': submitted && f.name.errors
+            }"
+          />
+        </div>
+        <!-- <app-show-errors
+          *ngIf="submitted"
+          [ctrl]="f.name"
+          [nameControll]="'商品名称'"
+        ></app-show-errors> -->
+        <div class="input-group single mt-15 unit">
+          <label for="" class="input-group__label">{{
+            "product.usedDateProduct" | translate
+            }}</label>
+          <input
+            type="text"
+            class="input-text"
+            placeholder="{{ 'product.placeholderUsedDate' | translate }}"
+            formControlName="usedDate"
+            [ngClass]="{
+              'input-error': submitted && f.usedDate.errors
+            }"
+          /><span class="txt">{{ "common.date" | translate }}</span>
+        </div>
+        <!-- <app-show-errors
+          *ngIf="submitted"
+          [ctrl]="f.usedDate"
+          [nameControll]="'使用推定日数'"
+          [errorMsg]="'※ 使用推定日数は数字で入力してください。'"
+        ></app-show-errors> -->
+        <div class="input-group single mt-15 unit">
+          <label for="" class="input-group__label">{{
+            "product.priceProduct" | translate
+            }}</label>
+          <input
+            type="text"
+            class="input-text"
+            placeholder="価格を入力してください"
+            formControlName="price"
+            [ngClass]="{
+              'input-error': submitted && f.price.errors
+            }"
+          /><span class="txt">{{ "common.price" | translate }}</span>
+        </div>
+        <!-- <app-show-errors
+          *ngIf="submitted"
+          [ctrl]="f.price"
+          [nameControll]="'価格（税抜）'"
+          [errorMsg]="'※ 価格（税抜）は数字で入力してください。'"
+        ></app-show-errors> -->
+        <div class="input-group mt-10">
+          <label for="" class="input-group__label">{{
+            "product.taxId" | translate
+            }}</label>
+          <select
+            class="select-form mt-10"
+            formControlName="taxId"
+            [ngClass]="{
+              'input-error': submitted && f.taxId.errors
+            }"
+          >
+            <option *ngFor="let item of listTaxes" value="{{ item.id }}">
+              {{ item.tax + '%' }}
+            </option>
+          </select>
+        </div>
+        <!-- <app-show-errors
+          *ngIf="submitted"
+          [ctrl]="f.taxId"
+          [nameControll]="'価格（税抜）'"
+          [errorMsg]="'※ 価格（税抜）は数字で入力してください。'"
+        ></app-show-errors> -->
+        <input type="hidden" formControlName="id" />
+
+        <div class="btn-grp mt-20" *ngIf="selectCurrent; else btnCreate">
+          <button
+            type="submit"
+            class="btn mt-20 btn-delete"
+            (click)="handleDelete()"
+          >
+            {{ "common.btnDelete" | translate }}
+          </button>
+          <button type="submit" class="btn mt-20" (click)="handleUpdate()">
+            {{ "common.btnUpdate" | translate }}
+          </button>
+        </div>
+        <ng-template #btnCreate>
+          <button type="submit" class="btn mt-20" (click)="handleCreate()">
+            {{ "common.btnRegister" | translate }}
+          </button>
+        </ng-template>
+      </form>
+    </div>
+  </div>
+</div>
+<app-confirm-modal
+  #confirmModal
+  (confirm)="handleConfirm($event)"
+></app-confirm-modal>

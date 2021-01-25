@@ -1,0 +1,25 @@
+<div class="upload-file">
+  <span class="upload-btn" *ngIf="!imagesUrl" ngClass="{{ label }}"
+        (click)="file.click()">{{ fileSelectionLabel }}</span>
+  <input [hidden]="!isButton" type="file" class="input-file" accept="
+    'image/png',
+    'image/gif',
+    'image/jpeg',
+    'image/bmp',
+    " #file (change)="fileSelected($event.target.files)" (cancel)="fileSelected($event.target.files)"/>
+  <div *ngIf="!imagesUrl" class="input-group single mt-10 mb-10">
+    <label class="input-group__label">
+      {{ "uploadFile.maxSizeAndType" | translate }}
+    </label>
+  </div>
+  <div class="input-group single mt-10" *ngIf="imagesUrl">
+    <div class="container">
+      <div class="img-content">
+        <button class="icon" (click)="removeImg()">
+          <label>X</label>
+        </button>
+        <img style="margin-bottom: 10px; width: 200px;" onerror="this.onerror=null;this.src='assets/images/icon/no-img-staff.svg';"  [src]="imagesUrl"/>
+      </div>
+    </div>
+  </div>
+</div>

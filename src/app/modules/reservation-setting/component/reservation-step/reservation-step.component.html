@@ -1,0 +1,10 @@
+<div class="bar-step">
+  <div class="pl-20 pr-20 pt-20 pb-20 flex-row">
+    <div class="label">
+      <span>{{ "regularHoliday.step.title" | translate }}</span>
+      {{helper.formatZero(stepNum) + '/' + helper.formatZero(endStep)}}
+    </div>
+    <div #viewStep class="step">
+    </div>
+  </div>
+</div>

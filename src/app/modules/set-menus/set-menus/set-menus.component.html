@@ -1,0 +1,53 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span>{{ "setMenu.setMenuList" | translate }}</span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <div class="pl-0 pr-0">
+            <div class="add-button mt-0">
+              <button (click)="openModal('create')">
+                <span></span>
+                <em>{{ "setMenu.btnCreate" | translate }}</em>
+              </button>
+            </div>
+          </div>
+
+          <div class="list mt-30">
+            <div class="list__header" style="position: sticky" id="btn-toggle-bigList">
+              {{ "setMenu.setMenuList" | translate }}
+            </div>
+            <div class="list__body list02 arrow toggle" id="toggle-bigList">
+              <ul class="tech-list" cdkDropList (cdkDropListDropped)="drop($event)">
+                <li *ngFor="let menu of menuList" cdkDragLockAxis="y" cdkDragBoundary=".tech-list" cdkDrag
+                    class="tech-box">
+                  <div class="tech-box__item1" style="justify-content: unset; display: flex !important;">
+                    <div class="tech-box__item1-1">
+                      <p class="tech-box__content">
+                        <span class="edit" (click)="selectedRow(menu)">
+                          {{ "common.edit" | translate }}
+                        </span>
+                        <span class="txt">{{ menu.name }}</span>
+                        <input type="hidden" value="{{ menu.sort }}"/>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="ico tech-box__item2" cdkDragHandle>
+                    <span class="ico__item1"></span>
+                    <span class="ico__item2"></span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<app-modal-set-menu *ngIf="isOpen" [isOpen]="isOpen" [setMenu]="selectCurrent" (confirm)="closeModal($event)"></app-modal-set-menu>

@@ -1,0 +1,59 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span>{{ "mailDestination.titleScreen" | translate }}</span>
+          </h2>
+          <div class="bar-step">
+            <app-reservation-step [stepNum]="8"></app-reservation-step>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="pl-0 pr-0">
+            <div class="add-button mt-0">
+              <button (click)="openModal('create')">
+                <span></span><em>{{ "mailDestination.btnAdd" | translate }}</em>
+              </button>
+            </div>
+          </div>
+          <div class="list mt-30">
+            <div class="list__header" style="position: sticky;" id="btn-toggle-bigList
+            ">
+              {{ "mailDestination.listMails" | translate }}
+              
+            </div>
+            <div class="list__body list02 arrow toggle" id="toggle-bigList">
+              <ul class="tech-list" *ngFor="let lm of listMails">
+                <li
+                  class="tech-box" *ngIf="lm&&lm.name!=''">
+                  <div class="tech-box__item1">
+                    <div class="tech-box__item1-1">
+                      <p class="tech-box__content
+                      ">
+                        <span class="edit" (click)="selectedRow(lm)">
+                          {{ "common.edit" | translate }}
+                        </span><span class="txt"  style="line-height: 1.5em;margin-bottom: 5px;">{{ lm.name }}({{ lm.email }})</span>
+                      </p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </article>
+  <div class="btn-area flex-row" style="margin:10px">
+    <div (click)="createMail()" class="bt next next_full open_dialog"  [ngClass]="(flag==true)?'editBtn':'null'"
+    >{{ btn }}</div>
+  </div>
+</main>
+
+<app-mail-create-modal [open]="open" [selectCurrent]="selectCurrent" (statusSelect)="checkStatus($event)"
+                       (newItemEvent)="addItem($event)"
+                       (confirm)="closeModal($event)"></app-mail-create-modal>

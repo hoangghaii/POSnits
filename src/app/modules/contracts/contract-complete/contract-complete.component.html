@@ -1,0 +1,72 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="online-application-completed">
+        <div class="flex-row">
+          <div class="col-12 mt-20">
+            <h2 class="title title-bold">
+              <span class="pl-0 pr-0 header-oap ">{{ 'contractors.complete.title' | translate}}</span>
+            </h2>
+          </div>
+          <div class="col-12">
+            <div class="white-box pt-5 pb-50 radius-none">
+          <div class="col-12 pl-20 pr-20">
+            <p>{{ 'contractors.complete.completeContractText01' | translate}}</p>
+            <p>{{ 'contractors.complete.completeContractText02' | translate}}</p>
+            <p>{{ 'contractors.complete.completeContractText03' | translate}}</p>
+            <p class="mt-20">{{ 'contractors.complete.completeContractText04' | translate}}</p>
+          </div>
+
+          <div class="col-12 mt-50 pl-10 pr-10">
+            <h2 class="title title-bold pl-10 pt-20">
+              <span>{{ 'contractors.complete.contractFeeTitle' | translate}}</span>
+            </h2>
+
+            <table>
+              <tr class="tb-content">
+                <td>{{ 'contractors.selectDetail.standardFeature' | translate}}</td>
+                <td> {{ 'contractors.selectDetail.pos' | translate}}</td>
+                <td>{{helper.formatCurrency(contract?.serviceFee?.standard)
+                + ('contractors.selectDetail.perMonth'| translate)}}</td>
+              </tr>
+              <tr class="tb-content"
+                  *ngIf="contract?.serviceFee?.web == true">
+                <td>{{ 'contractors.selectDetail.option' | translate}}</td>
+                <td>{{ 'contractors.selectDetail.web' | translate}}</td>
+                <td> {{helper.formatCurrency(contract?.serviceFee?.webFee)
+                + ('contractors.selectDetail.perMonth'| translate)}}</td>
+              </tr>
+              <tr class="tb-content"
+                  *ngIf="contract?.serviceFee?.payment == true">
+                <td>
+                    <span *ngIf="contract?.serviceFee?.web == false">
+                      {{ 'contractors.selectDetail.option' | translate}}
+                    </span>
+                </td>
+                <td>{{ 'contractors.selectDetail.payment' | translate}}</td>
+                <td> {{helper.formatCurrency(contract?.serviceFee?.paymentFee)
+                + ('contractors.selectDetail.perMonth'| translate)}}</td>
+              </tr>
+              <tr class="tb-footer">
+                <td colspan="2">
+                  {{ 'contractors.selectDetail.total' | translate}}
+                </td>
+                <td>
+                  {{helper.formatCurrency(contract?.serviceFee?.total)
+                + ('contractors.selectDetail.perMonth'| translate)}}
+                </td>
+              </tr>
+            </table>
+          </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="btn-area flex-row" style="display: flex;">
+          <button type="button" class="bt skip"
+            style="width: 100%; background: #ff648c; color: white;">{{ 'contractors.complete.btnComplete' | translate}}</button>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>

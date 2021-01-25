@@ -1,0 +1,140 @@
+.content-top {
+  font-weight: bold;
+  line-height: 25px;
+  font-size: 1.5rem;
+}
+
+.input-group {
+  width: 100%;
+  padding-top: 0;
+}
+
+.input-text {
+  width: 100%;
+}
+
+.inline-item {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.icon-add {
+  margin-top: 15px !important;
+  margin-left: 10px;
+  width: auto !important;
+  a {
+    cursor: pointer;
+  }
+}
+
+.c-pink {
+  color: #ff648c !important;
+}
+
+.pl-0 {
+  padding-left: 0;
+}
+
+.pr-0 {
+  padding-right: 0;
+}
+
+.pt-0 {
+  padding-top: 0;
+}
+
+.line-bottom {
+  border-bottom: 1.9px solid #e4e4e4;
+}
+
+.input-group__row {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.mr-20 {
+  margin-bottom: 20px;
+}
+
+.mr-7 {
+  margin-right: 7px;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.label-right {
+  text-align: right;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.add-button {
+  button {
+    width: 100%;
+  }
+}
+
+.w-half {
+  width: 50%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: initial;
+  cursor: pointer;
+
+  &.w-half-pink {
+    background-color: #ff648c;
+    color: #ffffff;
+  }
+}
+
+.create-modal__body__registration {
+  padding: 0px !important;
+  margin-top: 15px;
+}
+
+.icon {
+  width: 15px;
+  height: auto;
+}
+
+.customer-search {
+  cursor: pointer;
+}
+
+.reservation-date-and-time {
+  width: 100%;
+  border: 1px solid #dadbdb;
+  border-radius: 24px;
+  font-size: 1.6rem;
+  letter-spacing: 0.1em;
+  padding: 8px 16px;
+  background-color: #fff;
+  outline: none;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.create-modal__inner {
+  overflow: auto;
+}
+
+.wrap-li {
+  max-height: 79.6vh;
+  height: auto;
+  overflow: auto;
+}
+
+.cs-input-group__row{
+  display: flex;
+  align-items: flex-end;
+
+  .input-group:first-child{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

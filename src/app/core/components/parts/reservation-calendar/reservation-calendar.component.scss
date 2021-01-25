@@ -1,0 +1,19 @@
+td {
+  position: relative;
+
+  &.choice {
+    em {
+      color: #ffffff;
+    }
+  }
+
+  em {
+      font-size: 1rem;
+      color: #fe658d;
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+  }
+}

@@ -1,0 +1,114 @@
+<main class="pb-50 menu-cooperation__container">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 pl-15 pr-15">
+          <h2 class="title fw-bold title--type02 mt-15">
+            <span>{{'menuCooperationStaff.menuCooperationStaff' | translate}}</span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <form [formGroup]="staffForm">
+            <div class="input-group pb-15 bg-white pl-15 pr-15">
+              <div class="err">
+                <app-top-error *ngIf="submitted" [form]="staffForm" [formMap]="formMap"></app-top-error>
+              </div>
+              <label for="" class="input-group__label">
+                {{'menuCooperationStaff.selectStaff' | translate}}
+              </label>
+              <select name="" id="" class="mt-10" [formControlName]="'staffId'" (change)="getStaffMenuList()"
+              [ngClass]="{'select-error': submitted && this.staffForm.controls.staffId.value == ''}">
+                <option value=''></option>
+                <option *ngFor="let item of listStaff " value="{{item.id}}">{{item.name}}</option>
+              </select>
+              <div class="add-button mt-20">
+                <button class="btn-pink w-100" (click)="openModal()">
+                  <span></span><em>{{'menuCooperationStaff.selectMenu' | translate}}</em>
+                </button>
+              </div>
+            </div>
+            <div class="list mt-30">
+              <div class="list__header">
+                {{'menuCooperationStaff.technologyList' | translate}}
+              </div>
+              <div class="list mt-15 pr-15 pl-15" *ngIf="check(techClassListTech)">
+                <div class="list__header collapsible-heading collapsible-heading--menu" #collapsibleM1 (click)="toggleAccordian(collapsibleM1)">
+                  {{'menuRegistration.technology' | translate}}
+                </div>
+                <div class="list__body list02">
+                  <ul class="tech__ul collapsible" *ngFor="let tcl of techClassListTech; let i = index">
+                    <li class="collapsible-heading" #collapsible1 (click)="toggleAccordian(collapsible1)" *ngIf="filterItemsOfType(tcl.id)?.length > 0"><a>{{
+                        tcl.name }}</a></li>
+                    <div class="tech__listGroup collapsible-content collapsible-content__1">
+                      <div class="tech-list toggle" [id]="'toogle-list' + i">
+                        <li class="tech-box" *ngFor="let staffMenu of filterItemsOfType(tcl.id)"
+                        >
+                          <div class="tech-box__item1">
+                            <div class="tech-box__item1-1">
+                              <p class="tech-box__content">
+                                <span class="txt">
+                                  {{ staffMenu.details[0].name }}
+                                  <strong>
+                                    {{ helper.formatCurrency(staffMenu.details[0].price) }}
+                                  </strong>
+                                </span>
+                              </p>
+                            </div>
+                            <div class="ico" (click)="deleteStaffMenu(staffMenu.id)">
+                              <div class="trash-icon__box">
+                                <img src="./assets/images/icon/trash-alt-solid.svg" alt="" class="trash-icon"/>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </div>
+                    </div>
+                  </ul>
+                </div>
+              </div>
+              <div class="list pr-15 pl-15" *ngIf="check(techClassListCourse)">
+                <div class="list__header collapsible-heading collapsible-heading--menu" #collapsibleM2 (click)="toggleAccordian(collapsibleM2)">
+                  {{'menuRegistration.course' | translate}}
+                </div>
+                <div class="list__body list02">
+                  <ul class="tech__ul collapsible" *ngFor="let tcl of techClassListCourse; let i = index">
+                    <li class="collapsible-heading" #collapsible2 (click)="toggleAccordian(collapsible2)" *ngIf="filterItemsOfType(tcl.id)?.length > 0"><a>{{
+                        tcl.name }}</a></li>
+                    <div class="tech__listGroup collapsible-content collapsible-content__1">
+                      <div class="tech-list toggle" [id]="'toogle-list' + i">
+                        <li class="tech-box" *ngFor="let staffMenu of filterItemsOfType(tcl.id)"
+                        >
+                          <div class="tech-box__item1">
+                            <div class="tech-box__item1-1">
+                              <p class="tech-box__content">
+                                <span class="txt">
+                                  {{ staffMenu.details[0].name }}
+                                  <strong>
+                                    {{ helper.formatCurrency(staffMenu.details[0].price) }}
+                                  </strong>
+                                </span>
+                              </p>
+                            </div>
+                            <div class="ico" (click)="deleteStaffMenu(staffMenu.id)">
+                              <div class="trash-icon__box">
+                                <img src="./assets/images/icon/trash-alt-solid.svg" alt="" class="trash-icon"/>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </div>
+                    </div>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<app-menu-cooperation-staff-popup [isOpen]="isOpen" (confirm)="confirmModal($event)" [shopId]="shopId"
+  [staffId]="staffId" [listExist]="staffMenuList">
+</app-menu-cooperation-staff-popup>

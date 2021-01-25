@@ -1,0 +1,73 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span>{{ "discount.title" | translate }}</span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <div class="pl-0 pr-0">
+            <div class="add-button mt-0">
+              <button (click)="openModal('create')">
+                <span></span>
+                <em>{{ "discount.btnRegisterDiscount" | translate }}</em>
+              </button>
+            </div>
+          </div>
+
+          <div class="list mt-30">
+            <div class="list__header">
+              {{ "discount.listDiscounts" | translate }}
+            </div>
+            <input type="hidden" value="{{ shopId }}"/>
+            <div class="list__body list02 arrow toggle" id="toggle-bigList">
+              <ul
+                class="discount-list"
+                cdkDropList
+                (cdkDropListDropped)="drop($event)"
+              >
+                <li
+                  *ngFor="let dc of discountList"
+                  cdkDragLockAxis="y"
+                  cdkDragBoundary=".discount-list"
+                  cdkDrag
+                  class="discount-box"
+                >
+                  <div class="discount-box__item1">
+                    <div class="discount-box__item1-1">
+                      <p class="discount-box__content">
+                        <span class="edit" (click)="selectItem(dc)">
+                          {{ "common.edit" | translate }}
+                        </span>
+                        <span class="txt">
+                          {{ dc.name }} ({{ checkCategory(dc.discount_cd) }})
+                          <strong *ngIf="dc.discount_type == '1'">
+                            {{ dc.discount }}％ OFF
+                          </strong>
+                          <strong *ngIf="dc.discount_type == '2'">
+                            {{ helper.formatCurrency(dc.discount) }} OFF
+                          </strong>
+                        </span>
+                        <input type="hidden" value="{{ dc.sort }}"/>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="ico tech-box__item2" cdkDragHandle>
+                    <span class="ico__item1"></span>
+                    <span class="ico__item2"></span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<app-discount-create-modal [open]="open"
+                           [selectCurrent]="selectCurrent" (confirm)="closeModal($event)"
+></app-discount-create-modal>

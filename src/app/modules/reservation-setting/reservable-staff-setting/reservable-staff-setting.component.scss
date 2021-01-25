@@ -1,0 +1,170 @@
+.btn-area .bt.next {
+  width: 100%;
+}
+.lable {
+  font-weight: bold;
+}
+.list_header {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.input_group_label {
+  text-align: center;
+  font-size: 12px;
+  font-size: 1.2rem;
+  letter-spacing: 0.18em;
+  padding-top: 12px;
+  margin-top: 12px;
+  color: #666;
+  &:first-child {
+    margin-left: 10px;
+  }
+  &:nth-child(2) {
+    text-align: center;
+  }
+  &:nth-child(3) {
+    text-align: center;
+  }
+}
+.bd {
+  margin-top: 7px;
+  border-top: 1px solid #dadbdb;
+}
+
+.input-number {
+  width: 120px;
+}
+
+.combobox2 {
+  width: 120px;
+}
+
+.combobox1 {
+  width: 80px;
+}
+
+.input-group__label {
+  padding-top: 0 !important;
+  padding-bottom: 10px !important;
+}
+
+input[type="number"] {
+  text-align: center !important;
+  padding: 8px 5px;
+}
+
+.btn-area .bt.next {
+  width: 100%;
+}
+
+.lable {
+  font-weight: bold;
+}
+.list_data {
+  padding: 0 15px;
+}
+.row_data {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  align-items: center;
+  margin-top: 15px;
+  div:not(:first-child) {
+    text-align: center;
+  }
+  div:nth-child(3) {
+    margin-left: 15px;
+  }
+  & > *:not(:last-child){
+    margin-right: 1rem;
+  }
+}
+.row_data-item:first-child,
+.input_group_label:first-child{
+  text-align: left;
+  flex: 0 0 28%;
+}
+.row_data-item:nth-child(2),
+.input_group_label:nth-child(2){
+  flex: 0 0 15%;
+}
+.row_data-item:nth-child(3),
+.input_group_label:nth-child(3){
+  flex: 0 0 20%;
+}
+.row_data-item:last-child,
+.input_group_label:last-child{
+  flex: 0 0 25%;
+}
+.my-input {
+  width: 100% !important;
+}
+.input-error {
+  border: 1px solid #ff648c;
+  background: #ffecf1;
+}
+.my-input.input-error {
+  border: 1px solid #ff648c !important;
+  background: #ffecf1 !important;
+}
+.pl-100 {
+  padding-left: 100px !important;
+}
+.radio-group {
+  margin-top: 0;
+}
+@media only screen and (max-width: 767px) {
+  .input-number {
+    width: 90px;
+  }
+
+  .combobox2 {
+    width: 75px;
+  }
+
+  .combobox1 {
+    width: 60px;
+  }
+  // .list_header {
+  //   grid-template-columns: 1.2fr 0.8fr 1.9fr 0.8fr;
+  // }
+  .list_header> *:not(:last-child) {
+    margin-right: 1rem;
+  }
+  .row_data {
+    
+  }
+  .row_data-item:first-child{
+    flex: 0 0 28%;
+  }
+  .input_group_label:first-child{
+    flex: 0 0 20%;
+  }
+  .row_data-item:nth-child(2),
+  .input_group_label:nth-child(2){
+    flex: 0 0 15%;
+  }
+  .row_data-item:nth-child(3),
+  .input_group_label:nth-child(3){
+    flex: 0 0 32%;
+  }
+  .row_data-item:last-child,
+  .input_group_label:last-child{
+    flex: 0 0 15%;
+  }
+
+  .radio-group {
+    align-items: center;
+    margin-left: 0;
+    &__label {
+      &:last-child {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+.editBtn::after {
+  content: ""!important;
+}

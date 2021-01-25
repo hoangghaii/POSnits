@@ -1,0 +1,172 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="online-application-confirmation">
+        <div class="flex-row">
+          <div class="col-12 mt-0">
+            <h2 class="title title-bold pl-10">
+              <span>{{"contractors.confirmation.headTitle" | translate}}</span>
+            </h2>
+          </div>
+          <div class="col-12">
+            <div class="white-box pt-5 pb-50 radius-none">
+              <div class="white-box--links" style="width: 100%;">
+                <h2 class="title title-bold">{{"contractors.confirmation.title" | translate}}</h2>
+                <ul></ul>
+                <h3>{{ 'contractors.registerInformation.sectionCompany.title' | translate}}</h3>
+                <ul>
+                  <table>
+                    <tr class="tb-content">
+                      <td> {{ 'contractors.registerInformation.sectionCompany.name' | translate}}</td>
+                      <td>{{contract?.company?.name}}</td>
+                    </tr>
+                    <tr class="tb-content">
+                      <td>{{ 'contractors.registerInformation.sectionCompany.postalCd' | translate}}</td>
+                      <td>{{contract?.company?.postalCd}}</td>
+                    </tr>
+                    <tr class="tb-content">
+                      <td>{{ 'contractors.registerInformation.sectionCompany.prefecture' | translate}}</td>
+                      <td>{{contract?.company?.prefecture}}</td>
+                    </tr>
+                    <tr class="tb-content">
+                      <td>{{ 'contractors.registerInformation.sectionCompany.city' | translate}}</td>
+                      <td>{{contract?.company?.city}}</td>
+                    </tr>
+                    <tr class="tb-content">
+                      <td>{{ 'contractors.registerInformation.sectionCompany.address' | translate}}</td>
+                      <td>{{contract?.company?.address}}</td>
+                    </tr>
+
+                    <tr class="tb-content">
+                      <td>{{ 'contractors.registerInformation.sectionCompany.area' | translate}}</td>
+                      <td>{{contract?.company?.area}}</td>
+                    </tr>
+                    <tr class="tb-content">
+                      <td>{{ 'contractors.registerInformation.sectionCompany.cutoffDate' | translate}}</td>
+                      <td>{{contract?.company?.cutoffDate}}</td>
+                    </tr>
+                    <tr class="tb-content">
+                      <td>{{ 'contractors.registerInformation.sectionCompany.accounting' | translate}}</td>
+                      <td>
+                        <ng-container *ngFor="let item of accountingList">
+                          <label *ngIf="contract?.company?.accounting == item.key">
+                            {{item.value}}
+                          </label>
+                        </ng-container>
+                      </td>
+                    </tr>
+                  </table>
+                </ul>
+                <h3>{{ 'contractors.registerInformation.sectionShop.title' | translate}}</h3>
+                <ul>
+                  <table>
+                    <tr class="tb-content">
+                      <td> {{ 'contractors.registerInformation.sectionShop.name' | translate}}</td>
+                      <td>{{contract?.shop?.name}}</td>
+                    </tr>
+
+                    <tr class="tb-content">
+                      <td> {{ 'contractors.registerInformation.sectionShop.name' | translate}}</td>
+                      <td>{{contract?.shop?.postalCd}}</td>
+                    </tr>
+                    <tr class="tb-content">
+                      <td>{{ 'contractors.registerInformation.sectionShop.prefecture' | translate}}</td>
+                      <td>{{contract?.shop?.prefecture}}</td>
+                    </tr>
+                    <tr class="tb-content">
+                      <td>{{ 'contractors.registerInformation.sectionShop.city' | translate}}</td>
+                      <td>{{contract?.shop?.city}}</td>
+                    </tr>
+                    <tr class="tb-content">
+                      <td>{{ 'contractors.registerInformation.sectionShop.address' | translate}}</td>
+                      <td>{{contract?.shop?.address}}</td>
+                    </tr>
+                    <tr class="tb-content">
+                      <td>{{ 'contractors.registerInformation.sectionShop.area' | translate}}</td>
+                      <td>{{contract?.shop?.area}}</td>
+                    </tr>
+                    <tr class="tb-content">
+                      <td>{{ 'contractors.registerInformation.sectionShop.email' | translate}}</td>
+                      <td>{{contract?.shop?.email}}</td>
+                    </tr>
+                  </table>
+                </ul>
+                <h3>{{ 'contractors.registerInformation.user.title' | translate}}</h3>
+                <ul>
+                  <table>
+                    <tr class="tb-content">
+                      <td>{{ 'contractors.registerInformation.user.name' | translate}}</td>
+                      <td>{{contract?.user?.name}}</td>
+                    </tr>
+                    <tr class="tb-content">
+                      <td>{{ 'contractors.registerInformation.user.email' | translate}}</td>
+                      <td>{{contract?.user?.email}}</td>
+                    </tr>
+                    <tr class="tb-content">
+                      <td>{{ 'contractors.registerInformation.user.password' | translate}}</td>
+                      <td>**********</td>
+                    </tr>
+                    <tr class="tb-content">
+                      <td>{{ 'contractors.registerInformation.user.passwordConfirm' | translate}}</td>
+                      <td>**********</td>
+                    </tr>
+                  </table>
+                </ul>
+                <h3>{{ 'contractors.confirmation.contractFeeTitle' | translate}}</h3>
+                <ul>
+                  <table class="contract-fee">
+                    <tr class="tb-content">
+                      <td>{{ 'contractors.selectDetail.standardFeature' | translate}}</td>
+                      <td style="text-align: center;">{{ 'contractors.selectDetail.pos' | translate}}</td>
+                      <td> {{helper.formatCurrency(contract?.serviceFee?.standard)
+                      + ('contractors.selectDetail.perMonth'| translate)}}</td>
+                    </tr>
+                    <tr class="tb-content" *ngIf="contract?.serviceFee?.web == true">
+                      <td>{{ 'contractors.selectDetail.option' | translate}}</td>
+                      <td style="text-align: center;">{{ 'contractors.selectDetail.web' | translate}}</td>
+                      <td> {{helper.formatCurrency(contract?.serviceFee?.webFee)
+                      + ('contractors.selectDetail.perMonth'| translate)}}</td>
+                    </tr>
+                    <tr class="tb-content" *ngIf="contract?.serviceFee?.payment == true">
+                      <td>
+                        <span *ngIf="contract?.serviceFee?.web == false">
+                          {{ 'contractors.selectDetail.option' | translate}}
+                        </span>
+                      </td>
+                      <td style="text-align: center;">{{ 'contractors.selectDetail.payment' | translate}}</td>
+                      <td> {{helper.formatCurrency(contract?.serviceFee?.paymentFee)
+                      + ('contractors.selectDetail.perMonth'| translate)}}</td>
+                    </tr>
+                  </table>
+                </ul>
+                <hr>
+                <ul>
+                  <table>
+                    <tr class="tb-content">
+                      <td colspan="2">
+                        {{ 'contractors.selectDetail.total' | translate}}
+                      </td>
+                      <td style="text-align: right;">
+                        {{helper.formatCurrency(contract?.serviceFee?.total)
+                      + ('contractors.selectDetail.perMonth'| translate)}}
+                      </td>
+                    </tr>
+                  </table>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="btn-area flex-row" style="display: flex;">
+          <!-- back -->
+          <button type="button" class="bt skip" (click)="back(true)"
+                  style="width: 50%;">{{"contractors.confirmation.back" | translate}}</button>
+          <!-- to register -->
+          <button type="button" class="bt skip" (click)="goToPayment()"
+                  style="width: 50%; background: #ff648c; color: white;">{{"contractors.confirmation.toRegister" | translate}}</button>
+        </div>
+      </div>
+
+    </section>
+  </article>
+</main>

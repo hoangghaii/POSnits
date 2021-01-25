@@ -1,0 +1,93 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="filtered-search-screen-1">
+        <div class="flex-row">
+          <div class="col-12 mt-0">
+            <h2 class="title title-bold pl-10">
+              <span>{{'remainingList.serviceRemainiList' | translate}}</span>
+            </h2>
+          </div>
+          <div class="col-12">
+            <form [formGroup]="formServiceRemaining">
+              <div class="white-box pt-5 pb-20 radius-none">
+                <app-top-error *ngIf="submitted" [form]="formServiceRemaining" [formMap]="formMap"></app-top-error>
+                <div class="search-body">
+                  <div class="item-group">
+                    <div class="left">
+                      <label>{{'remainingList.specifyPeriod' | translate}}
+                      </label>
+                    </div>
+                    <div class="right">
+                      <div class="group-date">
+                        <div class="input-group">
+                          <input type="date" class="input-date" formControlName="target_from">
+                        </div>
+                        <label>～</label>
+                        <div class="input-group">
+                          <input type="date" class="input-date" formControlName="target_to">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-group">
+                    <div class="left">
+                      <label>{{'remainingList.target' | translate}}</label>
+                    </div>
+                    <div class="right">
+                      <!-- <div class="group-radio">
+                        <div class="input-group-radio">
+                          <input type="radio" id="target_type1" name="target_type" formControlName="target_type" value="'1'">
+                          <label for="target_type1">{{'remainingList.byCustomer' | translate}}</label>
+                        </div>
+                        <div class="input-group-radio">
+                          <input type="radio" id="target_type2" name="target_type" formControlName="target_type" value="'2'">
+                          <label for="target_type2">{{'remainingList.byContract' | translate}}</label>
+                        </div>
+                      </div> -->
+                      <div class="radio-group">
+                        <label class="radio-group__label" for="target_type1">
+                          <span class="flex-box">
+                            <input class="radio-group__input" type="radio" id="target_type1" name="target_type"
+                              value="0" formControlName="target_type" />
+                            <span class="fake-btn"></span>
+                            <span class="text">{{'remainingList.byCustomer' | translate}}</span>
+                          </span>
+                        </label>
+
+                        <label class="radio-group__label" for="target_type2">
+                          <span class="flex-box">
+                            <input class="radio-group__input" type="radio" id="target_type2" name="target_type"
+                              value="1" formControlName="target_type" />
+                            <span class="fake-btn"></span>
+                            <span class="text">{{'remainingList.byContract' | translate}}</span>
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-group">
+                    <div class="left">
+                      <label>{{'remainingList.personInCharge' | translate}}</label>
+                    </div>
+                    <div class="right">
+                      <div class="pulldown">
+                        <select name="choose" id="choose" class="select wm-250" formControlName="staff_id">
+                          <option *ngFor="let item of listStaff" value="{{item.id}}">{{item.name}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="add-button mt-20">
+                  <button (click)="submit()"><em
+                      style="color: #fff;">{{'remainingList.btnDownload' | translate}}</em></button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>

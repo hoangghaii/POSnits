@@ -1,0 +1,12 @@
+<div class="collapsible">
+  <div class="collapsible-heading" #collapsible (click)="toggleAccordian(collapsible, 0)">
+    <a>{{ item.name }}</a>
+  </div>
+  <div class="collapsible-content collapsible-content__1 " style="padding: 0;">
+    <div *ngFor="let subItem of listDetails">
+      <app-menu-registration-dropdown-item [detail]="subItem" [open]="open" [idParent]="item.id"
+        [category_cd]="item.category_cd">
+      </app-menu-registration-dropdown-item>
+    </div>
+  </div>
+</div>

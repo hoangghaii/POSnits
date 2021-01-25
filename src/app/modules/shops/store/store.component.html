@@ -1,0 +1,347 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span>{{ "store.storeInformationRegistration" | translate }}</span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <form [formGroup]="storeForm">
+            <div class="white-box pt-5 pb-20 radius-none">
+              <div class="err" style="margin: 0 20px 10px 20px;">
+                <app-top-error *ngIf="submitted" [form]="storeForm" [formMap]="formMap"></app-top-error>
+              </div>
+              <div class="input-group single">
+                <div class="input-group__label">
+                  {{ "store.name" | translate }}
+                </div>
+                <input
+                  type="text"
+                  id="storeName"
+                  placeholder="{{ 'store.placeholder001' | translate }}"
+                  class="input-text"
+                  formControlName="name"
+                  [ngClass]="{
+                    'input-error': submitted && f.name.errors
+                  }"
+                />
+              </div>
+              <!-- <app-show-errors
+                *ngIf="submitted"
+                [ctrl]="f.name"
+                [nameControll]="'店舗名'"
+              ></app-show-errors> -->
+              <div class="input-group pl-20 pt-0">
+                <div class="input-group__label">
+                  {{ "store.streetAddress" | translate }}
+                </div>
+                <div class="input-group__row justify-content-left">
+                  {{ "store.special001" | translate }}
+                  <input
+                    type="text"
+                    style="width: 80px;"
+                    placeholder=""
+                    id="postal_cd1"
+                    minlength="3"
+                    maxlength="3"
+                    class="input-text input-group__zipcode01"
+                    formControlName="zipcode01"
+                    (ngModelChange)="getZipCode01()"
+                    [ngClass]="{
+                      'input-error': submitted && f.zipcode01.errors
+                    }"
+                  />
+                  {{ "store.special002" | translate }}
+                  <input
+                    type="text"
+                    placeholder=""
+                    id="postal_cd2"
+                    minlength="4"
+                    maxlength="4"
+                    class="input-text input-group__zipcode02"
+                    formControlName="zipcode02"
+                    (ngModelChange)="getZipCode02()"
+                    [ngClass]="{
+                      'input-error': submitted && f.zipcode02.errors
+                    }"
+                  />
+                </div>
+              </div>
+              <!-- <app-show-errors
+                *ngIf="submitted"
+                [ctrl]="f.zipcode01"
+                [nameControll]="'郵便番号1'"
+                [errorMsg]="'※ 郵便番号1 は数字で入力してください。'"
+              ></app-show-errors> -->
+              <!-- <app-show-errors
+                *ngIf="submitted"
+                [ctrl]="f.zipcode02"
+                [nameControll]="'郵便番号2'"
+                [errorMsg]="'※ 郵便番号2 は数字で入力してください。'"
+              ></app-show-errors> -->
+              <div class="input-group single">
+                <input
+                  type="text"
+                  placeholder="{{ 'store.placeholder002' | translate }}"
+                  class="input-text"
+                  id="provincial"
+                  formControlName="prefecture"
+                  value="{{ this.storeForm.value.prefecture }}"
+                  readonly
+                />
+              </div>
+
+              <div class="input-group single">
+                <input
+                  type="text"
+                  placeholder="{{ 'store.placeholder003' | translate }}"
+                  class="input-text"
+                  id="city"
+                  formControlName="city"
+                  value="{{ this.storeForm.value.city }}"
+                  readonly
+                />
+              </div>
+              <div class="input-group single">
+                <input
+                  type="text"
+                  placeholder="{{ 'store.currentStreetAddress' | translate }}"
+                  class="input-text"
+                  id="street-address"
+                  formControlName="currentStreetAddress"
+                  value="{{ this.storeForm.value.currentStreetAddress }}"
+                  [ngClass]="{
+                    'input-error': submitted && f.currentStreetAddress.errors
+                  }"
+                />
+              </div>
+              <!-- <app-show-errors
+                *ngIf="submitted"
+                [ctrl]="f.currentStreetAddress"
+                [nameControll]="'住所'"
+              ></app-show-errors> -->
+              <div class="input-group single">
+                <input
+                  type="text"
+                  placeholder="{{ 'store.currentExtendedStreet' | translate }}"
+                  class="input-text"
+                  id="extended-address"
+                  formControlName="currentExtendedStreet"
+                  value="{{ this.storeForm.value.currentExtendedStreet }}"
+                  [ngClass]="{
+                    'input-error': submitted && f.currentExtendedStreet.errors
+                  }"
+                />
+              </div>
+              <!-- <app-show-errors
+                *ngIf="submitted"
+                [ctrl]="f.currentExtendedStreet"
+                [nameControll]="'拡張アドレス'"
+              ></app-show-errors> -->
+              <div class="input-group single pt-10">
+                <input
+                  type="text"
+                  placeholder="{{ 'store.placeholder004' | translate }}"
+                  class="input-text mt-0"
+                  formControlName="area"
+                  [ngClass]="{
+                    'input-error': submitted && f.area.errors
+                  }"
+                />
+              </div>
+              <!-- <app-show-errors
+                *ngIf="submitted"
+                [ctrl]="f.area"
+                [nameControll]="'ビル名'"
+              ></app-show-errors> -->
+              <div class="input-group single pt-0 mt-0">
+                <div class="input-group__label mt-0">
+                  {{ "store.phoneNumber" | translate }}
+                </div>
+                <input
+                  type="text"
+                  id="tel"
+                  placeholder="{{ 'store.placeholder005' | translate }}"
+                  class="input-text"
+                  formControlName="tel"
+                  [ngClass]="{
+                    'input-error': submitted && f.tel.errors
+                  }"
+                />
+              </div>
+              <!-- <app-show-errors
+                *ngIf="submitted"
+                [ctrl]="f.tel"
+                [nameControll]="'電話番号'"
+                [errorMsg]="'※ 郵便番号は数字で入力してください。'"
+              ></app-show-errors> -->
+              <div class="input-group single pt-0 mt-0">
+                <div class="input-group__label mt-0">
+                  {{ "store.mail" | translate }}
+                </div>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="{{ 'store.placeholder006' | translate }}"
+                  class="input-text"
+                  required
+                  formControlName="email"
+                  [ngClass]="{
+                    'input-error': submitted && f.email.errors
+                  }"
+                />
+              </div>
+              <!-- <app-show-errors
+                *ngIf="submitted"
+                [ctrl]="f.email"
+                [nameControll]="'メールアドレス'"
+                [errorMsg]="
+                  '※メールアドレスの形式が正しくないか、 システムで扱うことができないメールアドレスです。'
+                "
+              ></app-show-errors> -->
+              <div class="input-group pl-20 pr-20 pt-20">
+                <div class="input-group__label mt-0 pt-0">
+                  {{ "store.businessHours" | translate }}
+                </div>
+                <div class="input-group__row mt-0">
+                  <select id="openingTime" [ngClass]="{'input-error': submitted && f.openingTime.errors}"
+                          (change)="storeForm.controls.closingTime.updateValueAndValidity()"
+                          class="mt-10 half" required formControlName="openingTime">
+                    <option
+                      *ngFor="let opt of openingTimeList"
+                      value="{{ opt.value }}"
+                      [innerHtml]="opt.text"
+                    ></option>
+                  </select>
+                  <select id="closingTime" [ngClass]="{'input-error': submitted && f.closingTime.errors}"
+                          class="mt-10 half" required formControlName="closingTime">
+                    <option *ngFor="let cst of closingTimeList"
+                            value="{{ cst.value }}"
+                            [innerHtml]="cst.text"
+                    ></option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="input-group pl-20 pr-20 pt-25">
+                <div class="input-group__label mt-0 pt-0">
+                  {{ "store.shop" | translate }}
+                </div>
+                <select class="mt-10" required formControlName="timeBreak">
+                  <option
+                    *ngFor="let brk of breakTimeList"
+                    value="{{ brk.value }}"
+                  >
+                    {{ brk.key }}{{ "store.minute" | translate }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="input-group pl-20 pr-20 pt-15">
+
+                <div class="input-group__label mt-0 pt-0">
+                  {{ "store.facility" | translate }}
+                </div>
+                <div class="radio-group">
+                  <label
+                    class="radio-group__label"
+                    *ngFor="let item of facilities"
+                    for="{{ item.value }}{{ item.text }}"
+                  >
+                    <span class="flex-box">
+                      <input
+                        class="radio-group__input"
+                        type="radio"
+                        id="{{ item.value }}{{ item.text }}"
+                        name="facility"
+                        value="{{ item.value }}"
+                        formControlName="facility"
+                      />
+                      <span
+                        class="fake-btn"
+                        [ngClass]="{
+                          'input-error': submitted && f.facility.errors
+                        }"
+                      ></span>
+                      <span class="text">{{ item.text }}</span>
+                    </span>
+                  </label>
+                </div>
+                <!-- <select
+                  id="facility"
+                  class="mt-10"
+                  required
+                  formControlName="facility"
+                >
+                  <option
+                    *ngFor="let facility of facilities"
+                    value="{{ facility.value }}"
+                  >
+                    {{ facility.text }}
+                  </option>
+                </select> -->
+              </div>
+            
+              <input type="hidden" formControlName="updatedAt"/>
+              <div class="pl-20 pr-20 pt-30 pb-30" *ngIf="edit; else btnCreate">
+                <button type="submit" class="btn mt-20 update" (click)="handleUpdate()">
+                  {{ "common.update" | translate }}
+                </button>
+              </div>
+              <!-- <div class="btn-grp mt-20" *ngIf="edit; else btnCreate">
+                  <button
+                   type="submit"
+                   class="btn mt-20 btn-delete"
+                   (click)="handleDelete()"
+                 >
+                   {{ "common.delete" | translate }}
+                 </button>
+                 <button type="submit" class="btn mt-20 update" (click)="handleUpdate()">
+                   {{ "common.update" | translate }}
+                 </button>
+               </div>-->
+              <ng-template #btnCreate>
+                <div class="pl-20 pr-20 pt-30 pb-30">
+                  <button class="btn" (click)="confirmDialog()">
+                    {{ "store.register" | translate }}
+                  </button>
+                </div>
+              </ng-template>
+              <div
+                class="dialog-confirm"
+                [@fadeAnimation]="isConfirm ? 'fadeIn' : 'fadeOut'"
+              >
+                <div class="in">
+                  <p class="mb-20">{{ "store.confirmRegister" | translate }}</p>
+                  <div class="btn-grp">
+                    <button class="btn btn-delete" (click)="closeDialog()">
+                      {{ "common.cancel" | translate }}
+                    </button>
+                    <button class="btn" (click)="addStore()">
+                      {{ "common.yes" | translate }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<div
+  class="dialog-cancel"
+  [@fadeAnimation]="isOpenDialog ? 'fadeIn' : 'fadeOut'"
+>
+  <div class="in">
+    <p class="mb-20">{{ apiMessage }}</p>
+    <button class="btn close_dialog" (click)="closeDialog()">
+      {{ "common.btnCancel" | translate }}
+    </button>
+  </div>
+</div>
+<app-confirm-modal #confirmModal (confirm)="handleConfirm($event)"></app-confirm-modal>

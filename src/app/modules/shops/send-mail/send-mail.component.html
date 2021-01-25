@@ -1,0 +1,225 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <form [formGroup]="sendMailForm">
+        <div class="filtered-search filtered-search-screen-4">
+          <div class="flex-row">
+            <div class="col-12 mt-0">
+              <h2 class="title title-bold pl-10">
+                <span>{{ "sendMail.title" | translate }}</span>
+              </h2>
+            </div>
+            <div class="col-12">
+              
+              <div class="white-box pt-5 pb-20 radius-none">
+                <div class="err" style="margin: 0 20px">
+                  <app-top-error
+                    *ngIf="submitted"
+                    [form]="sendMailForm"
+                    [formMap]="formMap"
+                  ></app-top-error>
+                </div>
+                <div class="mail-setting-main">
+                  <div class="item-setting-row">
+                    <div class="left">
+                      <label>{{ "sendMail.sendType" | translate }}</label>
+                    </div>
+                    <div class="radio-group" style="margin-top: 7px;margin-left: 0;" >
+                      <label
+                        class="radio-group__label"
+                        *ngFor="let item of mail_type"
+                        for="{{ item.key + item.value }}"
+                      >
+                          <span class="flex-box">
+                            <input
+                              class="radio-group__input"
+                              type="radio"
+                              id="{{ item.key + item.value }}"
+                              name="mailType"
+                              value="{{ item.value }}"
+                              formControlName="mailType"
+                            />
+                            <span class="fake-btn"></span>
+                            <span class="text">{{ item.key }}</span>
+                          </span>
+                      </label>
+                    </div>
+                   <!-- <div class="right"> -->
+                      <!-- <div class="group-radio">
+                        <div class="input-group-radio">
+                          <input
+                            type="radio"
+                            name="mailType"
+                            value="0"
+                            id="group1"
+                            formControlName="mailType"
+                            [ngClass]="{
+                              'input-error': submitted && f.mailType.errors
+                            }"
+                          />
+                          <label for="group1">{{
+                            "sendMail.instant" | translate
+                          }}</label>
+                        </div>
+                        <div class="input-group-radio">
+                          <input
+                            type="radio"
+                            name="mailType"
+                            value="1"
+                            id="group2"
+                            formControlName="mailType"
+                            [ngClass]="{
+                              'input-error': submitted && f.mailType.errors
+                            }"
+                          />
+                          <label for="group2">{{
+                            "sendMail.reservation" | translate
+                          }}</label>
+                        </div>
+                      </div> -->
+                    
+                    <!-- </div> -->
+                  </div>
+                  <div class="item-setting-row">
+                    <div class="left">
+                      <label>{{ "sendMail.dateTime" | translate }}</label>
+                    </div>
+                    <div class="right">
+                      <div class="group-date">
+                        <div class="input-group input-group-date">
+                          <input
+                            type="date"
+                            class="input-date input-date-setting"
+                            formControlName="date"
+                            [ngClass]="{
+                              'input-error': submitted && f.date.errors
+                            }"
+                          />
+                        </div>
+                        <div class="input-group">
+                          <div class="input-group__label mt-0 pt-0"></div>
+                          <select
+                            name=""
+                            id=""
+                            formControlName="time"
+                            [ngClass]="{
+                              'input-error': submitted && f.time.errors
+                            }"
+                          >
+                          <option value="10:00">10:00</option>
+                          <option value="11:00">11:00</option>
+                          <option value="12:00">12:00</option>
+                          <option value="13:00">13:00</option>
+                          <option value="14:00">14:00</option>
+                          <option value="15:00">15:00</option>
+                          <option value="16:00">16:00</option>
+                          <option value="17:00">17:00</option>
+                          <option value="18:00">18:00</option>
+                          <option value="19:00">19:00</option>
+                          <option value="20:00">20:00</option>  
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-setting-row">
+                    <div class="left">
+                      <label>{{ "sendMail.subject" | translate }}</label>
+                    </div>
+                    <div class="right">
+                      <div class="group">
+                        <div class="input-group">
+                          <input
+                            type="text"
+                            style="width: 100%"
+                            class="input-text"
+                            formControlName="subject"
+                            [ngClass]="{
+                              'input-error': submitted && f.subject.errors
+                            }"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="item-setting-row">
+                    <div class="left">
+                      <label>{{ "sendMail.text" | translate }}</label>
+                    </div>
+                    <div class="right">
+                      <div class="group-span">
+                        <span class="btn" (click)="addToBody('name')">{{
+                          "sendMail.name" | translate
+                        }}</span>
+                        <span class="btn" (click)="addToBody('shopName')">{{
+                          "sendMail.shopName" | translate
+                        }}</span>
+                        <span class="btn" (click)="addToBody('shopAddress')">{{
+                          "sendMail.shopAddress" | translate
+                        }}</span>
+                        <span class="btn" (click)="addToBody('shopPhone')">{{
+                          "sendMail.shopPhone" | translate
+                        }}</span>
+                        <span class="btn" (click)="addToBody('reservationDateTime')">{{
+                          "sendMail.reservationDateTime" | translate
+                        }}</span>
+                        <span class="btn" (click)="addToBody('reservationMenu')">{{
+                          "sendMail.reservationMenu" | translate
+                        }}</span>
+                        <span class="btn" (click)="addToBody('reservationStaff')">{{
+                          "sendMail.reservationStaff" | translate
+                        }}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="input-group single mt-10">
+                    <textarea
+                    style="width:100%;   
+                    border: 1px solid #dadbdb;
+                     border-radius: 9.5px;
+                     background-color: #fff;
+                    resize: none;
+                     font-size: 15px;
+                    margin-top:10px ;
+                    outline: none;"
+                      name=""
+                      cols="40"
+                      rows="18"
+                      class="textarea-big"
+                      placeholder="。。。様いつもありがとうございます。。。 。。店住所"
+                      formControlName="body"
+                      [ngClass]="{
+                        'input-error': submitted && f.body.errors
+                      }"
+                      >{{ f.body.value }}</textarea
+                    >
+                    <div class="search-header-btn">
+                      <span class="btn" style="margin-top:10px" (click)="openReview()">{{
+                        "sendMail.preview" | translate
+                      }}</span>
+                    </div>
+                  </div>
+                  <div class="mail-setting-footer">
+                    <button class="btn" (click)="handlerSubmit()">
+                      {{ "sendMail.emailOrBook" | translate }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="btn-area flex-row cus-searh-footer cus-searh-footer-screen-1"
+            >
+              <div class="bt" (click)="backtoList()">{{ "sendMail.back" | translate }}</div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+  </article>
+</main>
+<app-send-mail-preview
+  [open]="isOpen"
+  (confirm)="closeModal($event)">
+</app-send-mail-preview>

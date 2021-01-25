@@ -1,0 +1,145 @@
+.col-12 {
+  padding: 0px 5px !important;
+}
+
+.coupon-menu-registration {
+  .coupon-list-regis {
+    line-height: 30px;
+    padding: 0px 20px 0px 0px;
+
+    .coupon-list {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+    }
+  }
+
+  .input-group__row {
+    justify-content: start;
+
+    &.input-group__date_start_end {
+      flex-wrap: nowrap;
+
+      .input-group {
+        padding: 0px;
+        width: 100%;
+      }
+
+      .input-group:nth-child(1) {
+        padding-right: 5px;
+      }
+
+      .input-group:nth-child(2) {
+        padding-left: 5px;
+      }
+    }
+  }
+}
+
+.coupon-list {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  line-height: 40px;
+
+  div {
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+
+    .single-coupon {
+      padding-left: 0px !important;
+
+      .input-text {
+        width: 100%;
+        margin-top: 0px;
+      }
+    }
+  }
+}
+
+.inputColorPicker {
+  outline: none;
+  border: 1px solid #dadbdb;
+  color: #fff;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 10px;
+
+  &.input-error {
+    border: 1px solid #ff648c;
+  }
+}
+
+.no-row-error {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ff648c;
+  margin: 5px auto;
+  text-align: center;
+}
+
+.radio-group {
+  display: flex;
+  margin-top: 15px;
+  margin-left: 15px;
+
+  &__label {
+    position: relative;
+    cursor: pointer;
+
+    &:last-child {
+      margin-left: 40px;
+    }
+  }
+
+  .fake-btn {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #dfdfdf;
+
+    &::before {
+      display: inline-block;
+      content: "";
+      position: absolute;
+      left: 3px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: transparent;
+      transition: all 0.3s;
+    }
+  }
+
+  input[type="radio"] {
+    opacity: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+  input[type="radio"]:checked + .fake-btn::before {
+    background-color: #ff648c;
+  }
+
+  .fake-btn.input-error {
+    border-color: #ff648c;
+  }
+
+  .flex-box {
+    display: flex;
+    align-items: center;
+  }
+}

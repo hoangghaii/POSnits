@@ -1,0 +1,191 @@
+<div class="create-modal" [ngClass]="open ? 'open' : null">
+  <div class="create-modal-overlay" (click)="close()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">
+      {{'coupon.btnCreate' | translate}} <span class="create-modal__header-close"
+                                               (click)="close()">&times;</span>
+    </div>
+    <div class="create-modal__body pt-0">
+      <div class="coupon-menu-registration">
+        <div class="flex-row">
+          <div class="col-12 mt-0">
+            <form [formGroup]="couponForm">
+              <div class="white-box pt-5 pb-20 radius-none">
+                <div class="err pl-20 pr-20">
+                  <app-top-error *ngIf="submitted" [form]="couponForm" [formMap]="formMap"></app-top-error>
+                </div>
+                <div class="input-group single mt-15">
+                  <label for="" class="input-group__label">
+                    {{ "couponMenuRegistration.name" | translate }}
+                  </label>
+                  <input type="text" class="input-text" placeholder="{{
+                      'couponMenuRegistration.namePlaceholder' | translate
+                    }}" formControlName="name" [ngClass]="{
+                      'input-error': submitted && f.name.errors
+                    }"/>
+                </div>
+                <!-- <app-show-errors
+                *ngIf="submitted"
+                [ctrl]="f.name"
+                [nameControll]="'クーポン名'"
+              ></app-show-errors> -->
+                <div class="input-group single">
+                  <button class="btn mt-20" style="width: 100%" (click)="openMenuModal('create')">
+                    {{ "couponMenuRegistration.openMenu" | translate }}
+                  </button>
+                </div>
+
+                <div class="list_data pt-5" formArrayName="details">
+                  <div class="input-group single coupon-list-regis"
+                       *ngFor="let detail of details.controls; let i = index" [formGroupName]="i">
+                    <div class="coupon-list">
+                      <div> {{ details.controls[i].get("name")?.value }}</div>
+                      <div style="text-align: right">
+                        {{ details.controls[i].get("price")?.value }}
+                        {{ "menuRegistration.circle" | translate }}
+                      </div>
+                      <div>{{ "menuRegistration.discount" | translate }}</div>
+                      <div>
+                        <div class="input-group single single-coupon pt-0">
+                          <input
+                            type="text"
+                            class="input-text"
+                            formControlName="discount"
+                            placeholder="{{
+                              'menuRegistration.discount' | translate
+                            }}"
+                            [ngClass]="{
+                              'input-error':
+                                submitted &&   details.controls[i].get('discount').errors
+                            }"
+                          />
+                          <span>
+                            {{ "menuRegistration.circle" | translate }}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="input-group single mt-10">
+                  <label class="input-group__label">
+                    {{ "couponMenuRegistration.web_flag" | translate }}
+                  </label>
+                  <div class="radio-group">
+                    <label class="radio-group__label" *ngFor="let item of listWeb" for="{{ item.key + item.value }}">
+                      <span class="flex-box">
+                        <input class="radio-group__input" type="radio" id="{{ item.key + item.value }}" name="webFlg"
+                               value="{{ item.key }}" formControlName="webFlg"/>
+                        <span class="fake-btn" [ngClass]="{
+                            'input-error': submitted && f.webFlg.errors
+                          }"></span>
+                        <span class="text">{{ item.value }}</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                <!-- <app-show-errors
+                *ngIf="submitted"
+                [ctrl]="f.web_flg"
+                [nameControll]="'ＷＥＢ予約'"
+              ></app-show-errors> -->
+                <div class="input-group single mt-10">
+                  <label for="" class="input-group__label">
+                    {{ "couponMenuRegistration.target_flag" | translate }}
+                  </label>
+                  <div class="radio-group">
+                    <label class="radio-group__label" *ngFor="let item of listTargets"
+                           for="{{ item.key + item.value }}">
+                      <span class="flex-box">
+                        <input class="radio-group__input" type="radio" id="{{ item.key + item.value }}"
+                               name="targetFlg" value="{{ item.key }}" formControlName="targetFlg"/>
+                        <span class="fake-btn" [ngClass]="{
+                            'input-error': submitted && f.targetFlg.errors
+                          }"></span>
+                        <span class="text">{{ item.value }}</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                <!-- <app-show-errors
+                *ngIf="submitted"
+                [ctrl]="f.target_flg"
+                [nameControll]="'対象'"
+              ></app-show-errors> -->
+
+                <div class="input-group single">
+                  <div class="input-group__row input-group__date_start_end">
+                    <div class="input-group">
+                      <label for="" class="input-group__label">
+                        {{ "couponMenuRegistration.start_date" | translate }}
+                      </label>
+                      <div class="input-group">
+                        <input type="date" placeholder="{{
+                            'couponMenuRegistration.start_datePlaceholder'
+                              | translate
+                          }}" class="input-date input-text" formControlName="startDate" (change)="
+                            couponForm.controls.endDate.updateValueAndValidity()
+                          " [ngClass]="{
+                            'input-error': submitted && f.startDate.errors
+                          }"/>
+                      </div>
+                    </div>
+                    <div class="input-group">
+                      <label for="" class="input-group__label">
+                        {{ "couponMenuRegistration.end_date" | translate }}
+                      </label>
+                      <div class="input-group">
+                        <input type="date" placeholder="{{
+                            'couponMenuRegistration.end_datePlaceholder'
+                              | translate
+                          }}" class="input-date input-text" formControlName="endDate" [ngClass]="{
+                            'input-error': submitted && f.endDate.errors
+                          }"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="input-group mt-10">
+                  <label class="input-group__label">{{
+                    "common.selectColor" | translate
+                    }}</label>
+                  <input class="inputColorPicker input-text mt-10" [value]="currentPickedColor"
+                         [style.background]="currentPickedColor" [(colorPicker)]="currentPickedColor"
+                         [cpPresetColors]="presetColors" [cpPosition]="'top'" [cpPositionOffset]="'9%'"
+                         [cpOutputFormat]="'hex'" [cpAlphaChannel]="'disabled'"
+                         (colorPickerChange)="getValueColor($event)"
+                         [ngClass]="{
+                      'input-error': submitted && f.colorCode.errors
+                    }"/>
+                </div>
+                <div class="input-group single">
+                  <div class="btn-grp mt-20" *ngIf="coupon != undefined; else btnCreate">
+                    <button type="submit" class="btn mt-20 btn-delete" (click)="updateMenu(true)">
+                      {{ "common.btnDelete" | translate }}
+                    </button>
+                    <button type="submit" class="btn mt-20" (click)="updateMenu()">
+                      {{ "common.btnUpdate" | translate }}
+                    </button>
+                  </div>
+                  <ng-template #btnCreate>
+                    <button type="submit" class="btn mt-20" (click)="handleCreate()">
+                      {{ "menuRegistration.btnCreate" | translate }}
+                    </button>
+                  </ng-template>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-menu-items [isOpen]="isOpenMenu" [currentMenus]="menuSelected" (select)="updateMenuItems($event)" ></app-menu-items>
+<app-confirm-modal
+  #confirmModal
+  (confirm)="handleConfirm($event)"
+></app-confirm-modal>

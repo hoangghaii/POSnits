@@ -1,0 +1,5 @@
+<div *ngIf="shouldShowErrors()" class="pl-20 mt-10">
+  <div class="input-note" *ngFor="let error of listOfErrors()">
+    {{ error }}
+  </div>
+</div>

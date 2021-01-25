@@ -1,0 +1,174 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span>{{"informationDisplay.title"|translate}}</span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <form [formGroup]="informationDisplaytForm">
+            <div class="white-box radius-none">
+              <div class="bar-step">
+                <app-reservation-step [stepNum]="9"></app-reservation-step>
+              </div>
+              <h2 class="inner-title title-bold">
+                <span>{{"informationDisplay.inner-title"|translate}}</span>
+              </h2>
+              <div class="input-group mt-5 pl-20 pr-20">
+                <div class="err pb-10">
+                  <app-top-error *ngIf="submitted" [form]="informationDisplaytForm" [formMap]="formMap"></app-top-error>
+                </div>
+                <div class="input-group file">
+                  <label class="input-group__label">{{"informationDisplay.image"|translate}}</label>
+                  <app-upload-file [label]="'mt-10'" [imagesUrl]="imagesUrl" [fileSelectionLabel]="'informationDisplay.imagePlaceholder'|translate" (confirm)="onFileChange($event)"></app-upload-file>
+                </div>
+              </div>
+              <div class="input-group single mt-10">
+                <div class="input-group__label">{{"informationDisplay.name"|translate}}</div>
+                <input type="text" placeholder='{{"informationDisplay.namePlaceholder"|translate}}' class="input-text"
+                       formControlName="name"
+                       [ngClass]="{
+                  'input-error':
+                    submitted && f.name.errors
+                }">
+              </div>
+              <div class="input-group pl-20 pt-0">
+                <div class="input-group__label">{{"informationDisplay.address"|translate}}</div>
+                <div class="input-group__row justify-content-left">
+                  〒
+                  <input type="text" placeholder="" class="input-text input-group__zipcode01"
+                         id="zipCode01"
+                         name="zipCode01"
+                         formControlName="zipCode01"
+                         (ngModelChange)="getZipCode01()"
+                         minlength="3"
+                         maxlength="3"
+                         [ngClass]="{
+                      'input-error':
+                        submitted && f.zipCode01.errors
+                    }"
+                    style="width: 65px;
+                    text-align: center;">
+                  ー
+                  <input type="text" placeholder="" class="input-text input-group__zipcode02"
+                         formControlName="zipCode02"
+                         (ngModelChange)="getZipCode02()"
+                         id="zipCode02"
+                         name="zipCode02"
+                         minlength="4"
+                         maxlength="4"
+                         [ngClass]="{
+                      'input-error':
+                        submitted && informationDisplaytForm.controls.zipCode02.errors
+                    }"
+                    style="text-align: center;
+                    width: 75px;">
+                </div>
+              </div>
+              <div class="input-group single pt-10">
+                <input type="text" placeholder='{{"informationDisplay.prefecturePlaceholder"|translate}}'
+                       class="input-text mt-0" formControlName="prefecture" [ngClass]="{
+                  'input-error':
+                    submitted && f.prefecture.errors
+                }">
+              </div>
+              <div class="input-group single pt-10">
+                <input type="text" placeholder='{{"informationDisplay.cityPlaceholder"|translate}}'
+                       class="input-text mt-0" formControlName="city" [ngClass]="{
+                  'input-error':
+                    submitted && f.city.errors
+                }">
+              </div>
+              <div class="input-group single">
+                <input
+                  type="text"
+                  class="input-text"
+                  placeholder="{{ 'company.placeholderAddress' | translate }}"
+                  id="address"
+                  name="address"
+                  formControlName="address"
+                  value="{{ informationDisplaytForm.controls.address.value }}"
+                  [ngClass]="{
+                      'input-error':
+                        submitted && informationDisplaytForm.controls.address.errors
+                    }"
+                />
+              </div>
+              <div class="input-group single">
+                <input
+                  type="text"
+                  class="input-text"
+                  placeholder="{{
+                      'company.placeholderExtAddress' | translate
+                    }}"
+                  id="extAddress"
+                  name="extAddress"
+                  formControlName="extAddress"
+                  value="{{ informationDisplaytForm.controls.extAddress.value }}"
+                  [ngClass]="{
+                      'input-error':
+                        submitted && informationDisplaytForm.controls.extAddress.errors
+                    }"
+                />
+              </div>
+              <div class="input-group single pt-10">
+                <input type="text" placeholder='{{"informationDisplay.areaPlaceholder"|translate}}'
+                       class="input-text mt-0" formControlName="area"
+                       [ngClass]="{
+                  'input-error':
+                    submitted && f.area.errors
+                }">
+              </div>
+              <div class="input-group single mt-10">
+                <label class="input-group__label">{{'customer.phoneNumber' | translate}}</label>
+                <input type="text" class="input-text" placeholder="{{'customer.phoneNumberPlaceHolder' | translate}}"
+                       formControlName="tel" [ngClass]="{
+                    'input-error': submitted && f.tel.errors
+                  }">
+              </div>
+              <div class="input-group single mt-10">
+                <div class="input-group__label">{{"informationDisplay.email"|translate}}</div>
+                <input type="text" ngModel [email]="true" placeholder='{{"informationDisplay.emailPlaceholder"|translate}}'
+                       formControlName="email" class="input-text"
+                       [ngClass]="{
+                  'input-error':
+                    submitted && f.email.errors
+                }">
+              </div>
+              <div class="input-group single mt-10">
+                <div class="input-group__label">{{'informationDisplay.access' | translate}}</div>
+                <textarea cols="40" rows="7" formControlName="access" class="input-text textarea-small"
+                          placeholder='{{"informationDisplay.accessPlaceholder"|translate}}'
+                          [ngClass]="{
+                      'input-error':
+                        submitted && f.access.errors
+                    }"></textarea>
+              </div>
+              <div class="inner-title" style="padding: 0px 87px;">
+                <p class="input-note" style="text-align: center; line-height: normal">
+                  {{'informationDisplay.note' | translate}}
+                </p>
+
+              </div>
+              <iframe *ngIf="urlGG!='undefined'" [src]="urlGG"
+              width="95%" height="450" frameborder="0" style="display: block;border:0;margin-left: 5%;
+              margin-top: 20px;
+              width: 90%;" allowfullscreen>
+              </iframe>
+                <div class="btn-area flex-row">
+                <div class="bt next next_full open_dialog"
+                     (click)="process()"
+                     [ngClass]="(flag==true)?'editBtn':'null'">{{status}}</div>
+              </div>
+            </div>
+          </form>
+
+        </div>
+       
+     
+      </div>
+    </section>
+  </article>
+</main>

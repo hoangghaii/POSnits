@@ -1,0 +1,93 @@
+.next_full{
+    width: 100% !important;
+}
+.button-week {
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    .button {
+        padding: 5px 10px;
+        margin-top: 10px;
+        background-color: #fff;
+        border-radius: 8px;
+        border: 1px solid #dadbdb;
+    }
+}
+.date_title {
+    .pre {
+        font-size: 25px;
+    }
+    .next {
+        font-size: 25px;
+    }
+    .date_label {
+        padding-top: 6px;
+    }
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+.move_now {
+    border-radius: 15%;
+    border: 1px solid;
+    padding: 0.5px 5px;
+}
+
+.move_now span {
+    font-size: 14px;
+}
+.mini {
+    font-size: 12px;
+}
+.event {
+    height: 35px !important ;
+    padding-top: 10px;
+    background-color: #fe658d;
+    border-radius: 20%;
+    color: white;
+}
+.calendar {
+    table {
+        width: 100%;
+        thead {
+            .cn {
+                color: #fe658d;
+                font-weight: 600;
+            }
+
+            .t7 {
+                color: blue;
+                font-weight: 600;
+            }
+            tr {
+                td {
+                    text-align: center;
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+        }
+        tbody{
+            tr {
+                td {
+                    text-align: center;
+                    width: 40px;
+                    height: 40px;
+                }
+                .point.choice{
+                    background-color: #fe658d;
+                    border-radius: 20%;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+.button.color{
+    background-color: #fe658d !important;
+    color: #fff;
+}
+.editBtn::after {
+    content: ""!important;
+  }
+  

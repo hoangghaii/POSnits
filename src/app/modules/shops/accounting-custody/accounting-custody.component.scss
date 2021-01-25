@@ -1,0 +1,125 @@
+.wrap-header {
+  display: flex !important;
+  align-items: center !important;
+  input {
+    width: 40%;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  span {
+    width: auto;
+    padding-left: 15px;
+  }
+  label {
+    border: 1px solid;
+    padding: 5px 15px;
+    font-size: 1.3rem;
+    margin-right: 10px;
+  }
+}
+.accuting-custody {
+  .d-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+  .title-accouting {
+    .h2-flex {
+      small {
+        margin-left: -10px;
+        font-size: 1.05rem;
+      }
+    }
+    .title-flex {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+    .label-opacity {
+      font-size: 1.075rem;
+    }
+    .label-opacity01 {
+      margin-left: 20px;
+      text-align: right;
+    }
+  }
+  .title-money {
+    background-color: #ff648c;
+    h2 {
+      font-size: 2.5rem;
+      color: #fff;
+    }
+    p {
+      font-size: 1.5rem;
+      color: #fff;
+      margin-right: 5px;
+    }
+  }
+  .total-money {
+    .title {
+      color: #999999;
+    }
+    h2.input-note {
+      font-size: 2.5rem;
+      color: #ff648c;
+      margin-bottom: 10px;
+    }
+    p.input-note {
+      font-size: 1.5rem;
+      color: #ff648c;
+      margin-right: 5px;
+    }
+  }
+}
+.input-error {
+  border: 1px solid #ff648c !important;
+}
+
+.client-infor {
+  width: auto !important;
+}
+
+.client-infor h2 {
+  font-size: 1.8rem;
+}
+
+.client-infor h2 small {
+  font-size: 1.4rem;
+}
+
+.time-info {
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+}
+
+.input-symbol-euro {
+  position: relative;
+  display: inline-block;
+  width: 50% !important;
+}
+
+.input-symbol-euro input {
+  padding-right: 15px;
+  width: 100%;
+}
+
+.input-symbol-euro:after {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
+  content: "￥";
+  left: 25px;
+}
+
+.input-text {
+  padding-left: 25px;
+  text-align: right;
+}

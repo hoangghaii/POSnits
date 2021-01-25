@@ -1,0 +1,118 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span> {{ "reservableStaff.title1" | translate }}</span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <div class="white-box radius-none">
+            <app-reservation-step [stepNum]="3"></app-reservation-step>
+            <h2 class="inner-title title-bold">
+              <span>{{ "reservableStaff.title2" | translate }}</span>
+            </h2>
+            <div class="err pl-20 pr-20 pt-10">
+              <app-top-error
+                *ngIf="submitted"
+                [form]="staffErrForm"
+                [formMap]="formMap"
+              ></app-top-error>
+            </div>
+            <div class="mt-5 list_header">
+              <div class="input_group_label" >
+                {{ "reservableStaff.header.staffName" | translate }}
+              </div>
+              <div class="input_group_label" >
+                {{ "reservableStaff.header.receptsAmount" | translate }}
+              </div>
+              <div class="input_group_label">
+                {{ "reservableStaff.header.webFlg" | translate }}
+              </div>
+              <div class="input_group_label" >
+                {{ "reservableStaff.header.nomination" | translate }}
+              </div>
+            </div>
+            <div class="bd"></div>
+            <form [formGroup]="staffsForm">
+              <div class="list_data" formArrayName="staffs">
+                <div
+                  *ngFor="let staff of staffs.controls; let i = index"
+                  [formGroupName]="i"
+                >
+                  <div class="row_data">
+                    <div class="row_data-item"style="margin-left:5px">
+                      {{ staffs.controls[i].get("staffName")?.value }}
+                    </div>
+                    <div class="row_data-item">
+                      <input
+                        type="text"
+                        class="input-text my-input"
+                        [ngClass]="{
+                          'input-error':
+                            submitted &&
+                            staffs.controls[i].get('receptAmount').errors
+                        }"
+                        style="width: 100% !important;text-align: center;"
+                        formControlName="receptAmount"
+                      />
+                    </div>
+                    <div class="row_data-item">
+                      <div class="radio-group">
+                        <label
+                          class="radio-group__label"
+                          *ngFor="let item of listWebFlg; let id = index"
+                          for="{{ 'webFlg' + i +  item.value + id  }}"
+                        >
+                          <span class="flex-box">
+                            <input
+                              class="radio-group__input"
+                              type="radio"
+                              id="{{ 'webFlg' + i +  item.value + id  }}"
+                              value="{{ item.value }}"
+                              formControlName="webFlg"
+                              (change)="changeValue($event,i)"
+                              style="text-align: center;"
+                            />
+                            <span
+                              class="fake-btn"
+                              [ngClass]="{
+                                'input-error':
+                                  submitted &&
+                                  staffs.controls[i].get('webFlg').errors
+                              }"
+                            ></span>
+                            <span class="text">{{ item.key }}</span>
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="row_data-item">
+                      <input
+                        type="text"
+                        class="input-text my-input"
+                        [ngClass]="{
+                          'input-error':
+                            submitted &&
+                            staffs.controls[i].get('nomination').errors
+                        }"
+                        style="margin-right: 30px;text-align: center;width: 95% !important;"
+                        formControlName="nomination"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="btn-area flex-row">
+                <div class="bt next open_dialog" (click)="next()"[ngClass]="(flag==true)?'editBtn':'null'">
+                  {{ status }}
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>

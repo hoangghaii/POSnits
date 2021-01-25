@@ -1,0 +1,201 @@
+.list-body {
+  background: #fff;
+  ul li {
+    border-bottom: 2px solid #e5e5e5;
+    padding: 20px 0;
+    width: 100%;
+    display: block;
+  }
+  .body-left {
+    width: calc(100% - 70px);
+    &.min {
+      width: calc(100% - 50px) !important;
+    }
+  }
+  .body-right {
+    width: 70px;
+    text-align: right;
+    &.min {
+      width: 50px !important;
+    }
+  }
+  small {
+    color: #808080;
+    letter-spacing: 0.1em;
+    font-size: 11px;
+    font-size: 1.1rem;
+    &.em {
+      color: #ff648c;
+    }
+  }
+  p {
+    font-size: 17px;
+    font-size: 1.7rem;
+    letter-spacing: 0.1em;
+    margin-top: 10px;
+    font-weight: bold;
+    small {
+      font-size: 14px;
+      font-size: 1.4rem;
+    }
+    &.c-pink {
+      color: #ff648c;
+      font-size: 15px;
+      font-size: 1.5rem;
+      font-weight: 500 !important;
+    }
+  }
+}
+.form-reservation-details {
+  .input-group {
+    padding: 0 !important;
+  }
+}
+.d-flex {
+  display: flex;
+}
+.align-center {
+  align-items: center;
+}
+.border-dashed {
+  border-bottom: 1px dashed lightgray;
+  margin-bottom: 5px;
+  padding-bottom: 7px;
+}
+.avatar-radius-pink {
+  width: 45px !important;
+  height: 45px !important;
+  border-radius: 45px !important;
+  color: #fff;
+  background: #ff648c;
+  font-size: 12px;
+  font-size: 1rem;
+  padding: 18px 5px;
+  text-align: center;
+  word-wrap: break-word;
+  white-space: nowrap;
+}
+.w-half {
+  width: 50%;
+  font-size: 16px;
+  text-align: center;
+  padding: 20px 0;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.w-half-pink {
+  background: #ff648c;
+  color: #fff !important;
+  letter-spacing: 0.5rem;
+}
+
+.btn-border {
+  border: 2px solid white;
+  color: white;
+  text-align: center;
+  padding: 3px;
+  font-size: 12px;
+  font-size: 1.2rem;
+  &.b-pink {
+    border: 2px solid #ff648c !important;
+    color: #ff648c !important;
+  }
+  &.b-black {
+    background-color: #4d4d4d;
+    color: white;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .list-body {
+    ul li {
+      border-bottom: 1px solid #e5e5e5;
+    }
+    small {
+      font-size: 10px;
+      font-size: 1rem;
+    }
+    p {
+      font-size: 14px;
+      font-size: 1.4rem;
+      small {
+        font-size: 11px;
+        font-size: 1.1rem;
+      }
+      &.label-menu {
+        font-size: 10px;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+      &.c-pink {
+        font-size: 10px;
+        font-size: 1rem;
+      }
+    }
+  }
+  .avatar-radius-pink {
+    font-size: 10px;
+    font-size: 1rem;
+  }
+
+  .btn-border {
+    border: 1px solid white;
+    font-size: 10px;
+    font-size: 1rem;
+    &.b-pink {
+      border: 1px solid #ff648c !important;
+    }
+    &.b-black {
+      background-color: #4d4d4d;
+      color: white;
+    }
+  }
+}
+.reservation-details {
+  .title {
+    &-small {
+      margin-left: 5px;
+      &-1 {
+        font-size: 14px;
+      }
+      &-2 {
+        color: #ff648c;
+        width: 100% !important;
+        display: inline;
+        &::before {
+          display: none;
+        }
+        &::after {
+          display: none;
+        }
+      }
+    }
+    .btn-more {
+      &::after {
+        content: "";
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        right: 0px;
+        border: 2px solid #ff648c;
+        border-left-color: transparent;
+        border-bottom-color: transparent;
+        transform: rotate(45deg);
+      }
+    }
+  }
+  .btn-grp {
+    .btn {
+      width: 100%;
+      &:first-child {
+        margin-left: -15px;
+        margin-right: 2px;
+      }
+      &:last-child {
+        margin-right: -15px;
+        margin-left: 2px;
+      }
+    }
+  }
+}

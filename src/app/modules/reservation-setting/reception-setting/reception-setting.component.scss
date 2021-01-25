@@ -1,0 +1,10 @@
+.without-skip {
+  width: 100% !important;
+}
+
+.inline-block {
+  display: inline-block;
+}
+.editBtn::after {
+  content: ""!important;
+}

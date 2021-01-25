@@ -1,0 +1,185 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="filtered-search filtered-search-screen-3">
+        <div class="flex-row">
+          <div class="col-12 mt-0">
+            <h2 class="title title-bold pl-10">
+              <span>{{ "searchHistory.title" | translate }}</span>
+            </h2>
+          </div>
+          <div class="col-12">
+            <div class="white-box pt-5 pb-20 radius-none">
+              <div class="content-history">
+                <div class="hist" *ngFor="let item of listSearch">
+                  <div class="item">
+                    <div class="left">
+                      <label>{{
+                        "searchHistory.searchTime" | translate
+                      }}</label>
+                    </div>
+                    <div class="right">
+                      <label>{{
+                        item.created_at
+                      }}</label>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="left">
+                      <label>{{
+                        "searchHistory.searchConditions" | translate
+                      }}</label>
+                    </div>
+                    <div class="right">
+                      <div>
+                        <span>{{ "searchHistory.dayType.title" | translate }}</span>
+                        <span *ngIf="item.day_type == '0'"
+                          >
+                          {{
+                            "searchHistory.dayType.reservation" | translate
+                          }}
+                        </span>
+                        <span *ngIf="item.day_type == '1'"
+                        >
+                        {{ "searchHistory.dayType.visit" | translate }}
+                        </span>
+                        <span *ngIf="item.day_type == '2'"
+                        >
+                        {{
+                          "searchHistory.dayType.lastVisit" | translate
+                        }}</span
+                      >
+                      </div>
+                      
+                      <div style="margin-top: 10px;">
+                        <label
+                        >{{ "searchHistory.dateRange" | translate }}</label>
+                        <span *ngIf="item.target_day_from||item.target_day_to">
+                          {{ item.target_day_from }} ~
+                        {{ item.target_day_to}}
+                        </span>
+                      </div>
+                      
+                      <div style="margin-top: 10px;"> 
+                        <label *ngIf="item.visit_amount_type == '0'"
+                        >{{
+                          "searchHistory.visitType.visitDuringPeriod"
+                            | translate
+                        }}
+                      </label>
+                      <label *ngIf="item.visit_amount_type == '1'"
+                        >{{ "searchHistory.visitType.totalVisit" | translate }}
+                      </label>
+                      <label *ngIf="!item.visit_amount_type"
+                        > 来店回数 :
+                      </label>
+                      <span *ngIf="item.visit_amount_from||item.visit_amount_to">
+                       
+                        {{ item.visit_amount_from }} ~
+                        {{ item.visit_amount_to }}
+                      </span>
+                      </div>
+                      <div style="margin-top: 10px;">
+                        <label *ngIf="item.sale_type == '0'"
+                        >{{
+                          "searchHistory.saleType.saleDuringPeriod" | translate
+                        }}
+                        </label>
+                      <label *ngIf="item.sale_type == '1'"
+                        >{{ "searchHistory.saleType.totalSale" | translate }}
+                      </label>
+                      <label *ngIf="!item.sale_type"
+                      >売上 :
+                    </label>
+                      <span *ngIf="item.sale_from|| item.sale_to"> {{ item.sale_from }} ~
+                        {{ item.sale_to }}</span>
+                      </div>
+                      <label
+                      *ngIf="item.birthday_from||item.birthday_to">{{ "searchHistory.birthday" | translate }} :
+                        {{ item.birthday_from }} ~
+                        {{item.birthday_to}}
+                      </label>
+                      <label
+                      *ngIf="item.age_from||item.age_to">{{ "searchHistory.age" | translate }} :
+                        {{ item.age_from }} ~
+                        {{ item.age_to }}
+                      </label>
+                      <label *ngIf="item.sex_type == '0'"
+                        >{{ "searchHistory.sexType.title" | translate }}
+                        {{ "searchHistory.sexType.all" | translate }}</label
+                      >
+                      <label *ngIf="item.sex_type == '1'"
+                        >{{ "searchHistory.sexType.title" | translate }}
+                        {{ "searchHistory.sexType.male" | translate }}</label
+                      >
+                      <label *ngIf="item.sex_type == '2'"
+                        >{{ "searchHistory.sexType.title" | translate }}
+                        {{ "searchHistory.sexType.female" | translate }}</label
+                      >
+                      <label *ngIf="item.menu_select_type == '0'"
+                        >{{ "searchHistory.menuSelectType.title" | translate }}
+                        {{
+                          "searchHistory.menuSelectType.all" | translate
+                        }}</label
+                      >
+                      <label *ngIf="item.menu_select_type == '1'"
+                        >{{ "searchHistory.menuSelectType.title" | translate }}
+                        {{
+                          "searchHistory.menuSelectType.any" | translate
+                        }}</label
+                      >
+                      <label *ngIf="item.menu_select_type == '2'"
+                        >{{ "searchHistory.menuSelectType.title" | translate
+                        }}{{
+                          "searchHistory.menuSelectType.notAll" | translate
+                        }}</label
+                      >
+                      <label class="spec-label" *ngIf="item.menus?.length > 0">{{
+                        "searchHistory.listMenu" | translate
+                      }}
+                        <div class="spec-div" *ngIf="item.menus?.length > 0 &&checkObj(item.menus)!='string'">
+                          <label
+                            class="menu-label"
+                            *ngFor="let i of item.menus"
+                          >
+                            {{ i.name }} 
+                          </label>
+                        </div>
+                    </label>
+                     
+                    </div>
+                  </div>
+                  <div class="item-footer">
+                    <div class="input-group__delete">
+                      <a (click)="handleEdit(item.id)"
+                        ><img src="./assets/images/icon/edit-list.svg" alt=""
+                      /></a>
+                    </div>
+                    <div class="input-group__delete">
+                      <a (click)="handleDelete(item.id)"
+                        ><img
+                          src="./assets/images/icon/trash-alt-solid.svg"
+                          alt=""
+                      /></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="btn-area flex-row cus-searh-footer cus-searh-footer-screen-1"
+          >
+            <div class="bt" routerLink="/shops/conditional-search">
+              {{ "searchHistory.back" | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+<app-confirm-modal
+  #confirmModal
+  (confirm)="handleConfirm($event)"
+></app-confirm-modal>

@@ -1,0 +1,91 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold title--type01 mt-15">
+            <span>{{'header.0004' | translate}}</span>
+            <label (click)="back()"
+              style="position: absolute; right: 0; border: 1px solid; padding: 5px 15px; font-size: 1.3rem; margin-right: 10px;">{{'accounting-confirmation.btnChange' | translate}}</label>
+          </h2>
+        </div>
+        <form [formGroup]="paymentForm" class="col-12">
+          <div class="white-box pt-5 radius-none">
+            <div class="err pl-10 pr-10">
+              <app-top-error *ngIf="submitted" [form]="paymentForm" [formMap]="formMap"></app-top-error>
+            </div>
+            <div class="list__body">
+              <ul>
+                <li>
+                  <div class="title title--type02">
+                    <div class="client-infor">
+                      <h2 class="title-bold">{{orderObj?.customerName}}<small>（{{orderObj?.gender}}）</small></h2>
+                      <small
+                        class="pt-10">{{'accounting-confirmation.numberOfVisits' | translate}}：{{orderObj?.visitCnt == 0 ? ('accounting-confirmation.firstTime' | translate) : ('accounting-confirmation.times' | translate: {times: orderObj?.visitCnt})}}
+                        {{'accounting-confirmation.lastVisitDate' | translate}}：{{orderObj?.visitCnt !== 0 ? (localTime.formatDate(orderObj?.lastVisit, 'YYYY-MM-DD HH:mm')) : '-'}}</small>
+                    </div>
+                    <label class="time-info">{{'accounting-confirmation.receptionDate' | translate}}：{{localTime.formatDate(date, 'YYYY-MM-DD HH:mm')}}</label>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="mt-10 list__body">
+              <ul>
+                <li>
+                  <div class="text-center main-price">
+                    <span class="input-note">{{orderObj?.qty}} {{'accounting-confirmation.point' | translate}} / </span>
+                    <span class="input-note price">{{helper.formatCurrency(orderObj?.money)}}</span>
+                  </div>
+                  <div class="text-center mt-10">
+                    <span class="mr-10 price-detail">{{'accounting-confirmation.subtotal' | translate}}</span>
+                    <span class="price-detail">{{helper.formatCurrency(orderObj?.subTotal)}}</span>
+                  </div>
+                  <div class="text-center mt-5">
+                    <span class="mr-10 price-detail">+{{'accounting-confirmation.taxTotal' | translate}}</span>
+                    <span class="price-detail">{{helper.formatCurrency(orderObj?.taxTotal)}}</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="mt-10 list__body">
+              <ul>
+                <li class="prduct-item" *ngFor="let item of orderObj?.details">
+                  <div class="title-letf">
+                    <em class="title-bold">{{item.abbreviationCategory}}</em>{{item.name}}
+                  </div>
+                  <div class="price-right">
+                    <p *ngIf="!item.isDiscount" class="input-note">{{helper.formatCurrency(item.totalAmount)}}</p>
+                    <p *ngIf="item.isDiscount && item.discountType == '2'" class="input-note">(-{{helper.formatCurrency(item.discount)}}) {{helper.formatCurrency((item.totalAmount - item.discount) + ((item.totalAmount - item.discount) * item.tax / 100))}}</p>
+                    <p *ngIf="item.isDiscount && item.discountType == '1'" class="input-note">(- {{item.discount}}%) {{helper.formatCurrency(item.totalAmount - item.discount)}}</p>
+                    <p class="price-detail mt-5">{{helper.formatCurrency(item.totalProduct)}} X {{item.qty}}</p>
+                  </div>
+                </li>
+                <li class="prduct-item total-price">
+                  <div class="title-letf">
+                    {{'accounting-confirmation.totalTax' | translate}}
+                  </div>
+                  <div class="price-right">
+                    <p class="input-note">{{helper.formatCurrency(orderObj?.money)}} </p>
+                    <p class="price-detail mt-5">({{helper.formatCurrency(orderObj?.taxTotal)}})</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="input-group pl-15 pr-15">
+              <div class="input-group__label mt-0 pt-0">{{'accounting-confirmation.paymentMethod' | translate}}</div>
+              <select name="" id="" class="mt-10" [ngClass]="{
+                  'select-error': submitted && paymentForm.controls.paymentId.errors
+                }" formControlName="paymentId">
+                <option value="">{{'accounting-confirmation.paymentMethodSelection' | translate}}</option>
+                <option *ngFor="let item of paymentList" value="{{item.id}}">{{item.name}}</option>
+              </select>
+            </div>
+            <div class="btn-area flex-row">
+              <div class="bt next open_dialog" (click)="submit()">{{'accounting-confirmation.btnTreasurer' | translate}}</div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </article>
+</main>

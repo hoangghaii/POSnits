@@ -1,0 +1,42 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="customer-info-tab">
+        <div class="flex-row">
+          <div class="col-12 mt-0">
+            <h2 class="title title-bold pl-10">
+              <span>{{'customer.customerInfo' | translate}}</span>
+            </h2>
+          </div>
+          <div class="col-12">
+            <div class="white-box pt-5 pb-20 radius-none">
+              <ul class="cus-info-tab">
+                <li><a class="tablinks" [ngClass]="(tabCurrent?.value?.active && tabCurrent?.value?.index === 0) ? 'is-active' : ''"
+                    (click)="openTab(0)">{{'customer.personalInfo' | translate}}</a></li>
+                <li *ngIf="id != undefined || id != null"><a class="tablinks" [ngClass]="(tabCurrent?.value?.active && tabCurrent?.value?.index === 1) ? 'is-active' : ''" (click)="openTab(1)">{{'customer.freeItems' | translate}}</a></li>
+                <li *ngIf="id != undefined || id != null"><a class="tablinks" [ngClass]="(tabCurrent?.value?.active && tabCurrent?.value?.index === 2) ? 'is-active' : ''"  (click)="openTab(2)">{{'customer.visitInfo' | translate}}</a></li>
+                <li *ngIf="id != undefined || id != null"><a class="tablinks" [ngClass]="(tabCurrent?.value?.active && tabCurrent?.value?.index === 3) ? 'is-active' : ''" (click)="openTab(3)">{{'customer.contractInfo' | translate}}</a>
+                </li>
+              </ul>
+              <div id="tab-1" class="tab-content" *ngIf="tabCurrent.value.index === 0">
+                <app-personal-info [userLogin]="userLogin" [paramMapId]="id"></app-personal-info>
+              </div>
+
+              <div id="tab-2" class="tab-content" *ngIf="tabCurrent.value.index === 1">
+                <app-free-items [userLogin]="userLogin" [paramMapId]="id"></app-free-items>
+              </div>
+
+              <div id="tab-3" class="tab-content" *ngIf="tabCurrent.value.index === 2">
+                <app-visit-info [userLogin]="userLogin" [paramMapId]="id"></app-visit-info>
+              </div>
+
+              <div id="tab-4" class="tab-content" *ngIf="tabCurrent.value.index === 3">
+                <app-contract-info [userLogin]="userLogin" [paramMapId]="id"></app-contract-info>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>

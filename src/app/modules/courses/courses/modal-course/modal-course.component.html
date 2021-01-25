@@ -1,0 +1,215 @@
+<div class="create-modal" [ngClass]="open ? 'open' : null">
+  <div class="create-modal-overlay" (click)="closeModal()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">
+      {{ "course.courseRegistration" | translate }}
+      <span class="create-modal__header-close" (click)="closeModal()">&times;</span>
+    </div>
+    <div class="create-modal__body">
+      <app-top-error *ngIf="submitted" [form]="addCourseForm" [formMap]="formMap"></app-top-error>
+      <form action="" [formGroup]="addCourseForm">
+        <div class="input-group">
+          <label for="" class="input-group__label">
+            {{ "course.courseClassSelection" | translate }}
+          </label>
+          <select class="select-form mt-10" formControlName="classId"
+                  [ngClass]="{'input-error': submitted && f.classId.errors}">
+            <option *ngFor="let tcl of techClassList" value="{{ tcl.id }}">
+              {{ tcl.name }}
+            </option>
+          </select>
+        </div>
+        <div class="input-group single mt-15">
+          <label for="" class="input-group__label">
+            {{ "course.courseName" | translate }}
+          </label>
+          <input type="text" class="input-text"
+                 placeholder="{{ 'course.placeCourseName' | translate }}" formControlName="name"
+                 [ngClass]="{'input-error': submitted && f.name.errors}"/>
+        </div>
+        <div class="input-group single mt-15 unit">
+          <label for="" class="input-group__label">
+            {{ "common.treatmentTime" | translate }}
+          </label>
+          <input type="text" class="input-text"
+                 placeholder="{{ 'common.placeTreatmentTime' | translate }}"
+                 formControlName="treatmentTime"
+                 [ngClass]="{
+              'input-error': submitted && f.treatmentTime.errors
+            }"
+          />
+          <span class="txt">{{ "common.minutes" | translate }}</span>
+        </div>
+        <div class="input-group single mt-15 unit">
+          <label for="" class="input-group__label">
+            {{ "common.bufferTime" | translate }}
+          </label>
+          <input type="text" class="input-text"
+                 placeholder="{{ 'common.placeBufferTime' | translate }}"
+                 formControlName="bufferTime"
+                 [ngClass]="{
+              'input-error': submitted && f.bufferTime.errors
+            }"
+          />
+          <span class="txt">{{ "common.minutes" | translate }}</span>
+        </div>
+        <div class="input-group single mt-15 unit">
+          <label for="" class="input-group__label">
+            {{ "course.count" | translate }}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </label>
+          <input
+            type="text"
+            class="input-text"
+            placeholder="{{ 'course.placeCount' | translate }}"
+            formControlName="count"
+            [ngClass]="{
+              'input-error': submitted && f.count.errors
+            }"
+          /><span class="txt">{{ "common.times" | translate }}</span>
+        </div>
+        <div class="input-group single mt-15 unit">
+          <label for="" class="input-group__label">
+            {{ "course.priceCourse" | translate }}
+          </label>
+          <input
+            type="text"
+            class="input-text"
+            placeholder="{{ 'common.placePrice' | translate }}"
+            formControlName="price"
+            [ngClass]="{
+              'input-error': submitted && f.price.errors
+            }"
+          />
+          <span class="txt">
+            {{ "common.price" | translate }}
+          </span>
+        </div>
+        <div class="input-group single mt-15 unit">
+          <label for="" class="input-group__label">
+            {{ "common.taxRate" | translate }}
+          </label>
+          <select
+            class="select-form mt-10"
+            formControlName="taxId"
+            [ngClass]="{
+              'input-error': submitted && f.taxId.errors
+            }"
+          >
+            <option *ngFor="let item of listTaxes" value="{{ item.id }}">
+              {{ item.tax + '%' }}
+            </option>
+          </select>
+        </div>
+        <div class="input-group single mt-15 unit">
+          <label for="" class="input-group__label">
+            {{ "course.limitDate" | translate }}
+          </label>
+          <input type="text" class="input-text"
+                 placeholder="{{ 'course.placeLimitDate' | translate }}"
+                 formControlName="limitDate"
+                 [ngClass]="{
+              'input-error': submitted && f.limitDate.errors
+            }"
+          />
+          <span class="txt">{{ "common.month" | translate }}</span>
+        </div>
+        <!-- <div class="input-group single mt-15">
+          <label for="" class="input-group__label">
+            {{ "course.limitDate" | translate }}
+          </label>
+          <input type="text" class="input-text"
+                 placeholder="{{ 'course.placeLimitDate' | translate }}" formControlName="limitDate"
+                 [ngClass]="{'input-error': submitted && f.limitDate.errors}"/>
+        </div> -->
+        <div class="input-group mt-10">
+          <label for="" class="input-group__label">
+            {{ "course.monthMenuFlg" | translate }}
+          </label>
+          <div class="input-group-checkbox mt-10" style="text-align: left;">
+            <input type="checkbox" name="monthMenuFlg" id="monthMenuFlg" formControlName="monthMenuFlg">
+            <label class="checkbox-label" for="monthMenuFlg">{{ 'course.monthMenu' | translate}}</label>
+          </div>
+          <!-- <div class="radio-group">
+            <label
+              class="radio-group__label"
+              *ngFor="let item of monthMenuFlgList"
+              for="{{ item.key + item.value }}"
+            >
+              <span class="flex-box">
+                <input
+                  class="radio-group__input"
+                  type="radio"
+                  id="{{ item.key + item.value }}"
+                  name="monthMenuFlg"
+                  value="{{ item.key }}"
+                  formControlName="monthMenuFlg"
+                />
+                <span
+                  class="fake-btn"
+                  [ngClass]="{
+                    'input-error': submitted && f.monthMenuFlg.errors
+                  }"
+                ></span>
+                <span class="text">{{ item.value }}</span>
+              </span>
+            </label>
+          </div> -->
+        </div>
+        <div class="input-group mt-10">
+          <label for="" class="input-group__label">
+            {{ "common.selectColor" | translate }}
+          </label>
+          <input
+            class="inputColorPicker input-text mt-10"
+            [value]="currentPickedColor"
+            [style.background]="currentPickedColor"
+            [(colorPicker)]="currentPickedColor"
+            [cpPresetColors]="presetColors"
+            [cpPosition]="'top'"
+            [cpPositionOffset]="'9%'"
+            [cpOutputFormat]="'hex'"
+            [cpAlphaChannel]="'disabled'"
+            (colorPickerChange)="getValueColor($event)"
+            [ngClass]="{
+              'input-error': submitted && f.colorCode.errors
+            }"
+          />
+        </div>
+        <input type="hidden" name="id" formControlName="id"/>
+        <input type="hidden" name="category_cd" formControlName="categoryCd"/>
+        <input type="hidden" name="sort" formControlName="sort"/>
+        <input type="hidden" formControlName="updatedAt"/>
+        <div class="btn-grp mt-20" *ngIf="courseId; else btnCreate">
+          <button
+            type="submit"
+            class="btn mt-20 btn-delete"
+            (click)="handleDelete()"
+          >
+            {{ "common.delete" | translate }}
+          </button>
+          <button
+            type="submit"
+            class="btn mt-20 update"
+            (click)="handleUpdate()"
+          >
+            {{ "common.update" | translate }}
+          </button>
+        </div>
+        <ng-template #btnCreate>
+          <button
+            type="submit"
+            class="btn mt-20 create"
+            (click)="handleCreate()"
+          >
+            {{ "common.signUp" | translate }}
+          </button>
+        </ng-template>
+      </form>
+    </div>
+  </div>
+</div>
+<app-confirm-modal
+  #confirmModal
+  (confirm)="handleConfirm($event)"
+></app-confirm-modal>

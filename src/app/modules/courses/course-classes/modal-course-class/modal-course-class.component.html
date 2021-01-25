@@ -1,0 +1,61 @@
+<div class="create-modal" [ngClass]="open ? 'open' : null">
+  <div class="create-modal-overlay" (click)="closeModal()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">
+      {{ "courseClass.courseClassRegistration" | translate }}
+      <span class="create-modal__header--modal" (click)="closeModal()"></span>
+    </div>
+    <div class="create-modal__body">
+      <form [formGroup]="courseClassificationForm">
+        <div class="err">
+          <app-top-error
+            *ngIf="submitted"
+            [form]="courseClassificationForm"
+            [formMap]="formMap"
+          ></app-top-error>
+        </div>
+        <div class="input-group single mt-15">
+          <label for="" class="input-group__label">
+            {{ "courseClass.courseClassName" | translate }}
+          </label>
+          <input
+            type="text"
+            class="input-text"
+            placeholder="{{ 'courseClass.placeCourseClassName' | translate }}"
+            formControlName="name"
+            [ngClass]="{
+              'input-error': submitted && f.name.errors
+            }"
+          />
+        </div>
+        <input type="hidden" formControlName="sort" />
+        <input type="hidden" formControlName="updatedAt" />
+        <input type="hidden" formControlName="id" />
+
+        <div class="btn-grp mt-20" *ngIf="selectCurrent; else btnCreate">
+          <button
+            type="submit"
+            class="btn mt-20 btn-delete"
+            (click)="handleDelete()"
+          >
+            {{ "addStaff.staffCreate.delete" | translate }}
+          </button>
+          <button type="submit" class="btn mt-20" (click)="handleUpdate()">
+            {{ "addStaff.staffCreate.update" | translate }}
+          </button>
+        </div>
+
+        <ng-template #btnCreate>
+          <button type="submit" class="btn mt-20" (click)="handleCreate()">
+            {{ "addStaff.staffCreate.signUp" | translate }}
+          </button>
+        </ng-template>
+      </form>
+    </div>
+  </div>
+</div>
+
+<app-confirm-modal
+  #confirmModal
+  (confirm)="handleConfirm($event)"
+></app-confirm-modal>

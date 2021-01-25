@@ -1,0 +1,55 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span>{{ "equipment.title" | translate }}</span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <div class="pl-0 pr-0">
+            <div class="add-button mt-0">
+              <button (click)="openModal('create')">
+                <span></span><em>{{ "equipment.title" | translate }}</em>
+              </button>
+            </div>
+          </div>
+          <div class="list mt-20">
+            <div class="list__header" style="position: sticky;" id="btn-toggle-bigList">
+              {{ "equipment.list" | translate }}
+            </div>
+            <div class="list__body toggle" id="toggle-bigList" cdkDropList (cdkDropListDropped)="drop($event)">
+              <ul>
+                <li *ngFor="let item of listEquipment" class="list-item-content" cdkDragLockAxis="y"
+                  cdkDragBoundary=".list__body" cdkDrag>
+                  <div>
+                    <span class="edit" (click)="selectItem(item.id)"> {{ "common.edit" | translate }}</span>
+                  </div>
+                  <div>
+                    <span *ngIf="item.equpment_cd == '01'" class="title-bold">{{ "equipment.categoryCd01" | translate }}
+                    </span>
+                    <span *ngIf="item.equpment_cd == '02'" class="title-bold">{{ "equipment.categoryCd02" | translate }}
+                    </span>
+                  </div>
+                  <div>
+                    <span class="title-bold">{{ item.name }}</span>
+                  </div>
+                  <div>
+                    <span class="title-bold">{{ item.amount }}</span>
+                  </div>
+                  <div class="ico" style="margin-left: 15px;" cdkDragHandle>
+                    <span class="ico__item1"></span>
+                    <span class="ico__item2"></span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+<app-modal-equipment [shopId]="shopId" [equipmentId]="equipmentId" [open]="open" (confirm)="closeModal($event)">
+</app-modal-equipment>

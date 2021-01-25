@@ -1,0 +1,42 @@
+<div class="create-modal" [ngClass]="selectMenuStatus ? 'open' : ''">
+  <div class="create-modal-overlay" (click)="closeModal()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">
+      {{selectCurrent && !selectMenuStatus ? ("reservationRegistration.reservationDetailsChange" | translate) :
+      selectMenuStatus ? ("reservationRegistration.menuSelection" | translate) :
+      ("reservationRegistration.reservationRegistration" | translate)}}
+      <span class="create-modal__header-close" (click)="closeModal()">&times;</span>
+    </div>
+    <div class="create-modal__body create-modal__body__registration">
+      <form>
+        <div *ngFor="let item of listMenu; let i = index">
+          <div class="dropdown-toggle" [id]="'dropdown-toggle' + i" (click)="toggleList(i)">
+            {{ item.name }}
+            <div class="dropdown-icon-menus"></div>
+          </div>
+          <div class="dropdown-content" [id]="'dropdown-list' + i">
+            <div *ngFor="let subItem of item.details; let j = index">
+              <div [ngClass]="checkSelect(subItem) ? 'bgPink focus' : ''" class="dropdown-content__item"
+                [id]="'dropdown-content__item' + i + j" (click)="toggleBg(i, j, subItem, item)">
+                <div class="dropdown-content__item--left">
+                  {{ subItem.name }}
+                </div>
+                <div class="dropdown-content__item--right">
+                  {{ helper.formatCurrency(subItem.price) }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex-row">
+          <div class="w-half" (click)="closeModal()">
+            {{ "reservationRegistration.selectMenu.cancel" | translate }}
+          </div>
+          <div class="w-half w-half-pink" (click)="onSubmit()">
+            {{ "reservationRegistration.selectMenu.registerAReservation" | translate }}
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

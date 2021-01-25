@@ -1,0 +1,16 @@
+<div class="dialog-cancel" [ngClass]="isError ? 'show-dialog' : 'hide-dialog'">
+  <div class="in"  [ngStyle]="optStyle">
+    <p class="mb-20" *ngIf="isString(msg); else listMsg">
+      {{msg ? msg : ('errors.confirmErrors.default'|translate)}}
+    </p>
+    <ng-template #listMsg>
+      <p class="mb-20" *ngFor="let item of getMsg()">
+        {{item.message}}
+        </p>
+    </ng-template>
+    
+    <button class="btn close_dialog" (click)="confirm.emit(false)">
+      {{btnText ? btnText : ('common.btnCancel'|translate)}}
+    </button>
+  </div>
+</div>

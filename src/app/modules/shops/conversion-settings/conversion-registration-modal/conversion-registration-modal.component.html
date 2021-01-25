@@ -1,0 +1,43 @@
+<div class="create-modal" [ngClass]="open ? 'open' : null ">
+  <div class="create-modal-overlay" (click)="closeModal()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">
+      {{'conversionSettings.conversionName' | translate}} <span class="create-modal__header-close"
+        (click)="closeModal()">&times;</span>
+    </div>
+    <div class="create-modal__body">
+      <form [formGroup]="formRegister">
+        <div class="err">
+          <app-top-error *ngIf="submitted" [form]="formRegister" [formMap]="formMap"></app-top-error>
+        </div>
+        <div class="white-box--links mt-20">
+          <div class="d-flex">
+            <label id="labelInput" class="input-group__label w-px w-200">{{'conversionSettings.conversionName' | translate}}</label>
+            <input type="text" class="input-text input-group__row w-px w__100" [ngClass]="{'input-error': submitted && f.name.errors}" type="text" name="name"
+            formControlName="name">
+        </div>
+        <h3 class="mb-5">{{'conversionSettings.completionPage' | translate}}</h3>
+              <textarea name="complete" cols="40" rows="10" placeholder="{{'conversionSettings.placeComplete' | translate}}"
+                  class="textarea-big" formControlName="complete" class="input-text textarea-big"
+                  [ngClass]="{'input-error': submitted && f.complete.errors}"></textarea>
+                  <h3 class="mb-5">{{'conversionSettings.nonCompletionPages' | translate}}</h3>
+                  <textarea name="other-complete" formControlName="otherComplete" cols="40" rows="10"
+              placeholder="{{'conversionSettings.placeComplete' | translate}}" class="input-text textarea-big"
+              [ngClass]="{'input-error': submitted && f.otherComplete.errors}"></textarea>
+
+        </div>
+        <div class="btn-area flex-row">
+          <button class="bt next open_dialog" style="width: 100%;" type="submit" *ngIf="selectCurrent; else actCreate"
+            (click)="handleUpdate()">{{'conversionSettings.registerWithThisContent' | translate}}</button>
+          <ng-template #actCreate>
+            <button class="bt next open_dialog" style="width: 100%;" type="submit"
+              (click)="handleCreate()">{{'conversionSettings.registerWithThisContent' | translate}}</button>
+          </ng-template>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<app-confirm-modal #confirmModal (confirm)="handleConfirm($event)"></app-confirm-modal>
+
+

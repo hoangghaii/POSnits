@@ -1,0 +1,27 @@
+<form class="pl-20" [formGroup]="staffReceptsForm">
+  <div class="row_data">
+    <div class="pt-20 pb-10 w-35">{{ staff.name }}</div>
+    <div class="pt-10 w-15 pb-10">
+      <input type="number" class="input-text my-input"
+             [ngClass]="{'input-error': submitted && f.receptAmount.errors}" formControlName="receptAmount"/>
+    </div>
+    <div class="pt-10 w-25 pb-10">
+      <select [ngClass]="{'input-error': submitted && f.webFlg.errors}"
+              class="combobox1" formControlName="webFlg">
+        <option *ngFor="let item of listWebFlg" value="{{ item.value }}">
+          {{ item.key }}
+        </option>
+      </select>
+    </div>
+    <div class="pt-10 w-25 pb-10 pr-10">
+      <input type="number" class="input-text my-input"
+             [ngClass]="{'input-error': submitted && f.nomination.errors}"
+             formControlName="nomination"/>
+    </div>
+  </div>
+  <div class="pl-100">
+    <app-show-errors *ngIf="submitted" [ctrl]="f.receptAmount" [nameControll]="'受付数'"></app-show-errors>
+    <app-show-errors *ngIf="submitted" [ctrl]="f.webFlg" [nameControll]="'予約可否'"></app-show-errors>
+    <app-show-errors *ngIf="submitted" [ctrl]="f.nomination" [nameControll]="'指名料'"></app-show-errors>
+  </div>
+</form>

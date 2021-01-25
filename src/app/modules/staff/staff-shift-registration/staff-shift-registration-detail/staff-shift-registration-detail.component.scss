@@ -1,0 +1,64 @@
+.w-half {
+  width: 50%;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: initial;
+  cursor: pointer;
+
+  &.w-half-pink {
+    margin-left: 10px;
+    background-color: #ff648c;
+    color: #ffffff;
+  }
+}
+
+.pd-0 {
+  padding: 0 !important;
+}
+
+.create-modal__header {
+  max-height: 36px;
+  height: 100%;
+}
+
+.input-group .select-form.input-error {
+  border: 1px solid #ff648c;
+  background: #ffecf1;
+}
+
+.hide-dialog {
+  display: none;
+}
+
+.show-dialog {
+  z-index: 99999999;
+  display: block;
+}
+
+.close_dialog {
+  white-space: nowrap;
+}
+
+.dialog-cancel .in {
+  &.staff-regis {
+    padding: 15px 11px 15px 15px !important;
+    text-align: left !important;
+    border-radius: 3px;
+  }
+}
+
+.close {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: -10px;
+  margin-right: -5px;
+  padding: 3px 5px;
+  border-radius: 10px;
+  color: white;
+  background-color: #4d4d4d;
+  width: 20px;
+  height: 20px;
+}

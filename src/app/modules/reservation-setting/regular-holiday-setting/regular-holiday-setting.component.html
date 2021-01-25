@@ -1,0 +1,48 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span>{{ "regularHoliday.title1" | translate }}</span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <form action="">
+            <div class="white-box radius-none">
+              <app-reservation-step [stepNum]="4"></app-reservation-step>
+              <h2 class="inner-title title-bold">
+                <span>{{ "regularHoliday.title2" | translate }}</span
+                >
+              </h2>
+              <div class="input-group single mt-10">
+                <div class="input-group__label">
+                  {{ "regularHoliday.weekly" | translate }}
+                </div>
+                <div class="button-week">
+                  <button class="button" *ngFor="let day of dayOfWeek; index as i" (click)="choice(day)"
+                          [ngClass]="weekOff.includes(i) ? 'color' : ''">
+                    {{ ("regularHoliday.listWeek." + day) | translate }}
+                  </button>
+                </div>
+              </div>
+              <app-reservation-calendar
+                #calendarComponent
+                [multi]="true"
+                [days]="listDateChoice"
+                (select)="choiceDate($event)"
+                [weekOff]="weekOff"></app-reservation-calendar>
+              <div class="btn-area flex-row">
+                <div class="bt next next_full open_dialog"
+                     (click)="updateRegularHoliday()"
+                     [ngClass]="(mode=='update')?'editBtn':'null'">
+                  {{ status }}
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>

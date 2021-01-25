@@ -1,0 +1,29 @@
+<div class="col-12 mt-0">
+  <app-reservation-calendar [reservationStatus]="true" [reservationsSort]="reservationsSort"  class="background-calendar reservation-month" [days]="[selectedDate]" (select)="onSelectDate($event)" (nextPrev)="onNextPrev($event)"></app-reservation-calendar>
+  <div class="col-12 pl-20">
+    <h2 class="title mt-15">
+      <span class="title-bold">{{ "reservationTable.tableMonth.reservationList" | translate }} / <em class="title-bold input-note">{{choiceDate.month}}{{ "reservationTable.month" | translate }}{{choiceDate.date}}{{ "reservationTable.day" | translate }}（{{choiceDate.day}}）</em></span>
+      <a (click)="nextDay()" class="table-month-title-right">{{ "reservationTable.tableMonth.nextDay" | translate }} <span>›</span></a>
+    </h2>
+  </div>
+  <div class="col-12 table-month-col-12">
+    <div class="white-box__whole mt-15 table-month-white-box__whole">
+      <div class="p-15 wrap-item">
+        <div class="white-box mt-15" *ngFor="let item of reservationItems">
+          <div class="white-box--type03">
+            <a (click)="handleDetail(item)">
+              <span class="table-month-span">
+                <b>{{item?.reservation_time | date:'HH:mm'}}</b>
+                <em>{{visitFlgConstants[item?.visit_flg].key}}</em>
+              </span>
+              <span class="title-bold">
+                <em>{{ "reservationTable.tableMonth.inCharge" | translate }}：{{item?.staff_name}}</em>
+                {{item?.customer_name}} <small>({{item?.customer_sex === '0' ? ("sex.male" | translate) : ("sex.female" | translate)}})</small>
+                <span>※{{item?.treatment_name}} {{item?.equipment_name}}｜{{ "reservationTable.tableMonth.classification" | translate }}｜{{categoryCd[item.details[0]?.category_cd * 1].key}}｜{{item.details[0]?.menu_name}}</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,112 @@
+<div class="create-modal" [ngClass]="open ? 'open' : null">
+    <div class="create-modal-overlay" (click)="closeModal()"></div>
+    <div class="create-modal__inner">
+        <div class="create-modal__header">
+            <div class="flex-row align-center">
+                <label class="pt-5">{{"reservationDetails.detail" | translate}}</label>
+                <button class="btn-border " (click)="openPopup()">{{"reservationDetails.change" | translate}}</button>
+            </div>
+        </div>
+        <div class="form-reservation-details">
+            <form action="" class="input-group">
+                <div class="flex-row pl-20 pr-20 pt-20">
+                    <button class="btn-border"
+                        [ngClass]="objInfo?.visit_flg === '0' ? 'b-pink' : 'b-black'">{{(objInfo?.visit_flg) ?
+                        ("reservationDetails.lastVisit" | translate) : ("reservationDetails.visited" |
+                        translate)}}</button>
+                    <small>{{"reservationDetails.receptionDate" | translate}}：{{toDay | date: 'yyyy-MM-dd
+                        HH:mm'}}</small>
+                </div>
+                <div class="list-body">
+                    <ul>
+                        <li>
+                            <div class="flex-row pl-20 pr-20">
+                                <div class="body-left min">
+                                    <p>{{objInfo?.customer_name}}<small>（{{gender[objInfo?.customer_sex]?.value}}）</small>
+                                    </p>
+                                    <div class="mt-10">{{"reservationDetails.numberOfVisit" |
+                                        translate}}：{{objInfo?.visit_flg}} {{ (objInfo?.visit_flg == 0) ? (
+                                        "reservationDetails.lastVisitTitle1" | translate) : (
+                                        "reservationDetails.lastVisitTitle2" | translate)}}
+                                        {{"reservationDetails.lastVisitDate" | translate}}: {{objInfo?.reservation_time
+                                        | date: 'yyyy-MM-dd'}}</div>
+                                </div>
+                                <div class="body-right min">
+                                    <div class="avatar-radius-pink">{{ objInfo?.visit_flg == "0" ? ("reservationDetails.waitingForVisit" | translate) : ("reservationDetails.visited" | translate) }}</div>
+                                </div>
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="pl-20 pr-20">
+                                <small>{{"reservationDetails.dateAndTime" | translate}}</small>
+                                <p>{{localTime?.getDateAndTime(objInfo?.reservation_time)}}
+                                </p>
+                                <p class="mt-5">{{getTimeStartEnd()}} 1{{"reservationDetails.name" | translate}}</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="pl-20 pr-20">
+                                <small>{{"reservationDetails.menu" | translate}}：{{"reservationDetails.technology" |
+                                    translate}}</small>
+                                <div class="flex-row border-dashed" *ngFor="let item of this.listMenus">
+                                    <div class="body-left">
+                                        <p class="label-menu">{{item?.name}}</p>
+                                    </div>
+                                    <div class="body-right">
+                                        <p class="c-pink" style="white-space: nowrap;">
+                                            {{helper.formatCurrency(item?.price)}}円</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="pl-20 pr-20">
+                                <small>{{"reservationDetails.personInCharge" | translate}}</small>
+                                <div class="d-flex align-center mt-10">
+                                    <img style="width: 40px; height: 40px; border-radius: 40px;" onerror="this.onerror=null;this.src='assets/images/icon/no-img-staff.svg';"
+                                        [src]="objInfo?.staff_img" alt="">
+                                    <span class="pl-10">{{objInfo?.staff_name}}</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li *ngIf="objInfo?.equipment_name && objInfo?.equipment_cd">
+                            <div class="pl-20 pr-20">
+                                <small>{{"reservationDetails.treatmentTableAndEquipment" | translate}}</small>
+                                <p>{{objInfo?.equipment_name}}：{{objInfo?.equipment_cd}}</p>
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="pl-20 pr-20">
+                                <small>{{"reservationDetails.securingTime" | translate}}</small>
+                                <p>{{objInfo?.treatments_time}} {{"reservationDetails.time" | translate}}</p>
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="pl-20 pr-20">
+                                <div class="mt-10">{{"reservationDetails.remarks" | translate}}</div>
+                                <p>{{objInfo?.remark}}</p>
+                            </div>
+                        </li>
+                        <li class="pt-0 pb-0">
+                            <div class="flex-row">
+                                <div class="w-half" (click)="cancelReservation()">
+                                    {{(objInfo?.visit_flg === '0') ? ("reservationDetails.cancel" | translate) :
+                                    ("reservationDetails.cancellationOfVisit" | translate)}}
+                                </div>
+                                <div class="w-half w-half-pink" (click)="updateReservation()">
+                                    {{(objInfo?.visit_flg === '0') ? ("reservationDetails.visit" | translate) :
+                                    ("reservationDetails.bill" | translate)}}
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<app-registration *ngIf="isOpen" [selectCurrent]="objInfo" [userLogin]="userLogin" [isOpen]="isOpen"
+    (confirm)="closeModalRegister($event)"></app-registration>

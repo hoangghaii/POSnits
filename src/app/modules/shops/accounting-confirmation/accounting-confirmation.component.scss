@@ -1,0 +1,100 @@
+.open_dialog {
+  width: 100% !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.price {
+  font-size: 2.5rem;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+
+.price-detail {
+  font-size: 1.3rem;
+  color: #919191;
+}
+
+.main-price {
+  display: block !important;
+  padding: 0 !important;
+}
+
+.prduct-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed #e5e5e5 !important;
+  padding: 16px 15px 8px !important;
+}
+
+.prduct-item .title-letf {
+  padding: 0 !important;
+  color: #4d4d4d;
+}
+
+.prduct-item .price-right {
+  margin: 0 !important;
+  text-align: right;
+}
+
+.prduct-item .price-right .input-note {
+  text-align: right;
+}
+
+.total-price {
+  border: none !important;
+}
+
+.total-price .title-letf {
+  font-size: 1.2rem;
+}
+
+.total-price .price-right .price-detail {
+  color: #ff648c;
+}
+
+.client-infor {
+  width: auto !important;
+}
+
+.client-infor h2 {
+  font-size: 1.8rem;
+}
+
+.client-infor h2 small {
+  font-size: 1.4rem;
+}
+
+.time-info {
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+}
+
+@media only screen and (max-width: 767px) {
+  .client-infor h2 {
+    font-size: 1.4rem;
+  }
+
+  .total-price .title-letf,
+  .prduct-item .title-letf,
+  .prduct-item .title-letf em {
+    font-size: 1.1rem;
+  }
+
+  .client-infor h2 small {
+    font-size: 1rem;
+  }
+
+  .title span {
+    padding-left: 15px;
+  }
+}
+
+.select-error {
+  border: 1px solid #ff648c;
+  background: #ffecf1;
+}

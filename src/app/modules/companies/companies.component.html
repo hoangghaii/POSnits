@@ -1,0 +1,307 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span>{{ "company.titleRegisterCompany" | translate }}</span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <form action="" [formGroup]="companyForm">
+            <div class="white-box pt-5 pb-20 radius-none">
+              <div class="err ml-20 mr-20" style="margin: 0 20px 10px 20px;">
+                <app-top-error
+                  *ngIf="submitted"
+                  [form]="companyForm"
+                  [formMap]="formMap"
+                ></app-top-error>
+              </div>
+              <div class="input-group single">
+                <div class="input-group__label">
+                  {{ "company.lbCompanyName" | translate }}
+                </div>
+                <input
+                  class="input-text"
+                  type="text"
+                  placeholder="{{
+                    'company.placeholderCompanyName' | translate
+                  }}"
+                  id="name"
+                  name="name"
+                  formControlName="name"
+                  [ngClass]="{
+                    'input-error': submitted && companyForm.controls.name.errors
+                  }"
+                />
+              </div>
+              <!-- <app-show-errors
+                class="pl-0"
+                *ngIf="submitted"
+                [ctrl]="f.name"
+                [nameControll]="'会社名'"
+              ></app-show-errors> -->
+
+              <div class="input-group pl-20 pt-0">
+                <div class="input-group__label">
+                  {{ "company.lbAddress" | translate }}
+                </div>
+                <div class="input-group__row justify-content-left">
+                  {{ "company.lbPostCode" | translate }}
+                  <input
+                    type="text"
+                    style="width: 80px;"
+                    minlength="3"
+                    maxlength="3"
+                    class="input-text input-group__zipcode01 no-arrow"
+                    id="zipCode01"
+                    name="zipCode01"
+                    formControlName="zipCode01"
+                    (ngModelChange)="getZipCode01()"
+                    [ngClass]="{
+                      'input-error':
+                        submitted && companyForm.controls.zipCode01.errors
+                    }"
+                  />
+                  ー
+                  <input
+                    type="text"
+                    minlength="4"
+                    maxlength="4"
+                    class="input-text input-group__zipcode02 no-arrow"
+                    id="zipCode02"
+                    name="zipCode02"
+                    formControlName="zipCode02"
+                    (ngModelChange)="getZipCode02()"
+                    [ngClass]="{
+                      'input-error':
+                        submitted && companyForm.controls.zipCode02.errors
+                    }"
+                  />
+                </div>
+              </div>
+              <!-- <app-show-errors
+                *ngIf="submitted"
+                [ctrl]="f.zipCode01"
+                [nameControll]="'郵便番号1'"
+                [errorMsg]="'※ 郵便番号1 は数字で入力してください。'"
+              ></app-show-errors> -->
+              <!-- <app-show-errors
+                *ngIf="submitted"
+                [ctrl]="f.zipCode02"
+                [nameControll]="'郵便番号2'"
+                [errorMsg]="'※ 郵便番号2 は数字で入力してください。'"
+              ></app-show-errors> -->
+
+              <div class="input-group single">
+                <input
+                  type="text"
+                  class="input-text"
+                  placeholder="{{
+                    'company.placeholderPrefecture' | translate
+                  }}"
+                  id="prefecture"
+                  name="prefecture"
+                  formControlName="prefecture"
+                  value="{{ this.companyForm.controls.prefecture.value }}"
+                  readonly
+                />
+              </div>
+
+              <div class="input-group single">
+                <input
+                  type="text"
+                  class="input-text"
+                  placeholder="{{ 'company.placeholderCity' | translate }}"
+                  id="city"
+                  name="city"
+                  formControlName="city"
+                  value="{{ this.companyForm.controls.city.value }}"
+                  readonly
+                />
+              </div>
+
+              <div class="input-group single">
+                <input
+                  type="text"
+                  class="input-text"
+                  placeholder="{{ 'company.placeholderAddress' | translate }}"
+                  id="address"
+                  name="address"
+                  formControlName="address"
+                  value="{{ companyForm.controls.address.value }}"
+                  [ngClass]="{
+                    'input-error':
+                      submitted && companyForm.controls.address.errors
+                  }"
+                />
+              </div>
+              <!-- <app-show-errors
+                *ngIf="submitted"
+                [ctrl]="f.address"
+                [nameControll]="'市区町村'"
+              ></app-show-errors> -->
+
+              <div class="input-group single">
+                <input
+                  type="text"
+                  class="input-text"
+                  placeholder="{{
+                    'company.placeholderExtAddress' | translate
+                  }}"
+                  id="extAddress"
+                  name="extAddress"
+                  formControlName="extAddress"
+                  value="{{ companyForm.controls.extAddress.value }}"
+                  [ngClass]="{
+                    'input-error':
+                      submitted && companyForm.controls.extAddress.errors
+                  }"
+                />
+              </div>
+              <!-- <app-show-errors
+                *ngIf="submitted"
+                [ctrl]="f.extAddress"
+                [nameControll]="'拡張アドレス'"
+              ></app-show-errors> -->
+
+              <div class="input-group single pt-10">
+                <input
+                  type="text"
+                  class="input-text mt-0"
+                  placeholder="{{ 'company.placeholderArea' | translate }}"
+                  id="area"
+                  name="area"
+                  formControlName="area"
+                  [ngClass]="{'input-error': submitted && companyForm.controls.area.errors}"
+                />
+              </div>
+              <!-- <app-show-errors
+                *ngIf="submitted"
+                [ctrl]="f.area"
+                [nameControll]="'拡張アドレス'"
+              ></app-show-errors> -->
+
+              <div class="input-group pl-20 pr-20 pt-15">
+                <div class="input-group__label mt-0 pt-0">
+                  {{ "company.lbAccounting" | translate }}
+                </div>
+                <select
+                  class="select-form mt-10"
+                  name="accounting"
+                  id="accounting"
+                  formControlName="accounting"
+                  [ngClass]="{
+                    'input-error':
+                      submitted && companyForm.controls.accounting.errors
+                  }"
+                >
+                  <option
+                    *ngFor="let item of accountingList"
+                    value="{{ item.key }}"
+                  >
+                    {{ item.value }}
+                  </option>
+                </select>
+              </div>
+              <!-- <app-show-errors
+                *ngIf="submitted"
+                [ctrl]="f.accounting"
+                [nameControll]="'会計処理設定'"
+              ></app-show-errors> -->
+
+              <div class="input-group single pt-0 mt-0">
+                <div class="input-group__label mt-0">
+                  {{ "company.lbCutoffDate" | translate }}
+                </div>
+                <input
+                style="width: 90%;"
+                  type="text"
+                  class="input-text"
+                  placeholder="{{
+                    'company.placeholderCutoffDate' | translate
+                  }}"
+                  id="cutoffDate"
+                  name="cutoffDate"
+                  formControlName="cutoffDate"
+                  [ngClass]="{
+                    'input-error':
+                      submitted && companyForm.controls.cutoffDate.errors
+                  }"
+                />
+                {{"company.day" | translate}}
+              </div>
+              <!-- <app-show-errors
+                *ngIf="submitted"
+                [ctrl]="f.cutoffDate"
+                [nameControll]="'締め日'"
+                [errorMsg]="'※締め日は日付型（yyyy-mm-dd）で入力してください。'"
+              ></app-show-errors> -->
+              <input type="hidden" formControlName="updatedAt" />
+              <div class="pl-20 pr-20 pt-30 pb-30" *ngIf="edit; else btnCreate">
+                <button
+                  type="submit"
+                  class="btn mt-20 update"
+                  (click)="handleUpdate()"
+                >
+                  {{ "common.update" | translate }}
+                </button>
+              </div>
+              <!-- <div class="btn-grp mt-20" *ngIf="edit; else btnCreate">
+                 <button
+                  type="submit"
+                  class="btn mt-20 btn-delete"
+                  (click)="handleDelete()"
+                >
+                  {{ "common.delete" | translate }}
+                </button>
+                <button type="submit" class="btn mt-20 update" (click)="handleUpdate()">
+                  {{ "common.update" | translate }}
+                </button>
+              </div>-->
+              <ng-template #btnCreate>
+                <div class="pl-20 pr-20 pt-30 pb-30">
+                  <button class="btn" (click)="signUp()">
+                    {{ "company.btnSignUp" | translate }}
+                  </button>
+                </div>
+              </ng-template>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </article>
+  <div
+    class="dialog-confirm"
+    [@fadeAnimation]="showConfirmPop ? 'fadeIn' : 'fadeOut'"
+  >
+    <div class="in">
+      <p class="mb-20">{{ "company.confirmRegisterMessage" | translate }}</p>
+      <div class="btn-grp">
+        <button class="btn btn-delete" (click)="showConfirmPop = false">
+          {{ "company.btnCancel" | translate }}
+        </button>
+        <button class="btn" (click)="save()">
+          {{ "company.btnSave" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div
+  class="dialog-cancel"
+  [@fadeAnimation]="isOpenDialog ? 'fadeIn' : 'fadeOut'"
+>
+  <div class="in">
+    <p class="mb-20">{{ apiMessage }}</p>
+    <button class="btn close_dialog" (click)="isOpenDialog = false">
+      {{ "common.btnCancel" | translate }}
+    </button>
+  </div>
+</div>
+<app-confirm-modal
+  #confirmModal
+  (confirm)="handleConfirm($event)"
+></app-confirm-modal>

@@ -1,0 +1,40 @@
+.btn-accounting-completed {
+  background: #e5e5e5;
+  color: #4d4d4d;
+  width: 100%;
+}
+
+.check-icon {
+  color: #4d4d4d;
+}
+.label-opacity {
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.input-group .select-form.input-error {
+  border: 1px solid #ff648c;
+  background: #ffecf1;
+}
+.hide-dialog {
+  display: none;
+}
+.show-dialog {
+  &.show-dialog-confirm {
+    z-index: 88888888 !important;
+    display: block;
+  }
+}
+.close-confirm {
+  margin-bottom: 12px;
+  margin-top: -28px;
+  float: right;
+  font-size: 16px;
+  cursor: pointer;
+}
+.close_dialog {
+  white-space: nowrap;
+}
+.btn-print-mail {
+  background-color: #4d4d4d !important;
+}

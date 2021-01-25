@@ -1,0 +1,69 @@
+<div class="create-modal" [ngClass]="open ? 'open' : null">
+  <div class="create-modal-overlay" (click)="closeModal()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">
+      {{ "product-classification.headerModal" | translate }}
+      <span class="create-modal__header--modal" (click)="closeModal()"></span>
+    </div>
+    <div class="create-modal__body">
+      <form [formGroup]="productClassificationForm">
+        <div class="err">
+          <app-top-error
+            *ngIf="submitted"
+            [form]="productClassificationForm"
+            [formMap]="formMap"
+          ></app-top-error>
+        </div>
+        <div class="input-group single mt-15">
+          <label for="" class="input-group__label">
+            {{ "product-classification.name" | translate }}
+          </label>
+          <input
+            type="text"
+            class="input-text"
+            placeholder="{{
+              'product-classification.namePlaceholder' | translate
+            }}"
+            formControlName="name"
+            [ngClass]="{
+              'input-error': submitted && f.name.errors
+            }"
+          />
+        </div>
+        <!-- <app-show-errors
+          *ngIf="submitted"
+          [ctrl]="f.name"
+          [nameControll]="'分類名'"
+        ></app-show-errors> -->
+
+        <input type="hidden" formControlName="sort" />
+        <input type="hidden" formControlName="updatedAt" />
+        <input type="hidden" name="id" formControlName="id" />
+
+        <div class="btn-grp mt-20" *ngIf="selectCurrent; else btnCreate">
+          <button
+            type="submit"
+            class="btn mt-20 btn-delete"
+            (click)="handleDelete()"
+          >
+            {{ "common.btnDelete" | translate }}
+          </button>
+          <button type="submit" class="btn mt-20" (click)="handleUpdate()">
+            {{ "common.btnUpdate" | translate }}
+          </button>
+        </div>
+
+        <ng-template #btnCreate>
+          <button type="submit" class="btn mt-20" (click)="handleCreate()">
+            {{ "common.btnRegister" | translate }}
+          </button>
+        </ng-template>
+      </form>
+    </div>
+  </div>
+</div>
+
+<app-confirm-modal
+  #confirmModal
+  (confirm)="handleConfirm($event)"
+></app-confirm-modal>

@@ -1,0 +1,281 @@
+<form [formGroup]="customerInfoRegisForm">
+  <div class="err pt-10">
+    <app-top-error
+      *ngIf="submitted"
+      [form]="customerInfoRegisForm"
+      [formMap]="formMap"
+    ></app-top-error>
+  </div>
+  <div class="input-group mt-10 input-group-tab">
+    <label class="input-group__label input-group__label-tab">{{
+      "customer.customerNo" | translate
+    }}</label>
+    <input
+      type="text"
+      class="input-text input-text-tab"
+      placeholder="ＢＳＧ0000001"
+      formControlName="customer_no"
+      [ngClass]="{
+        'input-error':
+          submitted && customerInfoRegisForm.controls.customer_no.errors
+      }"
+    />
+  </div>
+  <div class="input-group mt-10 input-group-tab">
+    <label class="input-group__label input-group__label-tab">{{
+      "customer.name" | translate
+    }}</label>
+    <div class="group">
+      <input
+        type="text"
+        class="input-text input-text-tab"
+        placeholder="{{ 'customer.name1' | translate }}"
+        formControlName="firstname"
+        [ngClass]="{
+          'input-error':
+            submitted && customerInfoRegisForm.controls.firstname.errors
+        }"
+      />
+      <input
+        type="text"
+        class="input-text input-text-tab"
+        placeholder="{{ 'customer.name2' | translate }}"
+        formControlName="lastname"
+        [ngClass]="{
+          'input-error':
+            submitted && customerInfoRegisForm.controls.lastname.errors
+        }"
+      />
+    </div>
+  </div>
+  <div class="input-group mt-10 input-group-tab">
+    <label class="input-group__label input-group__label-tab">{{
+      "customer.nameKana" | translate
+    }}</label>
+    <div class="group">
+      <input
+        type="text"
+        class="input-text input-text-tab"
+        placeholder="{{ 'customer.name1' | translate }}"
+        formControlName="firstname_kana"
+        [ngClass]="{
+          'input-error':
+            submitted && customerInfoRegisForm.controls.firstname_kana.errors
+        }"
+      />
+      <input
+        type="text"
+        class="input-text input-text-tab"
+        placeholder="{{ 'customer.name2' | translate }}"
+        formControlName="lastname_kana"
+        [ngClass]="{
+          'input-error':
+            submitted && customerInfoRegisForm.controls.lastname_kana.errors
+        }"
+      />
+    </div>
+  </div>
+  <div class="input-group mt-10 input-group-tab">
+    <div class="input-group__label input-group__label-tab">
+      {{ "customer.sex" | translate }}
+    </div>
+    <div class="radio-group">
+      <label
+        class="radio-group__label"
+        *ngFor="let item of constants.sex"
+        for="{{ item.key + item.value }}"
+      >
+        <span class="flex-box">
+          <input
+            class="radio-group__input"
+            type="radio"
+            id="{{ item.key + item.value }}"
+            name="sex"
+            value="{{ item.key }}"
+            formControlName="sex"
+          />
+          <span
+            class="fake-btn"
+            [ngClass]="{
+              'input-error':
+                submitted && customerInfoRegisForm.controls.sex.errors
+            }"
+          ></span>
+          <span class="text">{{ item.value }}</span>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="input-group mt-10 input-group-tab">
+    <label class="input-group__label input-group__label-tab">{{
+      "customer.birthday" | translate
+    }}</label>
+    <input
+      type="date"
+      class="input-text input-text-tab w-200 input-date"
+      formControlName="birthday"
+      [ngClass]="{
+        'select-error':
+          submitted && customerInfoRegisForm.controls.birthday.errors
+      }"
+    />
+  </div>
+  <div class="input-group mt-10 input-group-tab">
+    <label class="input-group__label input-group__label-tab">{{
+      "customer.phoneNumber" | translate
+    }}</label>
+    <input
+      type="text"
+      class="input-text input-text-tab"
+      placeholder="{{ 'customer.phoneNumberPlaceHolder' | translate }}"
+      formControlName="tel"
+      [ngClass]="{
+        'input-error': submitted && customerInfoRegisForm.controls.tel.errors
+      }"
+    />
+  </div>
+  <div class="input-group mt-10 input-group-tab">
+    <label class="input-group__label input-group__label-tab">{{
+      "customer.email" | translate
+    }}</label>
+    <input
+      [email]="true"
+      type="email"
+      class="input-text input-text-tab"
+      placeholder="{{ 'customer.emailPlaceHolder' | translate }}"
+      formControlName="email"
+      [ngClass]="{
+        'input-error': submitted && customerInfoRegisForm.controls.email.errors
+      }"
+    />
+  </div>
+  <div class="input-group mt-10 input-group-tab">
+    <label class="input-group__label input-group__label-tab">{{
+      "customer.zipCode" | translate
+    }}</label>
+    <input
+      type="text"
+      class="input-text input-text-tab w-260"
+      placeholder="{{ 'customer.zipCodePlaceHolder' | translate }}"
+      formControlName="postal_cd"
+      [ngClass]="{
+        'input-error':
+          submitted && customerInfoRegisForm.controls.postal_cd.errors
+      }"
+      (change)="getZipCode()"
+    />
+  </div>
+  <div class="input-group mt-10 input-group-tab">
+    <label class="input-group__label input-group__label-tab">{{
+      "customer.prefectures" | translate
+    }}</label>
+    <input
+      type="text"
+      class="input-text input-text-tab"
+      formControlName="prefecture"
+      placeholder="{{ 'customer.prefecturesPlaceHolder' | translate }}"
+      [ngClass]="{
+        'input-error':
+          submitted && customerInfoRegisForm.controls.prefecture.errors
+      }"
+    />
+  </div>
+  <div class="input-group mt-10 input-group-tab">
+    <label class="input-group__label input-group__label-tab">{{
+      "customer.city" | translate
+    }}</label>
+    <input
+      type="text"
+      class="input-text input-text-tab"
+      formControlName="city"
+      placeholder="{{ 'customer.cityPlaceHolder' | translate }}"
+      [ngClass]="{
+        'input-error': submitted && customerInfoRegisForm.controls.city.errors
+      }"
+    />
+  </div>
+  <div class="input-group mt-10 input-group-tab">
+    <label class="input-group__label input-group__label-tab">{{
+      "customer.townArea" | translate
+    }}</label>
+    <input
+      type="text"
+      class="input-text input-text-tab"
+      formControlName="area"
+      placeholder="{{ 'customer.townAreaPlaceHolder' | translate }}"
+      [ngClass]="{
+        'input-error': submitted && customerInfoRegisForm.controls.area.errors
+      }"
+    />
+  </div>
+  <div class="input-group mt-10 input-group-tab">
+    <label class="input-group__label input-group__label-tab">{{
+      "customer.address" | translate
+    }}</label>
+    <input
+      type="text"
+      class="input-text input-text-tab"
+      formControlName="address"
+      placeholder="{{ 'customer.addressPlaceHolder' | translate }}"
+      [ngClass]="{
+        'input-error':
+          submitted && customerInfoRegisForm.controls.address.errors
+      }"
+    />
+  </div>
+  <div class="input-group mt-10 input-group-tab">
+    <label class="input-group__label input-group__label-tab">{{
+      "customer.language" | translate
+    }}</label>
+    <div class="radio-group">
+      <label
+        class="radio-group__label"
+        *ngFor="let item of constants.listLanguage"
+        for="{{ item.key + item.value }}"
+      >
+        <span class="flex-box">
+          <input
+            class="radio-group__input"
+            type="radio"
+            id="{{ item.key + item.value }}"
+            name="language"
+            value="{{ item.value }}"
+            formControlName="language"
+          />
+          <span
+            class="fake-btn"
+            [ngClass]="{
+              'input-error':
+                submitted && customerInfoRegisForm.controls.language.errors
+            }"
+          ></span>
+          <span class="text">{{ item.key }}</span>
+        </span>
+      </label>
+    </div>
+  </div>
+  <!-- <div class="input-group mt-10 input-group-tab">
+    <label class="input-group__label input-group__label-tab">ファイル選択</label>
+    <app-upload-file [isButton]="false" [imagesUrl]="imagesUrl" (confirm)="handleFileInput($event)"></app-upload-file>
+  </div> -->
+
+  <div class="btn-area flex-row">
+    <div
+      class="bt skip" (click)="changeRouter()"
+    >
+      {{ "customer.btnBack" | translate }}
+    </div>
+    <div class="bt next open_dialog" (click)="saveCustomer()">
+      {{
+        customerInfoRegisForm.controls.id.value !== "" &&
+        customerInfoRegisForm.controls.id.value !== null
+          ? ("customer.btnUpdate" | translate)
+          : ("customer.btnSingUp" | translate)
+      }}
+    </div>
+  </div>
+</form>
+<app-confirm-modal
+  #confirmModal
+  (confirm)="handleConfirm($event)"
+></app-confirm-modal>

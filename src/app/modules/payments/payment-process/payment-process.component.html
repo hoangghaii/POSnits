@@ -1,0 +1,40 @@
+
+    <main class="pb-50">
+        <article class="wrap">
+            <section>
+                <div class="customer-info-tab">
+                    <div class="flex-row">
+                        <div class="col-12 pl-15 pr-15">
+                            <h2 class="title fw-bold title--type02 mt-15">
+                                <span>{{'paymentProcess.paymentProcess' | translate}}</span>
+                            </h2>
+                        </div>
+                        <div class="col-12">
+                            <div class="input-group single pt-0 mt-0">
+                                <div class="input-group__label mt-0">{{'paymentProcess.cardNumber' | translate}}</div>
+                                <input type="text" placeholder="{{'paymentProcess.cardNumberPlaceHolder' | translate}}" class="input-text">
+                            </div>
+                            <div class="input-group single">
+                                <div class="input-group__row input-group__date_start_end">
+                                    <div class="input-group">
+                                        <label for="" class="input-group__label">{{'paymentProcess.expirationDate' | translate}}</label>
+                                        <input type="text" placeholder="{{'paymentProcess.monthYear' | translate}}" class="input-text">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="" class="input-group__label">{{'paymentProcess.securityCode' | translate}}</label>
+                                        <input type="text" placeholder="{{'paymentProcess.securityCodePlaceHolder' | translate}}" class="input-text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group single" style="text-align: center;">
+                                <button class="btn mt-20" style="width: 40%;">{{'paymentProcess.settlePayment' | translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-area flex-row">
+                    <div class="bt skip next_full open_dialog">{{'paymentProcess.back' | translate}}</div>
+                </div>
+            </section>
+        </article>
+    </main>

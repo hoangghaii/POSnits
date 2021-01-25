@@ -1,0 +1,118 @@
+
+<main class="pb-50">
+    <article class="wrap">
+        <section>
+            <form [formGroup]="saleForm">
+            <div class="flex-row">
+                <div class="col-12 mt-0">
+                    <h2 class="title title-bold pl-10">
+                      <span> {{"salesTrends.title"|translate}}</span>
+                    </h2>
+                  </div>
+                <div class="col-12">
+                <div class="white-box pt-5 pb-20 radius-none">
+                    <div class="err" style="margin:20px">
+                        <app-top-error *ngIf="submitted" [form]="saleForm" [formMap]="formMap"></app-top-error>
+                      </div>
+                <div class="col-12 trend-div">
+
+                    <div class="trend-left"><span>{{"salesTrends.type_stage"|translate}}</span></div>
+                    <div class="trend-right">
+                        <div class="radio-group" style="margin:0">
+                            <label
+                              class="radio-group__label"
+                              *ngFor="let item of listStage"
+                              for="{{ item.key + item.value }}"
+                              style="margin-left: 10px;"
+                            >
+                                <span class="flex-box">
+                                  <input
+                                    class="radio-group__input"
+                                    type="radio"
+                                    id="{{ item.key + item.value }}"
+                                    name="type_stage"
+                                    value="{{item.value}}"
+                                    formControlName="type_stage"
+                                    (change)="chooseTypeChart()"
+                                  />
+                                  <span class="fake-btn"></span>
+                                  <span class="text">{{ item.key }}</span>
+                                </span>
+                            </label>
+                          </div>
+                    </div>
+                </div>
+                <div class="col-12 trend-div">
+                    <div class="trend-left select-div"><span class="select-span">{{"salesTrends.month_stage"|translate}}</span></div>
+                    <div class="trend-right">
+                        <select name="" id="" class="select" formControlName="month_stage"  (change)="chooseTypeChart()">
+                            <option value="{{item}}"  *ngFor="let item of listMonth">{{item}} {{"salesTrends.month"|translate}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 trend-div">
+                    <div class="trend-left select-div"><span class="select-span">{{"salesTrends.staff"|translate}}</span></div>
+                    <div class="trend-right">
+                        <select name="" id="" class="select" formControlName="staff"  (change)="chooseTypeChart()">
+                            <option value="{{item.id}}" *ngFor="let item of listStaff">{{item.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 trend-div">
+                    <div class="trend-left"><span>{{"salesTrends.type_chart"|translate}}</span></div>
+
+                        <div class="radio-group radio-group__special" style="margin:0;">
+                            <label
+                              class="radio-group__label"
+                              *ngFor="let item of chartType"
+                              for="{{ item.key + item.value }}"
+                              style="margin-left: 20px;"
+                            >
+                                <span class="flex-box">
+                                  <input
+                                    class="radio-group__input"
+                                    type="radio"
+                                    id="{{ item.key + item.value }}"
+                                    name="type_chart"
+                                    value="{{ item.value }}"
+                                    formControlName="type_chart"
+                                    (change)="chooseTypeChart()"
+                                  />
+                                  <span class="fake-btn"></span>
+                                  <span class="text">{{ item.key }}</span>
+                                </span>
+                            </label>
+                          </div>
+
+                </div>
+                <div class="col-12 mt-20">
+                    <h2 class="title title-bold pl-10">
+                        <span>{{"salesTrends.nameChart"|translate}}
+                        </span>
+                    </h2>
+                </div>
+                <div style="display: block;">
+                    <canvas baseChart width="150" height="150"
+                    style="padding: 20px 20px;"
+                      [datasets]="lineChartData"
+                      [labels]="lineChartLabels"
+                      [options]="barChartOptions"
+                      [colors]="lineChartColors"
+                      [legend]="lineChartLegend"
+                      [chartType]="lineChartType"
+                      [plugins]="lineChartPlugins">
+                    </canvas>
+                  </div>
+                 <div class="btn-area flex-row cus-searh-footer cus-searh-footer-screen-1">
+                    <div class="bt" (click)="displayChart()">{{"salesTrends.btn"|translate}}</div>
+                </div>
+                </div>
+                <div class="btn-area flex-row cus-searh-footer cus-searh-footer-screen-1">
+                  <div routerLink="/analytics" class="btn-back">戻る</div>
+              </div>
+            </div>
+            </div>
+        </form>
+        </section>
+    </article>
+</main>

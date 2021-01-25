@@ -1,0 +1,118 @@
+<main class="pb-50 menu-cooperation__container">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 pl-15 pr-15">
+          <h2 class="title fw-bold title--type02 mt-15">
+            <span>{{'menuCooperationEquipment.menuCooperationEquipment' | translate}}</span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <form [formGroup]="formEquipment" class="bg-white">
+            <div class="input-group mt-10 pr-15 pl-25 pr-25 pb-15">
+              <div class="err">
+                <app-top-error *ngIf="submitted" [form]="formEquipment" [formMap]="formMap"></app-top-error>
+              </div>
+              <div class="mt-10">
+                <label for="select-equiment" class="input-group__label">
+                  {{'menuCooperationEquipment.selectEquipment' | translate}}
+                </label>
+                <select name="select-equiment" id="select-equiment" class="mt-10" formControlName="equipmentId"
+                        (change)="getEquipmentMenuList()" [ngClass]="{
+                  'select-error': submitted && this.formEquipment.controls.equipmentId.value == ''
+                }">
+                  <option value=""></option>
+                  <option *ngFor="let item of listEquipment" value="{{item.id}}">{{item.name}}</option>
+                </select>
+              </div>
+              <div class="add-button mt-20">
+                <button class="btn-pink" (click)="openModal()">
+                  <span></span><em>{{'menuCooperationEquipment.selectMenu' | translate}}</em>
+                </button>
+              </div>
+            </div>
+            <div class="list mt-30">
+              <div class="list__header">
+                {{'menuCooperationEquipment.equipmentList' | translate}}
+              </div>
+              <div class="list mt-15 pl-15 pr-15" *ngIf="check(techClassListTech)">
+                <div class="list__header">
+                  {{'menuRegistration.technology' | translate}}
+                </div>
+                <div class="list__body list02">
+                  <ul class="tech__ul collapsible" *ngFor="let tcl of techClassListTech; let i = index" cdkDropListGroup>
+                    <li class="collapsible-heading" #collapsible1 (click)="toggleAccordian(collapsible1)" *ngIf="filterItemsOfType(tcl.id)?.length > 0"><a>{{
+                        tcl.name }}</a></li>
+                    <div class="tech__listGroup collapsible-content collapsible-content__1">
+                      <div class="tech-list toggle" [id]="'toogle-list' + i">
+                        <li class="tech-box" *ngFor="let equipmentMenu of filterItemsOfType(tcl.id)"
+                        >
+                          <div class="tech-box__item1">
+                            <div class="tech-box__item1-1">
+                              <p class="tech-box__content">
+                                <span class="txt">
+                                  {{ equipmentMenu.details[0].name }}
+                                  <strong>
+                                    {{ helper.formatCurrency(equipmentMenu.details[0].price) }}
+                                  </strong>
+                                </span>
+                              </p>
+                            </div>
+                            <div class="ico" (click)="deleteEquimentMenu(equipmentMenu.id)">
+                              <div class="trash-icon__box">
+                                <img src="./assets/images/icon/trash-alt-solid.svg" alt="" class="trash-icon"/>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </div>
+                    </div>
+                  </ul>
+                </div>
+              </div>
+              <div class="list pl-15 pr-15" *ngIf="check(techClassListCourse)">
+                <div class="list__header">
+                  {{'menuRegistration.course' | translate}}
+                </div>
+                <div class="list__body list02">
+                  <ul class="tech__ul collapsible" *ngFor="let tcl of techClassListCourse; let i = index" cdkDropListGroup>
+                    <li class="collapsible-heading" #collapsible2 (click)="toggleAccordian(collapsible2)" *ngIf="filterItemsOfType(tcl.id)?.length > 0"><a>{{
+                        tcl.name }}</a></li>
+                    <div class="tech__listGroup collapsible-content collapsible-content__1">
+                      <div class="tech-list toggle" [id]="'toogle-list' + i">
+                        <li class="tech-box" *ngFor="let equipmentMenu of filterItemsOfType(tcl.id)"
+                        >
+                          <div class="tech-box__item1">
+                            <div class="tech-box__item1-1">
+                              <p class="tech-box__content">
+                                <span class="txt">
+                                  {{ equipmentMenu.details[0].name }}
+                                  <strong>
+                                    {{ helper.formatCurrency(equipmentMenu.details[0].price) }}
+                                  </strong>
+                                </span>
+                              </p>
+                            </div>
+                            <div class="ico" (click)="deleteEquimentMenu(equipmentMenu.id)">
+                              <div class="trash-icon__box">
+                                <img src="./assets/images/icon/trash-alt-solid.svg" alt="" class="trash-icon"/>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </div>
+                    </div>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<app-modal-menu-equipment [open]="isOpen" [selectCurrent]="selectCurrent" (confirm)="confirmModal($event)"
+                          [userLogin]="userLogin" [equipmentId]="equipmentId"
+                          [listExist]="equipmentMenuList"></app-modal-menu-equipment>

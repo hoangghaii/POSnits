@@ -1,0 +1,82 @@
+<main class="pb-50">
+    <article class="wrap">
+        <section>
+            <div class="flex-row">
+                <div class="col-12">
+
+                    <div class="list">
+                        <div class="list__header">{{"accountingCompleted.bill" | translate}}</div>
+                        <div class="white-box pt-5 radius-none">
+                            <div class="list__body">
+                                <ul>
+                                    <li>
+                                        <h2 class="title title--type02 mt-5" style="align-items:unset;">
+                                            <div>
+                                                <p class="title-bold mb-10">
+                                                    {{objInfo?.customerName}}<small>（{{objInfo?.gender | translate}}）</small>
+                                                </p>
+                                                <h2 class="label-opacity">
+                                                    {{"accountingCompleted.numberOfVisit" | translate}}：{{objInfo?.visitCnt}}
+                                                    {{"accountingCompleted.lastVisitDate" | translate}}: -
+                                                    {{objInfo?.lastVisit | date: "yyyy/MM/dd"}}</h2>
+                                            </div>
+                                            <label
+                                                class="label-opacity">{{"accountingCompleted.receptionDate" | translate}}：{{firstVisitDate | date: "yyyy/MM/dd: HH:mm"}}</label>
+                                        </h2>
+                                    </li>
+                                    <li>
+                                        <div style="flex-direction: column; align-items: center;">
+                                            <label class="title title-bold input-note mt-10 mb-10"
+                                                style="font-size: 2rem;"><label class="check-icon">
+                                                    ✓
+                                                </label>{{"accountingCompleted.thePaymentHasBeenCompleted" | translate}}</label>
+                                            <label class="title mt-10"
+                                                style="font-size: 1rem;">{{"accountingCompleted.change" | translate}}</label>
+                                            <label class="title title-bold mt-10" style="font-size: 1.6rem;">
+                                                {{helper.formatCurrency(objInfo?.totalMoneyInput)}}
+                                            </label>
+                                            <label class="title mt-20 mb-20"
+                                                style="font-size: 1rem; opacity: 0.5;">{{"accountingCompleted.custody" | translate}}
+                                                {{helper.formatCurrency(objInfo?.moneyInput)}} -
+                                                {{"accountingCompleted.totalFee" | translate}}
+                                                {{helper.formatCurrency(objInfo?.money)}}</label>
+                                        </div>
+
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="pl-20 pr-20">
+                                <button class="btn mt-20 btn-accounting-completed"
+                                    (click)="openModal()">{{"accountingCompleted.receiptPrinting" | translate}}</button>
+                                <button class="btn mt-20 btn-accounting-completed"
+                                    (click)="openModal()">{{"accountingCompleted.receiptPrinting1" | translate}}</button>
+                            </div>
+
+                            <div class="btn-area flex-row" style="padding-top: 40px;">
+                                <button (click)="btnChange()" style="width: 100%;"
+                                    class="bt next open_dialog">{{"accountingCompleted.btnChange" | translate}} /
+                                    {{helper.formatCurrency(objInfo?.totalMoneyInput)}}</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </article>
+</main>
+
+<div class="dialog-cancel" [ngClass]="open ? 'show-dialog show-dialog-confirm' : 'hide-dialog'">
+
+    <div class="in" style="border-radius: 15px;">
+        <div class="close-confirm" (click)="open = !open">&times;</div>
+        <button class="btn btn-delete close_dialog btn-print-mail" style="width: 80%;" (click)="receiptPrinting()">
+            {{"printAndSend.print" | translate}}
+        </button>
+        <button class="btn mt-20 btn-delete close_dialog btn-print-mail" style="width: 80%;"
+            (click)="sendMail()">
+            {{"printAndSend.sendMail" | translate}}
+        </button>
+    </div>
+</div>

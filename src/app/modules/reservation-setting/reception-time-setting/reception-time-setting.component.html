@@ -1,0 +1,467 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span>{{
+              "receptionTime.webReservationInitialSetting" | translate
+            }}</span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <form [formGroup]="timeSettingForm">
+            <div class="white-box radius-none">
+              <app-reservation-step [stepNum]="1"></app-reservation-step>
+              <h2 class="inner-title title-bold">
+                <span>{{
+                  "receptionTime.reservationReceptionTimeSetting" | translate
+                }}</span>
+              </h2>
+              <div class="err">
+                <app-top-error
+                  *ngIf="submitted"
+                  [formMap]="formMap"
+                  [form]="timeSettingForm"
+                ></app-top-error>
+              </div>
+              <div class="radio-group">
+                <label class="radio-group__label" for="receptTypeCommon">
+                  <span class="flex-box">
+                    <input
+                      class="radio-group__input"
+                      type="radio"
+                      id="receptTypeCommon"
+                      name="receptType"
+                      value="1"
+                      formControlName="receptType"
+                      (click)="changeType('1')"
+                    />
+                    <span class="fake-btn" (click)="changeType('1')"></span>
+                    <span class="text" (click)="changeType('1')">
+                      {{ "receptionTime.common" | translate }}
+                    </span>
+                  </span>
+                </label>
+                <label class="radio-group__label" for="individual">
+                  <span class="flex-box">
+                    <input
+                      class="radio-group__input"
+                      type="radio"
+                      id="individual"
+                      name="receptType"
+                      value="2"
+                      formControlName="receptType"
+                      (click)="changeType('2')"
+                    />
+                    <span class="fake-btn" (click)="changeType('2')"></span>
+                    <span class="text" (click)="changeType('2')">
+                      {{ "receptionTime.individual" | translate }}
+                    </span>
+                  </span>
+                </label>
+              </div>
+              <ng-container *ngIf="statusCommon">
+                <div class="mt-20 pl-20 pr-20">
+                  <p>{{ "receptionTime.commonSetting" | translate }}:</p>
+                </div>
+                <div class="pr-20 pt-10 pl-20">
+                  <div class="input-group__row mt-0">
+                    <div class="mt-10 half select-inline">
+                      <select
+                        name="receptStart"
+                        formControlName="receptStart"
+                        (change)="
+                          timeSettingForm.controls.receptEnd.updateValueAndValidity()
+                        "
+                        [ngClass]="{
+                          'input-error':
+                            submitted && v.receptStart >= v.receptEnd
+                        }"
+                      >
+                        <ng-container *ngFor="let opt of openingTimeList">
+                          <option [value]="opt.value">{{ opt.text }}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                    <span class="mr-10 ml-10">～</span>
+                    <div class="mt-10 half select-inline">
+                      <select
+                        name="receptEnd"
+                        formControlName="receptEnd"
+                        (change)="
+                          timeSettingForm.controls.receptStart.updateValueAndValidity()
+                        "
+                        [ngClass]="{
+                          'input-error':
+                            submitted && v.receptStart >= v.receptEnd
+                        }"
+                      >
+                        <ng-container *ngFor="let cst of closingTimeList">
+                          <option [value]="cst.value">{{ cst.text }}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="!statusCommon">
+                <div class="mt-20 pl-20 pr-20">
+                  <span>{{
+                    "receptionTime.dayOfTheWeekSetting" | translate
+                  }}</span>
+                </div>
+                <div class="pr-20 pt-10 pl-20">
+                  <div class="input-group__row mt-0">
+                    <span class="label-box">{{
+                      "receptionTime.monday" | translate
+                    }}</span>
+                    <div class="mt-10 half select-inline">
+                      <select
+                        name="receptStartMo"
+                        formControlName="receptStartMo"
+                        (change)="
+                          timeSettingForm.controls.receptEndMo.updateValueAndValidity()
+                        "
+                        [ngClass]="{
+                          'input-error':
+                            submitted && v.receptStartMo >= v.receptEndMo
+                        }"
+                      >
+                        <ng-container *ngFor="let opt of openingTimeList">
+                          <option [value]="opt.value">{{ opt.text }}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                    <span class="mr-10 ml-10">～</span>
+                    <div class="mt-10 half select-inline">
+                      <select
+                        name="receptEndMo"
+                        formControlName="receptEndMo"
+                        (change)="
+                          timeSettingForm.controls.receptStartMo.updateValueAndValidity()
+                        "
+                        [ngClass]="{
+                          'input-error':
+                            submitted && v.receptStartMo >= v.receptEndMo
+                        }"
+                      >
+                        <ng-container *ngFor="let cst of closingTimeList">
+                          <option [value]="cst.value">{{ cst.text }}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pr-20 pt-10 pl-20">
+                  <div class="input-group__row mt-0">
+                    <span class="label-box">{{
+                      "receptionTime.tuesday" | translate
+                    }}</span>
+                    <div class="mt-10 half select-inline">
+                      <select
+                        name="receptStartTu"
+                        formControlName="receptStartTu"
+                        (change)="
+                          timeSettingForm.controls.receptEndTu.updateValueAndValidity()
+                        "
+                        [ngClass]="{
+                          'input-error':
+                            submitted && v.receptStartTu >= v.receptEndTu
+                        }"
+                      >
+                        <ng-container *ngFor="let opt of openingTimeList">
+                          <option [value]="opt.value">{{ opt.text }}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                    <span class="mr-10 ml-10">～</span>
+                    <div class="mt-10 half select-inline">
+                      <select
+                        name="receptEndTu"
+                        formControlName="receptEndTu"
+                        (change)="
+                          timeSettingForm.controls.receptStartTu.updateValueAndValidity()
+                        "
+                        [ngClass]="{
+                          'input-error':
+                            submitted && v.receptStartTu >= v.receptEndTu
+                        }"
+                      >
+                        <ng-container *ngFor="let cst of closingTimeList">
+                          <option [value]="cst.value">{{ cst.text }}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pr-20 pt-10 pl-20">
+                  <div class="input-group__row mt-0">
+                    <span class="label-box">{{
+                      "receptionTime.wednesday" | translate
+                    }}</span>
+                    <div class="mt-10 half select-inline">
+                      <select
+                        name="receptStartWe"
+                        formControlName="receptStartWe"
+                        (change)="
+                          timeSettingForm.controls.receptEndWe.updateValueAndValidity()
+                        "
+                        [ngClass]="{
+                          'input-error':
+                            submitted && v.receptStartWe >= v.receptEndWe
+                        }"
+                      >
+                        <ng-container *ngFor="let opt of openingTimeList">
+                          <option [value]="opt.value">{{ opt.text }}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                    <span class="mr-10 ml-10">～</span>
+                    <div class="mt-10 half select-inline">
+                      <select
+                        name="receptEndWe"
+                        formControlName="receptEndWe"
+                        (change)="
+                          timeSettingForm.controls.receptStartWe.updateValueAndValidity()
+                        "
+                        [ngClass]="{
+                          'input-error':
+                            submitted && v.receptStartWe >= v.receptEndWe
+                        }"
+                      >
+                        <ng-container *ngFor="let cst of closingTimeList">
+                          <option [value]="cst.value">{{ cst.text }}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pr-20 pt-10 pl-20">
+                  <div class="input-group__row mt-0">
+                    <span class="label-box">{{
+                      "receptionTime.thursday" | translate
+                    }}</span>
+                    <div class="mt-10 half select-inline">
+                      <select
+                        name="receptStartTh"
+                        formControlName="receptStartTh"
+                        (change)="
+                          timeSettingForm.controls.receptEndTh.updateValueAndValidity()
+                        "
+                        [ngClass]="{
+                          'input-error':
+                            submitted && v.receptStartTh >= v.receptEndTh
+                        }"
+                      >
+                        <ng-container *ngFor="let cst of openingTimeList">
+                          <option [value]="cst.value">{{ cst.text }}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                    <span class="mr-10 ml-10">～</span>
+                    <div class="mt-10 half select-inline">
+                      <select
+                        name="receptEndTh"
+                        formControlName="receptEndTh"
+                        (change)="
+                          timeSettingForm.controls.receptStartTh.updateValueAndValidity()
+                        "
+                        [ngClass]="{
+                          'input-error':
+                            submitted && v.receptStartTh >= v.receptEndTh
+                        }"
+                      >
+                        <ng-container *ngFor="let cst of closingTimeList">
+                          <option [value]="cst.value">{{ cst.text }}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pr-20 pt-10 pl-20">
+                  <div class="input-group__row mt-0">
+                    <span class="label-box">{{
+                      "receptionTime.friday" | translate
+                    }}</span>
+                    <div class="mt-10 half select-inline">
+                      <select
+                        name="receptStartFr"
+                        formControlName="receptStartFr"
+                        (change)="
+                          timeSettingForm.controls.receptEndFr.updateValueAndValidity()
+                        "
+                        [ngClass]="{
+                          'input-error':
+                            submitted && v.receptStartFr >= v.receptEndFr
+                        }"
+                      >
+                        <ng-container *ngFor="let cst of openingTimeList">
+                          <option [value]="cst.value">{{ cst.text }}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                    <span class="mr-10 ml-10">～</span>
+                    <div class="mt-10 half select-inline">
+                      <select
+                        name="receptEndFr"
+                        formControlName="receptEndFr"
+                        (change)="
+                          timeSettingForm.controls.receptStartFr.updateValueAndValidity()
+                        "
+                        [ngClass]="{
+                          'input-error':
+                            submitted && v.receptStartFr >= v.receptEndFr
+                        }"
+                      >
+                        <ng-container *ngFor="let cst of closingTimeList">
+                          <option [value]="cst.value">{{ cst.text }}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pr-20 pt-10 pl-20">
+                  <div class="input-group__row mt-0">
+                    <span class="label-box">{{
+                      "receptionTime.saturday" | translate
+                    }}</span>
+                    <div class="mt-10 half select-inline">
+                      <select
+                        name="receptStartSa"
+                        formControlName="receptStartSa"
+                        (change)="
+                          timeSettingForm.controls.receptEndSa.updateValueAndValidity()
+                        "
+                        [ngClass]="{
+                          'input-error':
+                            submitted && v.receptStartSa >= v.receptEndSa
+                        }"
+                      >
+                        <ng-container *ngFor="let cst of openingTimeList">
+                          <option [value]="cst.value">{{ cst.text }}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                    <span class="mr-10 ml-10">～</span>
+                    <div class="mt-10 half select-inline">
+                      <select
+                        name="receptEndSa"
+                        formControlName="receptEndSa"
+                        (change)="
+                          timeSettingForm.controls.receptStartSa.updateValueAndValidity()
+                        "
+                        [ngClass]="{
+                          'input-error':
+                            submitted && v.receptStartSa >= v.receptEndSa
+                        }"
+                      >
+                        <ng-container *ngFor="let cst of closingTimeList">
+                          <option [value]="cst.value">{{ cst.text }}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pr-20 pt-10 pl-20">
+                  <div class="input-group__row mt-0">
+                    <span class="label-box">{{
+                      "receptionTime.sunday" | translate
+                    }}</span>
+                    <div class="mt-10 half select-inline">
+                      <select
+                        name="receptStartSu"
+                        formControlName="receptStartSu"
+                        (change)="
+                          timeSettingForm.controls.receptEndSu.updateValueAndValidity()
+                        "
+                        [ngClass]="{
+                          'input-error':
+                            submitted && v.receptStartSu >= v.receptEndSu
+                        }"
+                      >
+                        <ng-container *ngFor="let cst of openingTimeList">
+                          <option [value]="cst.value">{{ cst.text }}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                    <span class="mr-10 ml-10">～</span>
+                    <div class="mt-10 half select-inline">
+                      <select
+                        name="receptEndSu"
+                        formControlName="receptEndSu"
+                        (change)="
+                          timeSettingForm.controls.receptStartSu.updateValueAndValidity()
+                        "
+                        [ngClass]="{
+                          'input-error':
+                            submitted && v.receptStartSu >= v.receptEndSu
+                        }"
+                      >
+                        <ng-container *ngFor="let cst of closingTimeList">
+                          <option [value]="cst.value">{{ cst.text }}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pr-20 pt-10 pl-20">
+                  <div class="input-group__row mt-0">
+                    <span class="label-box">{{
+                      "receptionTime.celebration" | translate
+                    }}</span>
+                    <select
+                      name="receptStartHo"
+                      class="mt-10 half select-inline"
+                      formControlName="receptStartHo"
+                      (change)="
+                        timeSettingForm.controls.receptStartHo.updateValueAndValidity()
+                      "
+                      [ngClass]="{
+                        'input-error':
+                          submitted && v.receptStartHo >= v.receptEndHo
+                      }"
+                    >
+                      <ng-container *ngFor="let cst of openingTimeList">
+                        <option [value]="cst.value">{{ cst.text }}</option>
+                      </ng-container>
+                    </select>
+                    <span class="mr-10 ml-10">～</span>
+                    <select
+                      name="receptEndHo"
+                      class="mt-10 half select-inline"
+                      formControlName="receptEndHo"
+                      (change)="
+                        timeSettingForm.controls.receptEndHo.updateValueAndValidity()
+                      "
+                      [ngClass]="{
+                        'input-error':
+                          submitted && v.receptStartHo >= v.receptEndHo
+                      }"
+                    >
+                      <ng-container *ngFor="let cst of closingTimeList">
+                        <option [value]="cst.value">{{ cst.text }}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                </div>
+              </ng-container>
+              <div class="btn-area flex-row">
+                <div class="bt next without-skip" (click)="onSubmit()" [ngClass]="(flag==true)?'editBtn':'null'">
+                  {{ status }}
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>

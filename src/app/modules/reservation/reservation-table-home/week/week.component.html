@@ -1,0 +1,52 @@
+<div class="col-12 mt-0">
+    <div class="tabs mt-0 tab-border-top">
+        <ul>
+            <li *ngFor="let tab of tabList; let i = index">
+                <a [ngClass]="tab.active ? 'active' : ''" (click)="selectTab(i)">
+                    <img [src]="'assets/images/icon/'+tab.image" alt="" />
+                    <span>{{tab.title | translate}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="col-12 mt-0">
+    <div *ngFor="let obj of weekList">
+        <h2 class="title title--type02 pl-15 title--newType">
+            <span>
+                <em>{{getMonthDayString(obj?.day)}}</em>
+
+            </span>
+        </h2>
+        <div class="reser-week__list">
+            <div class="reser-week__list--item">
+                <div class="reser-week__box--left">
+                    <span class="reser-week__start-time">
+                        {{checkDay(obj?.day)?.recept_start.substring(0,5)}}
+                    </span>
+                    <span class="reser-week__end-time">
+                        {{checkDay(obj?.day)?.recept_end.substring(0,5)}}
+                    </span>
+                </div>
+                <div class="reser-week__box--right">
+                    <!-- item -->
+                    <div class="reser-week__box--item" *ngFor="let item of obj?.list" (click)="handleDetail(item)">
+                        <span class="reser-week__box--title">
+                            {{item?.customer_name}}
+                        </span>
+                        <div class="reser-week__box-user">
+                            <div class="reser-week__box-user--avatar">
+                                <img onerror="this.onerror=null;this.src='assets/images/icon/no-img-staff.svg';" [src]="item?.staff_img"
+                                    alt="user avatar" />
+                            </div>
+                            <span class="reser-week__box-user--name">
+                                {{item?.staff_name}}
+                            </span>
+                        </div>
+                    </div>
+                    <!-- item -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

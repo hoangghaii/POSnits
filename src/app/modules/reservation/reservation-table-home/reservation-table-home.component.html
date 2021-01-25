@@ -1,0 +1,54 @@
+<main class="pb-50">
+    <article class="wrap">
+        <section>
+            <div class="flex-row">
+                <div class="col-12 pl-15 pr-15">
+                    <h2 class="title title--type02 mt-15">
+                        <span>{{ "reservationTable.reservationTable" | translate }} </span>
+                        <a (click)="openModal()">{{ "reservationTable.reservationRegistration" | translate }}</a>
+                    </h2>
+                </div>
+                <div class="col-12 mt-0 pl-15 pr-15">
+                    <div class="white-box mt-15">
+                        <div class="white-box--type04">
+                            <a style="cursor: pointer;" *ngFor="let tab of tabList; let i = index" (click)="selectTab(tab, i)"
+                                [ngClass]="(tab.active && tabCurrent.value?.active) ? 'white-box--type04__active' : ''">{{tab.tabTitle}}</a>
+                        </div>
+                    </div>
+                    <!-- List users -->
+                    <div class="avatars mt-20">
+                        <ul class="mb-10">
+                            <li *ngIf="userList.length > 4"><a class="all" style="cursor: pointer;">ALL</a></li>
+                            <li *ngFor="let item of userList">
+                                <a>
+                                    <img  onerror="this.onerror=null;this.src='assets/images/icon/no-img-staff.svg';" [src]="item?.staff_img" alt="" />
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <app-reservation-table-tab [tabTitle]="'reservationTable.day' | translate">
+                        <!-- Content -->
+                        <app-day *ngIf="tabCurrent.value?.index === 0" (confirm)="onSelectCurrent($event)"
+                            [statusClose]="statusAction"></app-day>
+                    </app-reservation-table-tab>
+                    <app-reservation-table-tab [tabTitle]="'reservationTable.week' | translate">
+                        <!-- Content -->
+                        <app-week *ngIf="tabCurrent.value?.index === 1" (confirm)="onSelectCurrent($event)"
+                            [statusClose]="statusAction"></app-week>
+                    </app-reservation-table-tab>
+                    <app-reservation-table-tab [tabTitle]="'reservationTable.month' | translate">
+                        <!-- Content -->
+                        <app-month *ngIf="tabCurrent.value?.index === 2" (confirm)="onSelectCurrent($event)"
+                            [statusClose]="statusAction"></app-month>
+                    </app-reservation-table-tab>
+                </div>
+            </div>
+        </section>
+    </article>
+</main>
+
+<app-registration [selectCurrent]="selectCurrent" [userLogin]="userLogin" [isOpen]="isOpen" [userList]="userList"
+    (confirm)="closeModal($event)"></app-registration>

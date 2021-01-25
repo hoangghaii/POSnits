@@ -1,0 +1,83 @@
+<div class="create-modal" [ngClass]="status ? 'open' : ''">
+  <div class="create-modal-overlay" (click)="closeModal()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">
+      {{'customer.customerInfoSearchPopup' | translate}}
+      <span class="create-modal__header-close" (click)="closeModal()"
+        >&times;</span
+      >
+    </div>
+    <div class="create-modal__body">
+      <div class="add-button mt-20" *ngIf="registerBtn">
+        <button (click)="nextPage()"><span></span><em style="color: #fff;">{{'customer.registerNew' | translate}}</em></button>
+      </div>
+      <form [formGroup]="customerForm">
+        <div class="input-group single col02">
+          <label for="" class="input-group__label">{{'customer.name' | translate}}</label>
+          <input type="text" class="input-text mr" placeholder="{{'customer.firstName' | translate}}"
+                 formControlName="firstname">
+          <input type="text" class="input-text" placeholder="{{'customer.lastName' | translate}}"
+                 formControlName="lastname">
+        </div>
+        <div class="input-group single mt-15 col02">
+          <label for="" class="input-group__label">{{'customer.nameKana' | translate}}</label>
+          <input type="text" class="input-text mr" placeholder="{{'customer.firstName' | translate}}"
+                 formControlName="firstname_kana">
+          <input type="text" class="input-text" placeholder="{{'customer.lastName' | translate}}"
+                 formControlName="lastname_kana">
+        </div>
+        <div class="input-group single mt-15 col02">
+          <label for="" class="input-group__label">{{'customer.customerNo' | translate}}</label>
+          <input type="text" class="input-text mr" placeholder="{{'customer.startNo' | translate}}"
+                 [(ngModel)]="startNo" [ngModelOptions]="{standalone: true}">
+          <input type="text" class="input-text" placeholder="{{'customer.endNo' | translate}}" [(ngModel)]="endNo"
+                 [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="input-group mt-10">
+          <label for="" class="input-group__label">{{'customer.inCharge' | translate}}</label>
+          <select name="" id="" class="mt-10" formControlName="staff_id">
+            <option value="">{{'customer.selectPersonInCharge' | translate}}</option>
+            <option *ngFor="let item of inCharge" value="item.id">{{ item.name }}</option>
+          </select>
+        </div>
+        <div class="input-group single mt-15">
+          <label for="" class="input-group__label">{{'customer.phoneNumber' | translate}}</label>
+          <input type="text" class="input-text" placeholder="{{'customer.phoneNumberPlaceHolder' | translate}}"
+                 formControlName="tel">
+        </div>
+        <div class="input-group mt-10">
+          <label for="" class="input-group__label">{{'customer.isMember' | translate}}</label>
+          <div class="radio-group">
+            <label
+              class="radio-group__label"
+              *ngFor="let item of memberID"
+              for="{{ item.key + item.value }}"
+            >
+              <span class="flex-box">
+                <input
+                  class="radio-group__input"
+                  type="radio"
+                  id="{{ item.key + item.value }}"
+                  name="member_flg"
+                  value="{{ item.key }}"
+                  formControlName="member_flg"
+                />
+                <span
+                  class="fake-btn"
+                ></span>
+                <span class="text">{{ item.value }}</span>
+              </span>
+            </label>
+          </div>
+        </div>
+        <button class="btn mt-20" (click)="getData()">{{'customer.search' | translate}}</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isPopup">
+  <app-customer-list [customerList]="customerList" (confirmEmit)="confirmCustomerList($event)" [isPopup]="isPopup"
+  [status]="statusPopup"></app-customer-list>
+</div>
+

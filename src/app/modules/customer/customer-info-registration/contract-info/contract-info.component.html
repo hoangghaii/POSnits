@@ -1,0 +1,70 @@
+<div class="flex-row">
+  <div class="col-12 mt-25 pl-10 pr-10" *ngFor="let item of contractList">
+    <table class="table-border">
+      <tbody>
+        <tr>
+          <td>{{"customer.contractDate" | translate}}</td>
+          <td class="a-left" colspan="3">{{formatDate(item.created)}}</td>
+        </tr>
+        <tr>
+          <td>{{"customer.contractCourse" | translate}}</td>
+          <td class="a-left" colspan="3">{{item.course_name}}</td>
+        </tr>
+        <tr>
+          <td>{{"customer.contractAmount" | translate}}</td>
+          <td>{{item.price | number}}</td>
+          <td>{{"customer.digestionCommitment" | translate}}</td>
+          <td>{{getSumNumberCount(item.details)}}/{{item.count}}</td>
+        </tr>
+        <tr>
+          <td>{{"customer.status" | translate}}</td>
+          <td>{{getStatus(item)}}</td>
+          <td>{{"customer.expirationDate" | translate}}</td>
+          <td>{{item.limit_date}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex mt-10">
+      <label class="btn-table-bill mr-5" (click)="update('deadlineChange', item)">{{"customer.btnDeadlineChange" | translate}}</label>
+      <label class="btn-table-bill mr-5" (click)="update('cancellation', item.id)">{{"customer.btnCancellation" | translate}}</label>
+      <label class="btn-table-bill mr-5" (click)="update('contractChange', item)">{{"customer.btnContractChange" | translate}}</label>
+    </div>
+  </div>
+</div>
+<div class="btn-area flex-row">
+  <div class="bt skip next_full open_dialog border-btn" (click)="changeRouter()">{{"customer.btnBack" | translate}}</div>
+</div>
+
+
+<div class="create-modal" [ngClass]="open ? 'open' : null">
+  <div class="create-modal-overlay" (click)="open = false; submitted = false"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">
+      {{ "techClass.techClassRegistration" | translate }}
+      <span class="create-modal__header--modal" (click)="open = false; submitted = false"></span>
+    </div>
+    <div class="create-modal__body">
+      <form>
+        <div class="err">
+        </div>
+        <div class="input-group single mt-15">
+          <label class="input-group__label pl-20 pr-20">
+            {{"customer.expirationDate" | translate}}
+          </label>
+          <input
+          type="date"
+          class="input-text input-text-tab input-date w-300"
+          [(ngModel)]="limitDate" [ngModelOptions]="{standalone: true}"
+        />
+        </div>
+        <button type="submit" class="btn mt-20" (click)="updateLimitDate()">
+          {{ "customer.btnUpdate" | translate }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<app-confirm-modal
+  #confirmModal
+  (confirm)="handleConfirm($event)"
+></app-confirm-modal>

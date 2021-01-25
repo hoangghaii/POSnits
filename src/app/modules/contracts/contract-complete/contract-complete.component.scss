@@ -1,0 +1,55 @@
+.online-application-completed {
+  h2 {
+    .header-oap {
+      padding-left: 15px !important;
+      font-size: 1.7rem;
+    }
+  }
+
+  p {
+    color: black;
+    line-height: 25px;
+  }
+
+  table {
+    width: 100%;
+
+    td {
+      padding: 15px 0px;
+      white-space: nowrap;
+    }
+
+    .tb-content {
+      td:nth-child(1) {
+        text-align: left;
+      }
+
+      td:nth-child(2) {
+        text-align: left;
+      }
+
+      td:nth-child(3) {
+        text-align: right;
+      }
+    }
+
+    .tb-footer {
+      border-top: 1px solid black;
+
+      td {
+        text-align: right;
+      }
+    }
+  }
+
+  .ap-footer {
+    background-color: #ff648c;
+    margin-top: 50px;
+    padding: 10px 30px;
+    justify-content: center;
+
+    span {
+      color: white;
+    }
+  }
+}

@@ -1,0 +1,85 @@
+<div class="create-modal" [ngClass]="isOpen ? 'open' : null">
+  <div class="create-modal-overlay" (click)="closeModal()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">{{'couponMenuRegistration.openMenu' | translate}}
+      <span class="create-modal__header-close"
+        (click)="closeModal()">&times;</span>
+    </div>
+    <div class="create-modal__body">
+      <form action="">
+        <div class="list mt-15 pr-15 pl-15" *ngIf="listMenuTech?.length > 0">
+          <div class="list__body list02">
+            <ul class="tech__ul collapsible">
+              <li class="collapsible-heading collapsible-heading--menu" #collapsibleM2
+                (click)="toggleAccordian(collapsibleM2)"><a style="font-size: 18.rem;"> {{ "menuRegistration.technology"
+                  | translate }} </a>
+              </li>
+              <div class="tech__listGroup collapsible-content" style="padding: 0px 0px;">
+                <div *ngFor="let item of listMenuTech; let i = index">
+                  <div class="collapsible">
+                    <div class="collapsible-heading" #collapsible1 (click)="toggleAccordian(collapsible1)">
+                      <a>{{ item.name }}</a>
+                    </div>
+                    <div class="collapsible-content collapsible-content__1" style="padding: 0;">
+                      <div *ngFor="let subItem of item.details; let j = index">
+                        <div class="dropdown-content__item" (click)="toggleBg(i, j, subItem, item)"
+                          [id]="'dropdown-content__item' + i + j">
+                          <div class="dropdown-content__item--left">
+                            {{ subItem.name }}
+                          </div>
+                          <div class="dropdown-content__item--right">
+                            {{ helper.formatCurrency(subItem.price) }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ul>
+          </div>
+        </div>
+        <div class="list pr-15 pl-15" *ngIf="listMenuCourse?.length > 0">
+          <div class="list__body list02">
+            <ul class="tech__ul collapsible">
+              <li class="collapsible-heading collapsible-heading--menu" #collapsibleM1
+                (click)="toggleAccordian(collapsibleM1)"><a style="font-size: 18.rem;"> {{ "menuRegistration.course" |
+                  translate }}</a>
+              </li>
+              <div class="tech__listGroup collapsible-content" style="padding: 0px 0px;">
+                <div *ngFor="let item of listMenuCourse; let i = index">
+                  <div class="collapsible">
+                    <div class="collapsible-heading" #collapsible2 (click)="toggleAccordian(collapsible2)">
+                      <a>{{ item.name }}</a>
+                    </div>
+                    <div class="collapsible-content collapsible-content__1 ">
+                      <div *ngFor="let subItem of item.details; let j = index">
+                        <div class="dropdown-content__item" (click)="toggleBg(i, j, subItem, item)"
+                          [id]="'dropdown-content__item' + i + j">
+                          <div class="dropdown-content__item--left">
+                            {{ subItem.name }}
+                          </div>
+                          <div class="dropdown-content__item--right">
+                            {{ helper.formatCurrency(subItem.price) }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="btn-grp mt-20">
+      <button type="submit" class="btn mt-20 btn-delete" (click)="resetListDetails()">
+        {{'menuRegistration.btnDeselection' | translate}}
+      </button>
+      <button type="submit" class="btn mt-20 btn-submit" (click)="submit()">
+        {{'menuRegistration.btnCreateModal' | translate}}
+      </button>
+    </div>
+  </div>
+</div>

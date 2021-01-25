@@ -1,0 +1,53 @@
+<div class="create-modal" [ngClass]="isOpen ? 'open' : null">
+  <div class="create-modal-overlay" (click)="closeModal()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">{{'couponMenuRegistration.openMenu' | translate}}<span class="create-modal__header-close" (click)="closeModal()"
+      >&times;</span
+    ></div>
+    <div class="create-modal__body">
+      <form action="">
+        <div *ngFor="let item of listMenu; let i = index">
+          <div *ngIf="(item.category_cd !== categoryClass.SETMENU && item.category_cd !== categoryClass.COUPON && item.details.length > 0)">
+            <div class="dropdown-toggle" [id]="'dropdown-toggle' + i" (click)="toggleList(i)">
+              {{ item.name }}
+              <div class="dropdown-icon"></div>
+            </div>
+            <div class="dropdown-content" [id]="'dropdown-list' + i">
+              <div *ngFor="let subItem of item.details; let j = index">
+                <div [ngClass]="subItem.active ? 'focus' : ''" class="dropdown-content__item"
+                  (click)="toggleBg(subItem)">
+                  <div class="dropdown-content__item--left">
+                    {{ subItem.name }}
+                  </div>
+                  <div class="dropdown-content__item--right">
+                    $ {{ subItem.price }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="dropdown-content" *ngIf="!(item.category_cd !== categoryClass.SETMENU && item.category_cd !== categoryClass.COUPON)">
+            <div>
+              <div class="dropdown-content__item" [ngClass]="item.active ? 'focus' : ''" (click)="toggleBg(item)">
+                <div class="dropdown-content__item--left">
+                  {{ item.name }}
+                </div>
+                <div class="dropdown-content__item--right">
+                  $ {{ item.price }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="btn-grp mt-20">
+      <button type="submit" class="btn mt-20 btn-delete" (click)="resetListDetails()">
+        {{'menuRegistration.btnDeselection' | translate}}
+      </button>
+      <button type="submit" class="btn mt-20 btn-submit" (click)="submit()">
+        {{'menuRegistration.btnDeselection' | translate}}
+      </button>
+    </div>
+  </div>
+</div>

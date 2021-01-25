@@ -1,0 +1,75 @@
+<div
+  class="sp-menu sp show-all-device"
+  [ngClass]="this.commonServicesService.isToogle ? 'on' : ''"
+>
+  <div (click)="toogleMenu()" class="sp-menu__overlay"></div>
+  <div class="sp-menu__inner">
+    <div>
+      <div class="header__calendar">
+        <input type="text" class="input-text" value="" />
+        <a href="javascript:void(0);">
+          <img src="./assets/images/icon/ico_calendar.svg" alt="" />
+        </a>
+      </div>
+
+      <div class="sp-menu__profile">
+        <a href="#">
+          <figure>
+            <div
+              style="background-image: url(https://via.placeholder.com/435x250)"
+            ></div>
+            <figcaption>OASIS RESORT SPA</figcaption>
+          </figure>
+        </a>
+      </div>
+
+      <ul>
+        <li>
+          <a routerLink="/top" (click)="toogleMenu()">
+            {{ "nav-menu.01" | translate }}
+          </a>
+        </li>
+        <li>
+          <a routerLink="/top" (click)="toogleMenu()">
+            {{ "nav-menu.02" | translate }}
+          </a>
+        </li>
+        <li>
+          <a routerLink="/reservations/table" (click)="toogleMenu()">
+            {{ "nav-menu.03" | translate }}
+          </a>
+        </li>
+        <li>
+          <a routerLink="/shops/accounting-input" (click)="toogleMenu()">
+            {{ "nav-menu.04" | translate }}
+          </a>
+        </li>
+        <li>
+          <a routerLink="/analytics" (click)="toogleMenu()">
+            {{ "nav-menu.05" | translate }}
+          </a>
+        </li>
+        <li>
+          <a routerLink="/setting" (click)="toogleMenu()">
+            {{ "nav-menu.06" | translate }}
+          </a>
+        </li>
+        <li>
+          <a routerLink="/reservations" (click)="toogleMenu()">
+            {{ "nav-menu.07" | translate }}
+          </a>
+        </li>
+        <li>
+          <a routerLink="/mail-setting" (click)="toogleMenu()">
+            {{ "nav-menu.10" | translate }}
+          </a>
+        </li>
+        <li>
+          <a class="cursor-pointer" (click)="logOut()">
+            {{ "nav-menu.09" | translate }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

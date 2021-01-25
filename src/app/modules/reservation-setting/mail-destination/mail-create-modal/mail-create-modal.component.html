@@ -1,0 +1,110 @@
+<div class="create-modal" [ngClass]="open ? 'open' : null">
+  <div class="create-modal-overlay" (click)="closeModal()">
+  </div>
+ 
+  <div class="create-modal__inner">
+     <div class="create-modal__header">
+    <span class="create-modal__header--modal" (click)="closeModal()"></span>
+</div>
+    <div class="create-modal__body">
+      <form [formGroup]="mailDestinationtForm">
+        <div class="white-box radius-none">
+          
+          <h2 class="inner-title title-bold">
+            <span>{{ "mailDestination.title" | translate }}</span>
+          </h2>
+          <div class="err">
+            <app-top-error *ngIf="submitted" [form]="mailDestinationtForm" [formMap]="formMap"></app-top-error>
+          </div>
+          <div class="input-group single mt-10">
+            <div class="input-group__label">{{ "mailDestination.name" | translate }}</div>
+            <input type="text" placeholder='{{ "mailDestination.namePlaceholder" | translate }}' class="input-text"
+                   formControlName="name"
+                   [ngClass]="{
+          'input-error': submitted && f.name.errors
+        }">
+          </div>
+          <!-- <app-show-errors
+            *ngIf="submitted"
+            [ctrl]="f.name"
+            [nameControll]="'商品分類'"
+          ></app-show-errors> -->
+          <div class="input-group single mt-10">
+            <div class="input-group__label">{{ "mailDestination.email" | translate }}</div>
+            <input type="email" placeholder='{{ "mailDestination.emailPlaceholder" | translate }}' ngModel
+                   [email]="true" class="input-text" formControlName="email"
+                   [ngClass]="{
+          'input-error': submitted && f.email.errors
+        }">
+          </div>
+          <!-- <app-show-errors
+            *ngIf="submitted"
+            [ctrl]="f.email"
+            [nameControll]="'商品分類'"
+          ></app-show-errors> -->
+
+          <div formArrayName="listMails"
+               *ngFor="let item of mailDestinationtForm.get('listMails')['controls']; let i = index;">
+            <div [formGroupName]="i">
+              <div class="input-group single mt-10">
+                <div class="input-group__label">{{ "mailDestination.name" | translate }}</div>
+                <input type="text" placeholder='{{ "mailDestination.namePlaceholder" | translate }}' class="input-text"
+                       formControlName="name"
+                       [ngClass]="{
+            'input-error': submitted &&
+            f.listMails.controls[i].controls.name.errors
+          }">
+              </div>
+              <!-- <app-show-errors
+                *ngIf="submitted"
+                [ctrl]="f.name"
+                [nameControll]="'商品分類'"
+              ></app-show-errors> -->
+              <div class="input-group single mt-10">
+                <div class="input-group__label">{{ "mailDestination.email" | translate }}</div>
+                <input type="email" placeholder='{{ "mailDestination.emailPlaceholder" | translate }}' ngModel
+                       [email]="true" class="input-text" formControlName="email"
+                       [ngClass]="{
+            'input-error': submitted &&
+            f.listMails.controls[i].controls.email.errors
+          }">
+              </div>
+              <!-- <app-show-errors
+                *ngIf="submitted"
+                [ctrl]="f.email"
+                [nameControll]="'商品分類'"
+              ></app-show-errors> -->
+            </div>
+          </div>
+          <!-- <div class="plus" *ngIf="!selectCurrent">
+            <div class="plus-button" (click)="addMail()"></div>
+          </div> -->
+        </div>
+        <div class="btn-grp mt-20" *ngIf="selectCurrent; else btnCreate">
+          <button
+            type="submit"
+            class="btn mt-20 btn-delete"
+            (click)="handleDelete()"
+          >
+            {{ "common.btnDelete" | translate }}
+          </button>
+          <button type="submit" class="btn mt-20" (click)="handleUpdate()">
+            {{ "common.btnUpdate" | translate }}
+          </button>
+        </div>
+
+        <ng-template #btnCreate>
+          <button type="submit" class="btn mt-20" (click)="handleCreate()">
+            {{ "common.btnRegister" | translate }}
+          </button>
+        </ng-template>
+      </form>
+
+    </div>
+  </div>
+
+</div>
+<app-confirm-modal
+  #confirmModal
+  (confirm)="handleConfirm($event)"
+></app-confirm-modal>

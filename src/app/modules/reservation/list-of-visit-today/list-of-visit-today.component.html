@@ -1,0 +1,83 @@
+<main class="pb-50">
+    <article class="wrap">
+        <section>
+            <div class="flex-row">
+                <div class="col-12">
+                    <div class="white-box__whole mt-15">
+                        <div class="col-12 mt-0 pl-10 pr-10">
+                            <h2 class="title title--type02 mt-15 pl-10 pr-10">
+                                <span>
+                                    {{ "listOfVisit.numberOfVisitors" | translate }} /
+                                    <em>{{ displayDay}}</em>
+                                </span>
+                            </h2>
+                        </div>
+                        <div class="white-box white-box--half" style="margin: 15px auto;width: 95%;">
+                            <div class="white-box--type01">
+                                <span> {{ "listOfVisit.numberOfVisitors" | translate }}</span>
+                                <em>
+                                    {{totalCustomerVisit}}
+                                    <small>{{ "listOfVisit.name" | translate }}</small>
+                                </em>
+                            </div>
+                            <div class="white-box--type02">
+                                <span>
+                                    {{ "listOfVisit.salesAmount" | translate }}
+                                    <small> {{ "listOfVisit.customerUnitPrice" | translate }}</small>
+                                </span>
+                                <em>
+                                    {{totalPriceVisit}}
+                                    <small> {{customerUnitPriceVisit}}</small>
+                                </em>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-0 pl-10 pr-10">
+                            <h2 class="title  mt-15 pl-10 border-bottom-white">
+                                <span>
+                                    {{ "listOfVisit.listReservation" | translate }} /
+                                    <em style="color: #ff648c">  {{ displayDay }}</em>
+                                </span>
+                                <a routerLink="/reservations/table"> {{ "listOfVisit.nextDay" | translate }}</a>
+                            </h2>
+                        </div>
+                        <div class="mt-30" style="padding: 0 10px;">
+                            <div class="white-box mb-10" *ngFor="let item of visitedReservations " (click)="selectedRow(item)">
+                                <div class="white-box--type03">
+                                    <a>
+                                        <span style="margin-left: -10px;line-height: 20px; font-size: small;">
+                                            <small>{{ "listOfVisit.today" | translate }}</small>
+                                            <b>{{item?.reservation_time?.substring(11,16)}}</b>
+                                            <em>{{ "listOfVisit.unaccounted" | translate }}</em>
+                                        </span>
+                                        <span>
+                                            <b
+                                                style="line-height: 30px;">{{ "listOfVisit.inCharge" | translate }}：{{item.staff_name}}</b>
+                                            <br>
+                                            <b class="bold">{{item?.customer_name}} <small
+                                                    *ngIf="item?.customer_sex==0">({{ "listOfVisit.male" | translate }})</small>
+                                                <small
+                                                    *ngIf="item?.customer_sex==1">({{ "listOfVisit.female" | translate }})</small></b>
+                                            <br>
+                                            <!-- <b style="line-height: 25px; font-size: small;">{{item.menu.name}}</b> -->
+                                            <div style="display: inline-flex;">
+                                              <span *ngFor="let subItem of item.details ;let i = index" style="color: black; margin-top: 0;">{{subItem.menu.name}}
+                                                  <label *ngIf="item.details.length-i-1 > 0">|</label>
+                                              </span>
+                                          </div>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" mt-20" style="width: 95%;margin: 0 auto;">
+                            <button class="btn" routerLink="/reservations/list-reservation"
+                                style="width: 100%;margin: 0 auto;">{{ "listOfVisit.btnNumberVisitors" | translate }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+</main>
+<app-reservation-details-modal [open]="open" [selectCurrent]="selectCurrent" (confirmEmit)="closeModal($event)"
+    [userLogin]="userLogin"></app-reservation-details-modal>

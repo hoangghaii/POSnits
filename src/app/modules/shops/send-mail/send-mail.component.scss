@@ -1,0 +1,141 @@
+.filtered-search-screen-4 {
+  .group {
+    display: flex;
+    flex-wrap: nowrap;
+    .input-group {
+      width: 100%;
+      display: flex;
+    }
+    label {
+      padding: 10px 5px;
+    }
+  }
+  .group-date {
+    display: flex;
+    flex-wrap: nowrap;
+    label {
+      padding: 10px 5px;
+    }
+    .input-group {
+      position: relative;
+      padding-top: 0px !important;
+      input {
+        width: 100%;
+        &.input-date-setting {
+          width: 100% !important;
+        }
+      }
+      .select-setting {
+        width: 100%;
+      }
+    }
+  }
+
+  .group-radio {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    margin-top: 5px;
+    &.col {
+      flex-direction: column;
+      .input-group-radio {
+        margin-top: 10px !important;
+      }
+      .input-group-radio:nth-child(1) {
+        margin-top: 0px !important;
+      }
+    }
+    .input-group-radio {
+      input {
+        padding-top: 0px;
+      }
+      label {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .group-span {
+    display: flex;
+    flex-wrap: wrap;
+    span {
+      margin-right: 5px;
+      margin-top: 5px;
+    }
+  }
+
+  .mail-setting-main {
+    padding-left: 10px;
+    padding-right: 10px;
+    .item-setting-row {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: nowrap;
+      .left {
+        vertical-align: baseline;
+        text-align: center;
+        width: 80px;
+        min-width: 80px;
+        padding: 10px 5px 15px 0px;
+      }
+      .right {
+        width: 100%;
+        .input-group {
+          padding-top: 0px;
+          width: 100%;
+          &.input-group-date {
+            margin-right: 10px;
+            width: auto !important;
+          }
+          .input-date-setting {
+            width: 145px !important;
+          }
+        }
+      }
+    }
+
+    .area {
+      margin-top: 10px;
+      text-align: center;
+      .area-footer {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+        span {
+          padding: 5px 15px;
+        }
+      }
+    }
+    .mail-setting-footer {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .cus-searh-footer {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    width: 100%;
+    &.cus-searh-footer-screen-1 {
+      grid-template-columns: 100%;
+    }
+    .bt {
+      background-color: #fff;
+    }
+  }
+}
+.btn {
+  width: auto !important;
+
+}
+.input-error {
+  border: 1px solid #ff648c !important;
+  background: #ffecf1 !important;
+}
+.search-header-btn {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0px 20px;
+}

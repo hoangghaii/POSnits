@@ -1,0 +1,133 @@
+<main class="pb-50">
+    <article class="wrap">
+      <section>
+        <div class="automatic-mail-delivery-settings">
+          <div class="flex-row">
+            <div class="col-12 mt-0">
+              <h2 class="title title-bold pl-10">
+                <span>{{ "autoMails.autoMail" | translate }}</span>
+              </h2>
+            </div>
+            <div class="col-12">
+              <div class="white-box pt-5 pb-20 radius-none">
+                <form [formGroup]="mailForm" *ngIf="mailForm">
+                <div class="mail-delivery-settings-main ">
+                  <app-top-error *ngIf="isSubmit" [form]="mailForm" [formMap]="formMap"></app-top-error>
+                  <div class="item-setting-row">
+                    <div class="left">
+                      <label>{{ "autoMails.deliveryConditions" | translate }}</label>
+                    </div>
+                    <div class="right">
+                      <div class="radio-group screen-max767">
+                        <label class="radio-group__label" for="deliveryCon1">
+                          <span class="flex-box">
+                            <input class="radio-group__input" type="radio" id="deliveryCon1" name="group"
+                              value="0" [(ngModel)]="deliveryCondition" [ngModelOptions]="{standalone: true}" />
+                            <span class="fake-btn"></span>
+                            <span class="text">{{ "autoMails.dayBeforeTheReservationDate" | translate }}</span>
+                          </span>
+                        </label>
+                        <label class="radio-group__label" for="deliveryCon2">
+                          <span class="flex-box">
+                            <input class="radio-group__input" type="radio" id="deliveryCon2" name="group"
+                              value="1" [(ngModel)]="deliveryCondition" [ngModelOptions]="{standalone: true}" />
+                            <span class="fake-btn"></span>
+                            <span class="text">{{ "autoMails.dayAfterTheLastVisit" | translate }}</span>
+                          </span>
+                        </label>
+                      </div>
+                      <div class="radio-group screen-max767">
+                        <label class="radio-group__label" for="deliveryCon3">
+                          <span class="flex-box">
+                            <input class="radio-group__input" type="radio" id="deliveryCon3" name="group"
+                              value="2" [(ngModel)]="deliveryCondition" [ngModelOptions]="{standalone: true}" />
+                            <span class="fake-btn"></span>
+                            <span class="text">{{ "autoMails.dayAfterTheVisitDate" | translate }}</span>
+                          </span>
+                        </label>
+                        <label class="radio-group__label" for="deliveryCon4">
+                          <span class="flex-box">
+                            <input class="radio-group__input" type="radio" id="deliveryCon4" name="group"
+                              value="3" [(ngModel)]="deliveryCondition" [ngModelOptions]="{standalone: true}" />
+                            <span class="fake-btn"></span>
+                            <span class="text">{{ "autoMails.onDayOfBirth" | translate }}</span>
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-setting-row">
+                    <div class="left">
+                      <label>{{ "autoMails.days" | translate }}</label>
+                    </div>
+                    <div class="right">
+                      <div class="group">
+                        <div class="input-group">
+                          <input type="number" min="1" value="1" style="width: 100px;" class="input-text" formControlName="days">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-setting-row">
+                    <div class="left">
+                      <label>{{ "autoMails.subject" | translate }}</label>
+                    </div>
+                    <div class="right">
+                      <div class="group">
+                        <div class="input-group">
+                          <input formControlName="subject" type="text" style="width: 100%;" class="input-text"
+                          [ngClass]="{'input-error': isSubmit && mailForm.controls.subject.errors}">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-setting-row">
+                    <div class="left">
+                      <label>{{ "autoMails.text" | translate }}</label>
+                    </div>
+                    <div class="right">
+                      <div class="button-group">
+                        <button type="button" id="name" (click)="addCharacter($event)" class="btn">{{ "autoMails.name" | translate }}</button>
+                        <button type="button" id="shopName" (click)="addCharacter($event)" class="btn">{{ "autoMails.storeName" | translate }}</button>
+                        <button type="button" id="shopAddress" (click)="addCharacter($event)" class="btn">{{ "autoMails.storeAddress" | translate }}</button>
+                        <button type="button" id="shopTel" (click)="addCharacter($event)" class="btn">{{ "autoMails.storePhoneNumber" | translate }}</button>
+                        <button type="button" id="reservationTime" (click)="addCharacter($event)" class="btn">{{ "autoMails.reservationDateAndTime" | translate }}</button>
+                        <button type="button" id="menuName" (click)="addCharacter($event)" class="btn">{{ "autoMails.reservationMenu" | translate }}</button>
+                        <button type="button" id="staffName" (click)="addCharacter($event)" class="btn">{{ "autoMails.personInCharge" | translate }}</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="area">
+                    <textarea #textareaBody formControlName="body" name="" cols="40" rows="14" class="textarea-small"
+                    [ngClass]="{'input-error': isSubmit && mailForm.controls.body.errors}"
+                      placeholder="{{ 'autoMails.placeHolder' | translate }}"></textarea>
+                  </div>
+                  <div class="item-setting-row">
+                    <div class="left">
+                      <label>{{ "autoMails.transmissionTime" | translate }}</label>
+                    </div>
+                    <div class="right">
+                      <div class="group-date">
+                        <div class="input-group">
+                          <div class="input-group__label mt-0 pt-0"></div>
+                          <select name="" id="" style="width: 60%;" formControlName="transmission_time" [ngClass]="{'input-error': isSubmit && mailForm.controls.transmission_time.errors}">
+                            <option value="">{{ "autoMails.selectTime" | translate }}</option>
+                            <option *ngFor="let item of transmissionTimeList" value="{{ item.value }}">{{ item.text }}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              </div>
+            </div>
+            <div class="btn-area flex-row cus-searh-footer cus-searh-footer-screen-1" style="display: flex;">
+              <div class="bt skip" style="width: 50%;" (click)="goBack()">{{ "autoMails.back" | translate }}</div>
+              <div class="bt next open_dialog" style="width: 50%;" (click)="nextPage()">{{ "autoMails.confirm" | translate }}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+  </main>

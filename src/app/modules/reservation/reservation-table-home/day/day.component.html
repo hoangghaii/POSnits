@@ -1,0 +1,69 @@
+<div class="col-12 pl-0 pr-0">
+    <div class="date-move">
+        <ul>
+            <li (click)="prevousDay()"><a class="date-move__prev"></a></li>
+            <li><span>{{"reservationTable.tableDay.today" | translate}}</span><em
+                    class="title-bold">{{ seletedDate.getMonth() + 1}}月{{seletedDate.getDate()}}日({{dayOfWeek[seletedDate.getDay()]}})</em>
+            </li>
+            <li (click)="nextDay()"><a class="date-move__next"></a></li>
+        </ul>
+    </div>
+    <div class="tabs mt-0 tab-border-top">
+        <ul>
+            <li *ngFor="let tab of tabList; let i = index">
+                <a [ngClass]="tab.active ? 'active' : ''" (click)="selectTab(i)">
+                    <img [src]="'assets/images/icon/'+tab.image" alt="" />
+                    <span>{{tab.title | translate}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="white-box mt-0 radius-none" style="padding: 5px 0px 5px 5px;">
+    <div>
+        <div class="calender-wrap">
+            <div class="calender">
+                <div class="calender-flex">
+                    <div class="time">
+                        <ng-container *ngFor="let item of listTime; let i = index">
+                            <time [ngClass]="((i + 1) % 2) ? 'title-bold' : 'time-opacity'"
+                                class="title-bold">{{item}}</time>
+                        </ng-container>
+                    </div>
+                    <div class="grid">
+                        <div class="grid__baselines">
+                            <ng-container *ngFor="let item of listTime; let i = index">
+                                <span></span>
+                            </ng-container>
+                        </div>
+                        <div class="container-task">
+                            <ng-container *ngFor="let item of dayList; let i = index">
+                                <ul class="days">
+                                    <ng-container *ngFor="let day of item?.list; let i = index">
+                                        <li [ngStyle]="{'margin-top': day.marginTop+'px'}">
+                                            <ul class="events">
+                                                <li class="content-item" (click)="handleDetail(day)"
+                                                   [ngStyle]="{'height': day.height+'px'}">
+                                                    <span class="title-bold">{{day?.customer_name}}</span>
+                                                    <div class="img-content mt-5">
+                                                        <a><img onerror="this.onerror=null;this.src='assets/images/icon/no-img-staff.svg';" [src]="day?.staff_img" alt=""></a>
+                                                        <span>{{day?.staff_name}}</span>
+                                                    </div>
+                                                    <span class="mt-10"><span class="ellipsis-span">※{{day?.treatment_name}} {{day.equipment_name}}｜{{ "reservationTable.tableMonth.classification" | translate }}｜{{categoryCd[day.details[0]?.category_cd * 1].key}}｜{{day.details[0]?.menu_name}}</span></span>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ng-container>
+                                </ul>
+                            </ng-container>
+                        </div>
+                        <!-- [ngStyle]="setMarginTop(item?.list[i - 1]?.treatments_time_end, day?.reservation_time)" -->
+                        <!-- [ngStyle]="setHeight(day?.reservation_time, day?.treatments_time_end)" -->
+                        <!-- <ul class="days-none-1h"></ul> -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

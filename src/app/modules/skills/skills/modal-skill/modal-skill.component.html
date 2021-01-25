@@ -1,0 +1,245 @@
+<div class="create-modal" [ngClass]="open ? 'open' : null">
+  <div class="create-modal-overlay" (click)="closeModal()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">
+      {{ "tech.techRegistration" | translate }}
+      <span class="create-modal__header--modal" (click)="closeModal()"></span>
+    </div>
+    <div class="create-modal__body">
+      <form action="" [formGroup]="addTechForm">
+        <div class="err">
+          <app-top-error
+            *ngIf="submitted"
+            [form]="addTechForm"
+            [formMap]="formMap"
+          ></app-top-error>
+        </div>
+        <div class="input-group">
+          <label for="" class="input-group__label">
+            {{ "tech.techClassSelection" | translate }}
+          </label>
+          <select
+            class="select-form mt-10"
+            formControlName="classId"
+            [ngClass]="{
+              'input-error': submitted && f.classId.errors
+            }"
+          >
+            <option *ngFor="let tcl of techClassList" value="{{ tcl.id }}">
+              {{ tcl.name }}
+            </option>
+          </select>
+        </div>
+        <!-- <app-show-errors
+          class="pl-0"
+          *ngIf="submitted"
+          [ctrl]="f.classId"
+          [nameControll]="'技術分類選択'"
+          [errorMsg]="'※技術分類選択特殊文字は使用できません'"
+        ></app-show-errors> -->
+
+        <div class="input-group single mt-15">
+          <label for="" class="input-group__label">
+            {{ "tech.techName" | translate }}
+          </label>
+          <input
+            type="text"
+            class="input-text"
+            placeholder="{{ 'tech.placeTechName' | translate }}"
+            formControlName="name"
+            [ngClass]="{
+              'input-error': submitted && f.name.errors
+            }"
+          />
+        </div>
+        <!-- <app-show-errors
+          *ngIf="submitted"
+          [ctrl]="f.name"
+          [nameControll]="'技術名称'"
+        ></app-show-errors> -->
+
+        <div class="input-group single mt-15 unit">
+          <label for="" class="input-group__label">
+            {{ "common.treatmentTime" | translate }}
+          </label>
+          <div style="display: flex; flex-wrap: nowrap; width: 100%">
+            <input
+            type="text"
+            class="input-text"
+            placeholder="{{ 'common.placeTreatmentTime' | translate }}"
+            formControlName="treatmentTime"
+            [ngClass]="{
+              'input-error': submitted && f.treatmentTime.errors
+            }"
+          />
+          <span style="padding-top: 20px;" class="txt">分</span>
+          </div>
+        </div>
+        <!-- <app-show-errors
+          *ngIf="submitted"
+          [ctrl]="f.treatmentTime"
+          [nameControll]="'施術時間'"
+          [errorMsg]="'※施術時間は数字で入力してください。'"
+        ></app-show-errors> -->
+
+        <div class="input-group single mt-15 unit">
+          <label for="" class="input-group__label">
+            {{ "common.bufferTime" | translate }}
+          </label>
+          <div style="display: flex; flex-wrap: nowrap; width: 100%">
+          <input
+            type="text"
+            class="input-text"
+            placeholder="{{ 'common.placeBufferTime' | translate }}"
+            formControlName="bufferTime"
+            [ngClass]="{
+              'input-error': submitted && f.bufferTime.errors
+            }"
+          />
+          <span style="padding-top: 20px;" class="txt">分</span>
+          </div>
+        </div>
+        <!-- <app-show-errors
+          *ngIf="submitted"
+          [ctrl]="f.bufferTime"
+          [nameControll]="'バッファ時間'"
+          [errorMsg]="'※バッファ時間は数字で入力してください。'"
+        ></app-show-errors> -->
+
+        <div class="input-group single mt-15 unit">
+          <label for="" class="input-group__label">
+            {{ "common.tPrice" | translate }}
+          </label>
+          <div style="display: flex; flex-wrap: nowrap; width: 100%">
+          <input
+            type="text"
+            class="input-text"
+            placeholder="{{ 'common.placePrice' | translate }}"
+            formControlName="price"
+            [ngClass]="{
+              'input-error': submitted && f.price.errors
+            }"
+          />
+          <span style="padding-top: 20px;" class="txt">{{ "common.price" | translate }}</span>
+          </div>
+        </div>
+        <!-- <app-show-errors
+          *ngIf="submitted"
+          [ctrl]="f.price"
+          [nameControll]="'価格'"
+          [errorMsg]="'※価格は数字で入力してください。'"
+        ></app-show-errors> -->
+
+        <div class="input-group mt-10">
+          <label for="" class="input-group__label">
+            {{ "common.taxRate" | translate }}
+          </label>
+          <select
+            class="select-form mt-10"
+            formControlName="taxId"
+            [ngClass]="{
+              'input-error': submitted && f.taxId.errors
+            }"
+          >
+            <option *ngFor="let item of listTaxes" value="{{ item.id }}">
+              {{ item.tax }} {{'common.percent' | translate}}
+            </option>
+          </select>
+        </div>
+        <!-- <app-show-errors
+          *ngIf="submitted"
+          [ctrl]="f.taxId"
+          [nameControll]="'税率'"
+        ></app-show-errors> -->
+
+        <div class="input-group mt-10">
+          <label for="" class="input-group__label">
+            {{ "tech.webFlg" | translate }}
+          </label>
+          <div class="radio-group">
+            <label
+              class="radio-group__label"
+              *ngFor="let item of listWeb"
+              for="{{ item.key + item.value }}"
+            >
+              <span class="flex-box">
+                <input
+                  class="radio-group__input"
+                  type="radio"
+                  id="{{ item.key + item.value }}"
+                  name="webFlg"
+                  value="{{ item.key }}"
+                  formControlName="webFlg"
+                />
+                <span
+                  class="fake-btn"
+                  [ngClass]="{
+                    'input-error': submitted && f.webFlg.errors
+                  }"
+                ></span>
+                <span class="text">{{ item.value }}</span>
+              </span>
+            </label>
+          </div>
+        </div>
+        <!-- <app-show-errors
+          *ngIf="submitted"
+          [ctrl]="f.webFlg"
+          [nameControll]="'WEB予約'"
+        ></app-show-errors> -->
+
+        <div class="input-group mt-10">
+          <label for="" class="input-group__label">
+            {{ "common.selectColor" | translate }}
+          </label>
+          <input
+            [formControlName]="'colorCode'"
+            id="colorCode"
+            class="inputColorPicker input-text mt-10"
+            [value]="currentPickedColor"
+            [style.background]="currentPickedColor"
+            [(colorPicker)]="currentPickedColor"
+            [cpPresetColors]="presetColors"
+            [cpPosition]="'top'"
+            [cpPositionOffset]="'9%'"
+            [cpOutputFormat]="'hex'"
+            [cpAlphaChannel]="'disabled'"
+            (colorPickerChange)="getValueColor($event)"
+            [ngClass]="{
+              'input-error': submitted && f.colorCode.errors
+            }"
+          />
+        </div>
+
+        <input type="hidden" formControlName="id" />
+        <input type="hidden" formControlName="categoryCd" />
+        <input type="hidden" formControlName="sort" />
+        <input type="hidden" formControlName="updatedAt" />
+
+        <div class="btn-grp mt-20" *ngIf="selectCurrent; else btnCreate">
+          <button
+            type="submit"
+            class="btn mt-20 btn-delete"
+            (click)="handleDelete()"
+          >
+            {{ "addStaff.staffCreate.delete" | translate }}
+          </button>
+          <button type="submit" class="btn mt-20" (click)="handleUpdate()">
+            {{ "addStaff.staffCreate.update" | translate }}
+          </button>
+        </div>
+
+        <ng-template #btnCreate>
+          <button type="submit" class="btn mt-20" (click)="handleCreate()">
+            {{ "addStaff.staffCreate.signUp" | translate }}
+          </button>
+        </ng-template>
+      </form>
+    </div>
+  </div>
+</div>
+
+<app-confirm-modal
+  #confirmModal
+  (confirm)="handleConfirm($event)"
+></app-confirm-modal>

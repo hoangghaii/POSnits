@@ -1,0 +1,364 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span>{{
+              "receptionSetting.webReservationInitialSetting" | translate
+              }}</span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <form [formGroup]="receptionSettingForm">
+            <div class="white-box radius-none">
+              <app-reservation-step [stepNum]="2"></app-reservation-step>
+              <h2 class="inner-title title-bold">
+                <span>{{
+                  "receptionSetting.reservationReceptionSetting" | translate
+                  }}</span>
+              </h2>
+              <div class="err pl-20 pr-20">
+                <app-top-error
+                  *ngIf="submitted"
+                  [form]="receptionSettingForm"
+                  [formMap]="formMap  "
+                ></app-top-error>
+              </div>
+              <div class="input-group pl-20 pr-20 pt-0 mt-10">
+                <div class="input-group__label mt-0">
+                  {{ "receptionSetting.reservationInterval" | translate }}
+                </div>
+                <select
+                  formControlName="reservInterval"
+                  class="mt-10"
+                  [ngClass]="{
+                    'input-error': submitted && f.reservInterval.errors
+                  }"
+                >
+                  <option value="">---</option>
+                  <ng-container *ngFor="let item of reservIntervalList">
+                    <option [value]="item.value">{{ item.key }}</option>
+                  </ng-container>
+                </select>
+              </div>
+
+              <div class="input-group pl-20 pr-20 pt-0 mt-10">
+                <div class="input-group__label mt-0">
+                  {{ "receptionSetting.receptionRestrictions" | translate }}
+                  <small>{{
+                    "receptionSetting.reservationsCanBeMadeUpToTheSetAmount"
+                      | translate
+                    }}</small>
+                </div>
+                <select
+                  formControlName="receptRest"
+                  class="mt-10"
+                  [ngClass]="{
+                    'input-error': submitted && f.receptRest.errors
+                  }"
+                >
+                  <option value="">---</option>
+                  <ng-container *ngFor="let item of receptRestList">
+                    <option [value]="item.value">{{ item.key }}</option>
+                  </ng-container>
+                </select>
+              </div>
+              <div class="input-group pl-20 pr-20 pt-0 mt-10 col02">
+                <div class="input-group__label mt-0">
+                  {{ "receptionSetting.acceptableNumber" | translate }}
+                </div>
+                <input
+                  type="text"
+                  formControlName="receptAmount"
+                  class="mt-10 input-text my-input"
+                  placeholder="{{
+                    'receptionSetting.placeholderAcceptableNumber' | translate
+                  }}"
+                  [ngClass]="{
+                    'input-error': submitted && f.receptAmount.errors
+                  }"
+                  disabled
+                />
+                <div class="btn" (click)="openModal()" style="font-size:1.4rem ;">
+                  {{ "receptionSetting.individualSetting" | translate }}
+                </div>
+              </div>
+              <div class="input-group single mt-10">
+                <div class="input-group__label">
+                  {{ "receptionSetting.cancelSetting" | translate }}
+                </div>
+                <div class="radio-group">
+                  <label
+                    class="radio-group__label"
+                    *ngFor="let item of cancelWaitFlgList"
+                    for="{{ 'cancelWaitFlg'+ item.value }}"
+                  >
+                    <span class="flex-box">
+                      <input
+                        class="radio-group__input"
+                        type="radio"
+                        id="{{ 'cancelWaitFlg'+ item.value }}"
+                        name="cancelWaitFlg"
+                        value="{{ item.value }}"
+                        formControlName="cancelWaitFlg"
+                      />
+                      <span
+                        class="fake-btn"
+                        [ngClass]="{
+                          'input-error': submitted && f.cancelWaitFlg.errors
+                        }"
+                      ></span>
+                      <span class="text">{{ item.key }}</span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="input-group pl-20 pr-20 pt-0 mt-10">
+                <div class="input-group__label mt-0">
+                  {{ "receptionSetting.cancellationDeadline" | translate }}
+                </div>
+                <select
+                  formControlName="cancelLimit"
+                  class="mt-10"
+                  [ngClass]="{
+                    'input-error': submitted && f.cancelLimit.errors
+                  }"
+                >
+                  <option value="">---</option>
+                  <ng-container *ngFor="let item of cancelLimitList">
+                    <option [value]="item.value">{{ item.key }}</option>
+                  </ng-container>
+                </select>
+              </div>
+
+              <div class="input-group pl-20 pr-20 pt-0 mt-10">
+                <div class="input-group__label mt-0">
+                  {{
+                  "receptionSetting.numberOfFutureReservations" | translate
+                  }}
+                </div>
+                <select
+                  formControlName="futureReservNum"
+                  class="mt-10"
+                  [ngClass]="{
+                    'input-error': submitted && f.futureReservNum.errors
+                  }"
+                >
+                  <option value="">---</option>
+                  <ng-container *ngFor="let item of futureReservNumList">
+                    <option [value]="item.value">{{ item.key }}</option>
+                  </ng-container>
+                </select>
+              </div>
+
+              <div class="input-group pl-20 pr-20 pt-0 mt-10">
+                <div class="input-group__label mt-0">
+                  {{ "receptionSetting.waitingList" | translate }}
+                </div>
+                <div class="radio-group">
+                  <label
+                    class="radio-group__label"
+                    *ngFor="let item of cancelSettingFlgList"
+                    for="{{ 'cancelSettingFlg' + item.value }}"
+                  >
+                    <span class="flex-box">
+                      <input
+                        class="radio-group__input"
+                        type="radio"
+                        id="{{ 'cancelSettingFlg' + item.value }}"
+                        name="cancelSettingFlg"
+                        value="{{ item.value }}"
+                        formControlName="cancelSettingFlg"
+                      />
+                      <span
+                        class="fake-btn"
+                        [ngClass]="{
+                          'input-error': submitted && f.cancelSettingFlg.errors
+                        }"
+                      ></span>
+                      <span class="text">{{ item.key }}</span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="input-group pl-20 pr-20 pt-0 mt-10 input-group col02">
+                <div class="input-group__label mt-0">
+                  {{ "receptionSetting.menuSelectFlg.title" | translate }}
+                </div>
+                <div class="radio-group">
+                  <label class="radio-group__label" for="single">
+                    <span class="flex-box">
+                      <input
+                        class="radio-group__input"
+                        type="radio"
+                        id="single"
+                        name="menuSelectFlg"
+                        value="0"
+                        formControlName="menuSelectFlg"
+                      />
+                      <span class="fake-btn"></span>
+                      <span class="text">{{
+                        "receptionSetting.menuSelectFlg.single" | translate
+                        }}</span>
+                    </span>
+                  </label>
+                  <label class="radio-group__label" for="multiple">
+                    <span class="flex-box">
+                      <input
+                        class="radio-group__input"
+                        type="radio"
+                        id="multiple"
+                        name="menuSelectFlg"
+                        value="1"
+                        formControlName="menuSelectFlg"
+                      />
+                      <span class="fake-btn"></span>
+                      <span class="text">{{
+                        "receptionSetting.menuSelectFlg.multi" | translate
+                        }}</span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+              <div class="input-group pl-20 pr-20 pt-0 mt-10 input-group col02">
+                <div class="input-group__label mt-0">
+                  {{ "receptionSetting.staffSelectFlg.title" | translate }}
+                </div>
+                <div class="radio-group">
+                  <label class="radio-group__label" for="yesStaffSelectFlg">
+                    <span class="flex-box">
+                      <input
+                        class="radio-group__input"
+                        type="radio"
+                        id="yesStaffSelectFlg"
+                        name="staffSelectFlg"
+                        value="0"
+                        formControlName="staffSelectFlg"
+                      />
+                      <span class="fake-btn"></span>
+                      <span class="text">{{
+                        "receptionSetting.staffSelectFlg.yes" | translate
+                        }}</span>
+                    </span>
+                  </label>
+                  <label class="radio-group__label" for="none">
+                    <span class="flex-box">
+                      <input
+                        class="radio-group__input"
+                        type="radio"
+                        id="none"
+                        name="staffSelectFlg"
+                        value="1"
+                        formControlName="staffSelectFlg"
+                      />
+                      <span class="fake-btn"></span>
+                      <span class="text">{{
+                        "receptionSetting.staffSelectFlg.no" | translate
+                        }}</span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+              <div class="input-group pl-20 pr-20 pt-0 mt-10 input-group col02">
+                <div class="input-group__label mt-0">
+                  {{ "receptionSetting.guestFlg.title" | translate }}
+                </div>
+                <div class="radio-group">
+                  <label class="radio-group__label" for="yesGuestFlg">
+                    <span class="flex-box">
+                      <input
+                        class="radio-group__input"
+                        type="radio"
+                        id="yesGuestFlg"
+                        name="guestFlg"
+                        value="0"
+                        formControlName="guestFlg"
+                      />
+                      <span class="fake-btn"></span>
+                      <span class="text">{{
+                        "receptionSetting.guestFlg.possible" | translate
+                        }}</span>
+                    </span>
+                  </label>
+                  <label class="radio-group__label" for="impossible">
+                    <span class="flex-box">
+                      <input
+                        class="radio-group__input"
+                        type="radio"
+                        id="impossible"
+                        name="guestFlg"
+                        value="1"
+                        formControlName="guestFlg"
+                      />
+                      <span class="fake-btn"></span>
+                      <span class="text">{{
+                        "receptionSetting.guestFlg.impossible" | translate
+                        }}</span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+              <div class="input-group pl-20 pr-20 pt-0 mt-10 input-group col02">
+                <div class="input-group__label mt-0">
+                  {{ "receptionSetting.memberReserveFlg.title" | translate }}
+                </div>
+                <div class="radio-group">
+                  <label class="radio-group__label" for="yesMemberReserveFlg">
+                    <span class="flex-box">
+                      <input
+                        class="radio-group__input"
+                        type="radio"
+                        id="yesMemberReserveFlg"
+                        name="memberReserveFlg"
+                        value="0"
+                        formControlName="memberReserveFlg"
+                      />
+                      <span class="fake-btn"></span>
+                      <span class="text">{{
+                        "receptionSetting.memberReserveFlg.yes" | translate
+                        }}</span>
+                    </span>
+                  </label>
+                  <label class="radio-group__label" for="noneMemberReserveFlg">
+                    <span class="flex-box">
+                      <input
+                        class="radio-group__input"
+                        type="radio"
+                        id="noneMemberReserveFlg"
+                        name="memberReserveFlg"
+                        value="1"
+                        formControlName="memberReserveFlg"
+                      />
+                      <span class="fake-btn"></span>
+                      <span class="text">{{
+                        "receptionSetting.memberReserveFlg.no" | translate
+                        }}</span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+              <div class="btn-area flex-row" >
+                <button
+                  type="submit"
+                  class="bt next open_dialog without-skip"
+                  (click)="onSubmit()"
+                  [ngClass]="(flag==true)?'editBtn':'null'"
+                >
+                  {{ status}}
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+<app-recept-amount-day
+[open]="isOpen"
+(confirm)="closeModal($event)"
+[selectCurrent]="receptAmountDay"
+></app-recept-amount-day>

@@ -1,0 +1,15 @@
+.input-group .select-form.input-error {
+  border: 1px solid #ff648c;
+  background: #ffecf1;
+}
+.hide-dialog {
+  display: none;
+}
+.show-dialog {
+  z-index: 99999999;
+  display: block;
+}
+
+.close_dialog {
+  white-space: nowrap;
+}

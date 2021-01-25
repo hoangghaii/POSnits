@@ -1,0 +1,56 @@
+<footer class="footer">
+  <div class="sp show-all-device style-footer">
+    <nav>
+      <ul>
+        <li class="cursor-pointer">
+          <a routerLink="/reservations/table">
+            <img src="./assets/images/icon/ico_yoyakuhyo.svg" alt="" />
+            <span>{{ "footer.0001" | translate }}</span>
+          </a>
+        </li>
+        <li class="cursor-pointer">
+          <a routerLink="/shops/accounting-input" routerLinkActive="active">
+            <img src="./assets/images/icon/ico_okaikei.svg" alt="" />
+            <span>{{ "footer.0002" | translate }}</span>
+          </a>
+        </li>
+        <li></li>
+        <li class="cursor-pointer">
+          <a routerLink="/shops/customer-info" routerLinkActive="active">
+            <img src="./assets/images/icon/ico_search.svg" alt="" />
+            <span>{{ "footer.0003" | translate }}</span>
+          </a>
+        </li>
+        <li class="cursor-pointer">
+          <a
+            class="toggle-menu"
+            id="toggle-menu"
+            (click)="toogleMenu()"
+            [ngClass]="this.commonServicesService.isToogle ? 'on' : ''"
+          >
+            <img
+              src="./assets/images/icon/ico_menu.svg"
+              alt=""
+              class="type01"
+            />
+            <img
+              src="./assets/images/icon/ico_close.svg"
+              alt=""
+              class="type02"
+            />
+            <span>{{ "footer.0004" | translate }}</span>
+          </a>
+        </li>
+      </ul>
+      <div>
+        <a (click)="openModal()" routerLinkActive="active" class="cursor-pointer">
+          <em>
+            <img src="./assets/images/icon/ico_whiteplus.svg" alt="" />
+            <span>{{ "footer.0005" | translate }}</span>
+          </em>
+        </a>
+      </div>
+    </nav>
+  </div>
+</footer>
+<app-registration *ngIf="isOpen" [isOpen]="isOpen" [userLogin]="userLogin" (confirm)="closeModalRegister($event)"></app-registration>

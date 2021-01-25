@@ -1,0 +1,66 @@
+
+<div class="pt-10">
+  <app-top-error
+  *ngIf="submitted"
+  [form]="form"
+  [formMap]="formMap"
+></app-top-error>
+</div>
+<div class="flex-row">
+  <div class="col-8 mt-25">
+    <table class="table-border">
+      <tr>
+        <td>{{"customer.fistVisitDate" | translate}}</td>
+        <td>{{visitDate.first}}</td>
+      </tr>
+      <tr>
+        <td>{{"customer.lastVisitDate" | translate}}</td>
+        <td>{{visitDate.last}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="col-12 mt-0 pl-15 pr-15 border-bottom">
+    <h2 class="mt-15">{{"customer.visitHistory" | translate}}</h2>
+  </div>
+
+  <div class="col-12 mt-15" *ngFor="let item of reservationList; let j = index">
+    <table class="table-border">
+      <tr>
+        <td>{{"customer.visitDate" | translate}}</td>
+        <td class="a-left" colspan="2">{{formatDate(item.reservation_time)}}</td>
+      </tr>
+      <tr>
+        <td>{{"customer.personInCharge" | translate}}</td>
+        <td class="a-left" colspan="2">{{item.customer_name}}</td>
+      </tr>
+      <tr>
+        <td [rowSpan]="item.details.length + 1">{{"customer.menu" | translate}}</td>
+        <td style="width: 38%;" class="a-left">{{item.details[0]?.name}}</td>
+        <td style="width: 38%;">{{item.details[0]?.price | number}}</td>
+      </tr>
+      <tr *ngFor="let detail of item.details; let i = index">
+        <td style="width: 38%;" [hidden]="i == 0" class="a-left">{{detail?.name}}</td>
+        <td style="width: 38%;" [hidden]="i == 0">{{detail?.price | number}}</td>
+      </tr>
+      <tr>
+        <td>{{"customer.billingAmount" | translate}}</td>
+        <td class="a-left" colspan="2">
+          {{totalAmount(item.details) | number}}
+        </td>
+      </tr>
+      <tr>
+        <td>{{"customer.visitMemo" | translate}}</td>
+        <td colspan="2">
+          <textarea style="width: 100%; border: 1px solid #000;" rows="4"
+            [value]="item.memo" [(ngModel)]="item.memo" [ngModelOptions]="{standalone: true}"
+            (keyup)="changeMemo(item)" [ngClass]="item.error ? 'input-error' : ''"></textarea>
+          <label class="btn-table-bill right" (click)="submit(item)">{{"customer.visitMemoRegistration" | translate}}</label>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="btn-area flex-row">
+  <div class="bt skip next_full open_dialog border-btn" (click)="changeRouter()">{{"customer.btnBack" | translate}}</div>
+</div>

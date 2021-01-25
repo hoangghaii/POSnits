@@ -1,0 +1,128 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold title--type01 mt-15">
+            <span>{{'accountingInput.bill' | translate}}</span>
+            <label (click)="goBack()" class="title--right">{{'accountingInput.change' | translate}}</label>
+          </h2>
+        </div>
+        <div class="col-12">
+          <form action="">
+            <div class="white-box pt-5 radius-none">
+              <div class="list__body">
+                <ul *ngIf="!customerInfo">
+                  <li>
+                    <div class="add-button mt-0">
+                      <button class="btn w-30" (click)="customerSearch()"><img class="icon-serch custom"
+                          src="assets/images/icon/ico_pinksearch.svg" alt=""><em>{{'customer.search' | translate}}</em></button>
+                    </div>
+                  </li>
+                </ul>
+                <ul>
+                  <li *ngIf="customerInfo">
+                    <div class="title title--type02">
+                      <div class="client-infor">
+                        <h2 class="title-bold">
+                          {{customerInfo.firstname + ' ' + customerInfo.lastname}}<small>（{{ helper.getSex(customerInfo.sex) }}）</small>
+                        </h2>
+                        <small
+                          class="pt-10">{{'accountingInput.numOfVisit' | translate}}：{{customerInfo.visit_cnt == 0 ? ('accounting-confirmation.firstTime' | translate) : ('accounting-confirmation.times' | translate: {times: customerInfo.visit_cnt})}}
+                          {{'accountingInput.lastVisitDate' | translate}}：{{ customerInfo.visit_cnt !== 0 ? (customerInfo.last_visit | date : "yyyy-MM-dd HH:mm" ) : '-' }}</small>
+                      </div>
+                      <label
+                        class="time-info">{{'accountingInput.receptionDate' | translate}}：{{receptionDate | date: 'yyyy-MM-dd HH:mm'}}</label>
+                    </div>
+                  </li>
+                  <li>
+                      <div class="add-button mt-0" (click)="openModal()">
+                        <button class="btn w-30"><span></span><em>{{'accountingInput.selectMenu' | translate}}</em></button>
+                      </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="input-group pl-20 pr-20 pt-0 mt-10">
+                <small>{{'accountingInput.total' | translate}}</small>
+                <div *ngFor="let item of productList; let i = index">
+                  <div class="input-group__label" style="border-top: none;"> <span
+                      style="font-weight: bold;">{{ item.abbreviationCategory }}</span>{{ item.name }}</div>
+                  <div class="input-group__row">
+                    <a href="javascript:;" (click)="getDiscount(item)"
+                      [ngClass]="item.isDiscount ? 'btn-discount' : ''">{{'accountingInput.total' | translate}}</a>
+                    <input type="number"  class="input-text input-group__quantity" style="width: 60px;"
+                      [(ngModel)]="item.qty" [ngModelOptions]="{standalone: true}" (keyup)="total()" />
+                    <span>×</span>
+                    <input type="number" class="input-text input-group__price"
+                      [value]="!item.isDiscount || (item.isDiscount && !item.discountId) ? item.qty * math.ceil(( item.price + item.price * item.tax / 100 )) : item.price * item.qty"
+                      readonly>
+                    <div class="input-group__radios" *ngIf="!item.isDiscount || (item.isDiscount && !item.discountId)">
+                      <label class="input-group__radios--input" *ngFor="let tax of taxList">
+                        <input *ngIf="item.tax == tax.tax" type="radio" checked disabled>
+                        <input *ngIf="item.tax !== tax.tax" type="radio" disabled>
+                        <span>{{tax.tax}}<sub>%</sub></span>
+                      </label>
+                    </div>
+                    <div class="input-group__radios" *ngIf="!(!item.isDiscount || (item.isDiscount && !item.discountId))">
+                      <label class="input-group__radios--input" *ngFor="let tax of taxList">
+                        <input type="radio" disabled>
+                        <span>{{tax.tax}}<sub>%</sub></span>
+                      </label>
+                    </div>
+                    <div class="input-group__delete" (click)="removeItem(item.id, item.menu_id)">
+                      <a href="javascript:;"><img src="./assets/images/icon/ico_trash.svg" alt=""></a>
+                    </div>
+                  </div>
+                  <div class="input-group__row" [ngClass]="item.isDiscount ? '' : 'hide-discount'">
+                    <a href="javascript:;" class="disabled">{{'accountingInput.total' | translate}}</a>
+                    <input type="number" class="input-text input-group__quantity" style="width: 60px;"
+                      [(ngModel)]="item.discountQty" [ngModelOptions]="{standalone: true}" (keyup)="total()" />
+                    <span>×</span>
+                    <select class="select-form" [(ngModel)]="item.discountId" [ngModelOptions]="{standalone: true}"
+                      (change)="getDiscountInfo(item)">
+                      <option *ngFor="let discount of discountList" value="{{ discount.id }}">
+                        {{ discount.name }}
+                      </option>
+                    </select>
+                    <div class="input-group__radios" *ngIf="!(!item.isDiscount || (item.isDiscount && !item.discountId))">
+                      <label class="input-group__radios--input" *ngFor="let tax of taxList">
+                        <input *ngIf="item.tax == tax.tax" type="radio" checked disabled>
+                        <input *ngIf="item.tax !== tax.tax" type="radio" disabled>
+                        <span>{{tax.tax}}<sub>%</sub></span>
+                      </label>
+                    </div>
+                    <div class="input-group__radios" *ngIf="!item.isDiscount || (item.isDiscount && !item.discountId)">
+                      <label class="input-group__radios--input" *ngFor="let tax of taxList">
+                        <input type="radio" disabled>
+                        <span>{{tax.tax}}<sub>%</sub></span>
+                      </label>
+                    </div>
+                    <div class="input-group__delete" (click)="getDiscount(item)">
+                      <a href="javascript:;"><img src="./assets/images/icon/ico_trash.svg" alt=""></a>
+                    </div>
+                  </div>
+                  <div class="input-group__label"></div>
+                </div>
+                <hr class="hr-accounting">
+                <div class="pl-0">
+                  <div class="input-group__label">{{'accountingInput.accounting' | translate}}</div>
+                </div>
+              </div>
+              <div class="btn-area flex-row">
+                <div style="width: 100%;" class="bt next open_dialog" (click)="nextPage()">
+                  <span>{{ productList.length }}{{'accountingInput.point' | translate}}／{{'accountingInput.price' | translate}}{{ totalAmount }}</span>
+                  <span>{{'accountingInput.proceedToPayment' | translate}}</span>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <app-search-popup [shopId]="shopId" [status]="openSearch" (confirm)="searchResult($event)"
+        [registerBtn]="false" [isPopup]="true"></app-search-popup>
+      </div>
+    </section>
+  </article>
+</main>
+<app-accounting-input-popup [isOpen]="isOpen" [shopId]="shopId" (confirm)="confirmModal($event)"
+  [existArr]="productList">
+</app-accounting-input-popup>

@@ -1,0 +1,58 @@
+<body id="base">
+  <main class="pb-50">
+    <article class="wrap">
+      <section>
+        <div class="flex-row">
+          <div class="col-12 mt-0">
+            <h2 class="title title-bold pl-10">
+                <span>{{
+                  "shopTerm.webReservationInitialSetting" | translate
+                  }}</span>
+            </h2>
+          </div>
+          <div class="col-12">
+  
+            <form action="" [formGroup]="termForm">
+              <div class="white-box radius-none">
+                <app-reservation-step [stepNum]="6"></app-reservation-step>
+                <h2 class="inner-title title-bold">
+                  <span>{{ "shopTerm.termsAndPpSetting" | translate }}</span>
+                </h2>
+                <div class="err pl-20 pr-20">
+                  <app-top-error *ngIf="submitted" [form]="termForm" [formMap]="formMap"></app-top-error>
+                </div>
+                <div class="input-group single mt-10">
+                  <div class="input-group__label">
+                    {{ "shopTerm.terms" | translate }}
+                  </div>
+                  <textarea name="terms" cols="40" rows="7" class="textarea-small" formControlName="terms"
+                            [ngClass]="{'input-error': submitted && f.terms.errors}"></textarea>
+                </div>
+                <div class="update-btn">
+                  <button [ngStyle]="style"(click)="subUpdate()">{{ "shopTerm.update" | translate }}</button>
+                </div>
+                <div class="input-group single mt-10">
+                  <div class="input-group__label">
+                    {{ "shopTerm.privacyPolicy" | translate }}
+                  </div>
+                  <textarea name="pp" cols="40" rows="7" class="textarea-small" formControlName="privacyPolicy"
+                            [ngClass]="{'input-error': submitted && f.privacyPolicy.errors}"></textarea>
+                </div>
+                <div class="update-btn">
+                  <button [ngStyle]="style"(click)="subUpdate()">{{ "shopTerm.update" | translate }}</button>
+                </div>
+                <div class="btn-area flex-row">
+                  <div class="bt next next_full open_dialog" (click)="nextStep()"
+                  [ngClass]="(flag==true)?'editBtn':'null'">
+                    {{ btn}}
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </article>
+  </main>
+  </body>
+  

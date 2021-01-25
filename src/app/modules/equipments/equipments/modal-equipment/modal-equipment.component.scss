@@ -1,0 +1,19 @@
+.grid-equipment {
+  padding-left: 0px;
+  padding-right: 20px;
+  .grid-equipment-button {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 20px 20px;
+    padding: 30px 30px 30px 30px;
+  }
+  .grid-equipment-footer {
+    display: flex;
+    justify-content: flex-end;
+    bottom: 0;
+    padding: 0px 10px 0px 10px;
+  }
+  .btn {
+    border-radius: unset;
+  }
+}

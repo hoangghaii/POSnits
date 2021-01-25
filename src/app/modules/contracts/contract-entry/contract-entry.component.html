@@ -1,0 +1,229 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="customer-info-tab">
+        <div class="flex-row">
+          <div class="col-12 mt-0">
+            <h2 class="title title-bold pl-10">
+              <span class="pr-0">{{ 'contractors.registerInformation.title' | translate}}</span>
+            </h2>
+          </div>
+
+          <div class="col-12">
+            <div class="white-box pt-5 pb-50 radius-none">
+              <form [formGroup]="contractorForm">
+                <div class="err ml-20 mr-20" style="margin: 0 20px 20px 20px;">
+                  <app-top-error *ngIf="submitted" [form]="contractorForm" [formMap]="formMap"></app-top-error>
+                </div>
+                <!-- 契約者情報 -->
+                <div class="col-12 pl-20 mt-0 border-bottom">
+                  <h2 class="mt-10 pb-5">
+                    <span>{{ 'contractors.registerInformation.sectionCompany.title' | translate}}</span>
+                  </h2>
+                </div>
+                <div class="tab-content" style="display: block;" formGroupName="company">
+                  <div class="input-group mt-2 input-group-tab">
+                    <label class="input-group__label input-group__label-tab">
+                      {{ 'contractors.registerInformation.sectionCompany.name' | translate}}
+                    </label>
+                    <input type="text" class="input-text input-text-tab" id="companyName" name="companyName"
+                           formControlName="name"
+                           [ngClass]="{'input-error': submitted && contractorForm.get('company')?.controls.name.errors}"
+                           placeholder=" {{ 'contractors.registerInformation.sectionCompany.namePlaceholder' | translate}}">
+                  </div>
+                  <div class="input-group mt-2 input-group-tab">
+                    <label class="input-group__label input-group__label-tab">
+                      {{ 'contractors.registerInformation.sectionCompany.postalCd' | translate}}
+                    </label>
+                    <input type="text" class="input-text input-text-tab w_30" id="companyPostalCd"
+                           name="companyPostalCd"
+                           formControlName="postalCd" (change)="getZipCode()"
+                           [ngClass]="{'input-error': submitted && contractorForm.get('company')?.controls.postalCd.errors}"
+                           placeholder="{{ 'contractors.registerInformation.sectionCompany.postalCdPlaceholder' | translate}}">
+                  </div>
+                  <div class="input-group mt-2 input-group-tab">
+                    <label class="input-group__label input-group__label-tab">
+                      {{ 'contractors.registerInformation.sectionCompany.prefecture' | translate}}
+                    </label>
+                    <input type="text" class="input-text input-text-tab w_50" id="companyPrefecture"
+                           name="companyPrefecture" formControlName="prefecture"
+                           [ngClass]="{'input-error': submitted && contractorForm.get('company')?.controls.prefecture.errors}"
+                           placeholder=" {{ 'contractors.registerInformation.sectionCompany.prefecturePlaceholder' | translate}}">
+                  </div>
+                  <div class="input-group mt-2 input-group-tab">
+                    <label class="input-group__label input-group__label-tab">
+                      {{ 'contractors.registerInformation.sectionCompany.city' | translate}}
+                    </label>
+                    <input type="text" class="input-text input-text-tab w_60" id="companyCity" name="companyCity"
+                           formControlName="city"
+                           [ngClass]="{'input-error': submitted && contractorForm.get('company')?.controls.city.errors}"
+                           placeholder=" {{ 'contractors.registerInformation.sectionCompany.cityPlaceholder' | translate}}">
+                  </div>
+                  <div class="input-group mt-2 input-group-tab">
+                    <label class="input-group__label input-group__label-tab">
+                      {{ 'contractors.registerInformation.sectionCompany.address' | translate}}
+                    </label>
+                    <input type="text" class="input-text input-text-tab w_70" id="companyAddress" name="companyAddress"
+                           formControlName="address"
+                           [ngClass]="{'input-error': submitted && contractorForm.get('company')?.controls.address.errors}"
+                           placeholder="{{ 'contractors.registerInformation.sectionCompany.addressPlaceholder' | translate}}">
+                  </div>
+                  <div class="input-group mt-2 input-group-tab">
+                    <label class="input-group__label input-group__label-tab">
+                      {{ 'contractors.registerInformation.sectionCompany.area' | translate}}
+                    </label>
+                    <input type="text" class="input-text input-text-tab" id="companyArea" name="companyArea"
+                           formControlName="area"
+                           [ngClass]="{'input-error': submitted && contractorForm.get('company')?.controls.address.errors}"
+                           placeholder=" {{ 'contractors.registerInformation.sectionCompany.areaPlaceholder' | translate}}">
+                  </div>
+                  <div class="input-group mt-2 input-group-tab">
+                    <label class="input-group__label input-group__label-tab">
+                      {{ 'contractors.registerInformation.sectionCompany.cutoffDate' | translate}}
+                    </label>
+                    <input type="text" class="input-text input-text-tab w_20" id="companyCutoffDate"
+                           name="companyCutoffDate" formControlName="cutoffDate"
+                           [ngClass]="{'input-error': submitted && contractorForm.get('company')?.controls.cutoffDate.errors}"
+                           placeholder=" {{ 'contractors.registerInformation.sectionCompany.cutoffDatePlaceholder' | translate}}">
+                  </div>
+                  <div class="input-group mt-2 input-group-tab">
+                    <label class="input-group__label input-group__label-tab">
+                      {{ 'contractors.registerInformation.sectionCompany.accounting' | translate}}
+                    </label>
+                    <select class="select-form" name="accounting" id="accounting" formControlName="accounting"
+                            [ngClass]="{'input-error':submitted && contractorForm.get('company')?.controls.accounting.errors}">
+                      <option *ngFor="let item of accountingList" value="{{ item.key }}">
+                        {{ item.value }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- 店舗情報 -->
+                <div class="col-12 pl-20 pt-2 border-bottom">
+                  <h2 class="mt-10 pb-5">
+                    <span>{{ 'contractors.registerInformation.sectionShop.title' | translate}}</span>
+                  </h2>
+                </div>
+                <div class="tab-content" style="display: block;" formGroupName="shop">
+                  <div class="input-group mt-2 input-group-tab">
+                    <label class="input-group__label input-group__label-tab">
+                      {{ 'contractors.registerInformation.sectionShop.name' | translate}}
+                    </label>
+                    <input type="text" class="input-text input-text-tab" id="shopName" name="shopName"
+                           formControlName="name"
+                           [ngClass]="{'input-error': submitted && contractorForm.get('shop')?.controls.name.errors}"
+                           placeholder="{{ 'contractors.registerInformation.sectionShop.namePlaceholder' | translate}}">
+                  </div>
+                  <div class="input-group mt-2 input-group-tab">
+                    <label class="input-group__label input-group__label-tab">
+                      {{ 'contractors.registerInformation.sectionShop.postalCd' | translate}}
+                    </label>
+                    <input type="text" class="input-text input-text-tab w_30" id="shopPostalCd" name="shopPostalCd"
+                           formControlName="postalCd" (change)="getZipCode('shop')"
+                           [ngClass]="{'input-error': submitted && contractorForm.get('shop')?.controls.postalCd.errors}"
+                           placeholder="{{ 'contractors.registerInformation.sectionShop.postalCdPlaceholder' | translate}}">
+                  </div>
+                  <div class="input-group mt-2 input-group-tab">
+                    <label class="input-group__label input-group__label-tab">
+                      {{ 'contractors.registerInformation.sectionShop.prefecture' | translate}}
+                    </label>
+                    <input type="text" class="input-text input-text-tab w_50" id="shopPrefecture" name="shopPrefecture"
+                           formControlName="prefecture"
+                           [ngClass]="{'input-error': submitted && contractorForm.get('shop')?.controls.prefecture.errors}"
+                           placeholder=" {{ 'contractors.registerInformation.sectionShop.prefecturePlaceholder' | translate}}">
+                  </div>
+                  <div class="input-group mt-2 input-group-tab">
+                    <label class="input-group__label input-group__label-tab">
+                      {{ 'contractors.registerInformation.sectionShop.city' | translate}}
+                    </label>
+                    <input type="text" class="input-text input-text-tab w_60" id="shopCity" name="shopCity"
+                           formControlName="city"
+                           [ngClass]="{'input-error': submitted && contractorForm.get('shop')?.controls.city.errors}"
+                           placeholder=" {{ 'contractors.registerInformation.sectionShop.cityPlaceholder' | translate}}">
+                  </div>
+                  <div class="input-group mt-2 input-group-tab">
+                    <label class="input-group__label input-group__label-tab">
+                      {{ 'contractors.registerInformation.sectionShop.address' | translate}}
+                    </label>
+                    <input type="text" class="input-text input-text-tab w_70" id="shopAddress" name="shopAddress"
+                           formControlName="address"
+                           [ngClass]="{'input-error': submitted && contractorForm.get('shop')?.controls.address.errors}"
+                           placeholder="{{ 'contractors.registerInformation.sectionShop.addressPlaceholder' | translate}}">
+                  </div>
+                  <div class="input-group mt-2 input-group-tab">
+                    <label class="input-group__label input-group__label-tab">
+                      {{ 'contractors.registerInformation.sectionShop.area' | translate}}
+                    </label>
+                    <input type="text" class="input-text input-text-tab" id="shopArea" name="shopArea"
+                           formControlName="area"
+                           [ngClass]="{'input-error': submitted && contractorForm.get('shop')?.controls.area.errors}"
+                           placeholder=" {{ 'contractors.registerInformation.sectionShop.areaPlaceholder' | translate}}">
+                  </div>
+                  <div class="input-group mt-2 input-group-tab">
+                    <label class="input-group__label input-group__label-tab">
+                      {{ 'contractors.registerInformation.sectionShop.email' | translate}}
+                    </label>
+                    <input type="text" class="input-text input-text-tab w_50" id="shopEmail" name="shopEmail"
+                           formControlName="email"
+                           [ngClass]="{'input-error': submitted && contractorForm.get('shop')?.controls.email.errors}">
+                    <label style="margin-top: 10px;">{{mailDomain}}</label>
+                  </div>
+                </div>
+
+                <!-- ログイン情報 -->
+                <div class="col-12 pl-20 pt-2 border-bottom">
+                  <h2 class="mt-15 pb-5">
+                    <span>{{ 'contractors.registerInformation.user.title' | translate}}</span>
+                  </h2>
+                </div>
+                <div class="tab-content" style="display: block;" formGroupName="user">
+                  <div class="input-group mt-2 input-group-tab">
+                    <label class="input-group__label input-group__label-tab">
+                      {{ 'contractors.registerInformation.user.name' | translate}}
+                    </label>
+                    <input type="text" class="input-text input-text-tab" id="userName" name="userName"
+                           formControlName="name"
+                           [ngClass]="{'input-error': submitted && contractorForm.get('user')?.controls.name.errors}"
+                           placeholder="{{ 'contractors.registerInformation.user.namePlaceholder' | translate}}">
+                  </div>
+                  <div class="input-group mt-2 input-group-tab">
+                    <label class="input-group__label input-group__label-tab">
+                      {{ 'contractors.registerInformation.user.email' | translate}}
+                    </label>
+                    <input type="text" class="input-text input-text-tab" id="userEmail" name="userEmail"
+                           formControlName="email"
+                           [ngClass]="{'input-error': submitted && contractorForm.get('user')?.controls.email.errors}"
+                           placeholder="{{ 'contractors.registerInformation.user.emailPlaceholder' | translate}}">
+                  </div>
+                  <div class="input-group mt-2 input-group-tab">
+                    <label class="input-group__label input-group__label-tab min-200">
+                      {{ 'contractors.registerInformation.user.password' | translate}}
+                    </label>
+                    <input type="password" class="input-text input-text-tab" id="password" name="password"
+                           formControlName="password"
+                           [ngClass]="{'input-error': submitted && contractorForm.get('user')?.controls.password.errors}">
+                  </div>
+                  <div class="input-group mt-2 input-group-tab">
+                    <label class="input-group__label input-group__label-tab min-200">
+                      {{ 'contractors.registerInformation.user.passwordConfirm' | translate}}
+                    </label>
+                    <input type="password" class="input-text input-text-tab" id="passwordConfirm" name="passwordConfirm"
+                           formControlName="passwordConfirm"
+                           [ngClass]="{'input-error': submitted && contractorForm.get('user')?.controls.passwordConfirm.errors}">
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="btn-area flex-row">
+          <button class="bt skip" (click)="back()"
+                  type="button">{{ 'contractors.registerInformation.btnBack' | translate}}</button>
+          <button class="bt next" (click)="goToConfirm()"
+                  type="button">{{ 'contractors.registerInformation.btnNext' | translate}}</button>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>

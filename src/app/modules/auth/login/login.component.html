@@ -1,0 +1,55 @@
+<main class="login-whole">
+  <div class="login-whole__box">
+    <form [formGroup]="loginForm">
+      <div class="login-whole__brand">
+        <img src="assets/images/logo/logo.svg" alt="" />
+      </div>
+      <div class="err">
+        <app-top-error
+          *ngIf="submitted"
+          [form]="loginForm"
+          [formMap]="formMap"
+        ></app-top-error>
+      </div>
+      <div class="input-group mt-30">
+        <label>
+          <img src="assets/images/icon/ico_person.svg" alt="" />
+          <span>{{ "login.lbEmail" | translate }}</span>
+        </label>
+        <input
+          type="text"
+          class="input-text"
+          [ngClass]="{
+            'input-error': submitted && loginForm.controls.email.errors
+          }"
+          formControlName="email"
+        />
+      </div>
+      <div class="input-group">
+        <label>
+          <img src="assets/images/icon/ico_password.svg" alt="" />
+          <span>{{ "login.lbPassword" | translate }}</span>
+        </label>
+        <input
+          type="password"
+          class="input-text"
+          [ngClass]="{
+            'input-error': submitted && loginForm.controls.password.errors
+          }"
+          formControlName="password"
+        />
+      </div>
+      <div class="forgot-password">
+        <a translate href="">{{ "login.lbForgot" | translate }}</a>
+      </div>
+      <button
+        translate
+        class="btn btn-block mt-40"
+        type="submit"
+        (click)="login()"
+      >
+        {{ "login.btnLogin" | translate }}
+      </button>
+    </form>
+  </div>
+</main>

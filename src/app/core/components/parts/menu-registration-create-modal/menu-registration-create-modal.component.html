@@ -1,0 +1,60 @@
+<div class="create-modal" [ngClass]="open ? 'open' : null">
+  <div class="create-modal-overlay" (click)="closeModal()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">
+      {{ "menuRegistration.btnOpenModal" | translate }}
+      <span class="create-modal__header--modal" (click)="closeModal()"></span>
+    </div>
+    <div class="create-modal__body">
+      <form action="">
+        <div class="list mt-15 pr-15 pl-15">
+          <div class="list__body list02">
+            <ul class="tech__ul collapsible">
+              <li class="collapsible-heading collapsible-heading--menu" #collapsible1
+                (click)="toggleAccordian(collapsible1)"><a style="font-size: 1.8rem;"> {{ "menuRegistration.technology" | translate }}</a>
+              </li>
+              <div class="tech__listGroup collapsible-content" style="padding: 0px 0px;">
+                <div *ngFor="let item of listMenu">
+                  <ng-container *ngIf="item.category_cd === '01'">
+                    <app-menu-registration-dropdown [open]="open" [item]="item" (confirm)="closeModal()">
+                    </app-menu-registration-dropdown>
+                  </ng-container>
+
+                </div>
+              </div>
+            </ul>
+          </div>
+        </div>
+        <div class="list pr-15 pl-15">
+          <div class="list__body list02">
+            <ul class="tech__ul collapsible">
+              <li class="collapsible-heading collapsible-heading--menu" #collapsible2
+                (click)="toggleAccordian(collapsible2)"><a style="font-size: 18.rem;"> {{ "menuRegistration.course" | translate }}</a>
+              </li>
+              <div class="tech__listGroup collapsible-content" style="padding: 0px 0px;">
+
+                <div *ngFor="let item of listMenu">
+                  <ng-container *ngIf="item.category_cd === '02'">
+                    <app-menu-registration-dropdown [open]="open" [item]="item" (confirm)="closeModal()">
+                    </app-menu-registration-dropdown>
+                  </ng-container>
+                </div>
+              </div>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Content 2 -->
+      </form>
+    </div>
+
+    <div class="btn-grp mt-20">
+      <button type="submit" class="btn mt-20 btn-delete" (click)="resetListDetails()">
+        {{ "menuRegistration.btnDeselection" | translate }}
+      </button>
+      <button type="submit" class="btn mt-20 btn-submit" (click)="closeModal()">
+        {{ "menuRegistration.btnCreateModal" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

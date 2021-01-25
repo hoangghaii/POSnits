@@ -1,0 +1,87 @@
+<main class="pb-50">
+  <article class="wrap accuting-custody">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold title--type01 mt-15 wrap-header">
+            <span>{{ "accoutingCustody.bill" | translate }}</span>
+            <label (click)="back()">{{ "accoutingCustody.change1" | translate }}</label>
+          </h2>
+        </div>
+        <div class="col-12">
+          <div class="list">
+            <div class="white-box pt-5 radius-none">
+              <form [formGroup]="formCreateAccount">
+                <div class="err pl-20 pr-20">
+                  <app-top-error *ngIf="submitted" [form]="formCreateAccount" [formMap]="formMap"></app-top-error>
+                </div>
+                <div class="list__body">
+                  <ul>
+                    <li class="title-accouting">
+                      <div class="title title--type02">
+                        <div class="client-infor">
+                          <h2 class="title-bold">
+                            {{objInfo?.customerName}}<small>（{{ objInfo?.gender }}）</small>
+                          </h2>
+                          <small
+                            class="pt-10">{{'accoutingCustody.numberOfVisit' | translate}}：{{objInfo?.visitCnt == 0 ? ('accounting-confirmation.firstTime' | translate) : ('accounting-confirmation.times' | translate: {times: objInfo?.visitCnt})}}
+                            {{'accoutingCustody.lastVisitDate' | translate}}：{{ objInfo?.visitCnt !== 0 ? (objInfo?.lastVisit | date : "yyyy-MM-dd HH:mm" ) : '-' }}</small>
+                        </div>
+                        <label
+                          class="time-info">{{'accoutingCustody.receptionDate' | translate}}：{{receptionDate | date: 'yyyy-MM-dd HH:mm'}}</label>
+                      </div>
+                    </li>
+                    <li class="total-money">
+                      <div class="d-flex">
+                        <h2 class="title title-bold input-note">
+                          <p class="input-note">
+                            {{objInfo?.qty}}{{ "accoutingCustody.point" | translate }} /
+                          </p>
+                          {{ helper.formatCurrency(objInfo?.money) }}
+                        </h2>
+                        <p class="title">
+                          {{ "accoutingCustody.subTotal" | translate }}
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          {{ helper.formatCurrency(objInfo?.subTotal) }}
+                        </p>
+                        <p class="title">
+                          +{{ "accoutingCustody.taxTotal" | translate }}
+                          &nbsp;&nbsp;&nbsp;
+                          {{ helper.formatCurrency(objInfo?.taxTotal) }}
+                        </p>
+                      </div>
+                    </li>
+                    <li class="title-money">
+                      <div class="d-flex">
+                        <h2 class="title title-bold">
+                          <p>{{ "accoutingCustody.change2" | translate }} /</p>
+                          {{ helper.formatCurrency(getTotalMoney()) }}
+                        </h2>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="wrap-header">
+                        <h2>{{ "accoutingCustody.cash" | translate }}</h2>
+                        <span class="input-symbol-euro">
+                          <input class="input-text" type="number" min="0" max="20" inputmode="numeric"
+                          pattern="[0-9]*" title="Non-negative integral number" formControlName="moneyInput" [ngClass]="{
+                            'input-error': submitted && f.moneyInput.errors
+                          }" />
+                        </span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="input-group single">
+                  <button type="submit" class="btn mt-30 mb-30" (click)="handleCreate()">
+                    {{ "accoutingCustody.btnConfirm" | translate }}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>

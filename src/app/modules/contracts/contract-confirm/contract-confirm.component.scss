@@ -1,0 +1,93 @@
+.online-application-confirmation {
+  h2 {
+    .header-oap {
+      color: #ff648c;
+      font-size: 1.7rem;
+    }
+  }
+
+  ul.info {
+    list-style-type: none;
+
+    li {
+      padding: 5px 0px;
+    }
+  }
+
+  .white-box--links {
+    padding: 0px !important;
+
+    h2 {
+      padding: 10px;
+    }
+  }
+
+  .white-box--links h3 {
+    border-bottom: 1px solid #e5e5e5;
+    padding-top: 10px !important;
+    padding-left: 25px;
+    margin-bottom: 5px !important;
+  }
+
+  .white-box--links h3::before {
+    background: none !important;
+  }
+
+  hr {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+    background: none;
+    height: 1px !important;
+    box-shadow: none;
+    border-bottom: 1px solid #e5e5e5 !important;
+  }
+
+  ul {
+    padding: 0 25px;
+  }
+
+  table {
+    width: 100%;
+
+    td {
+      padding: 15px 0px;
+      white-space: nowrap;
+    }
+
+    .tb-content {
+      td {
+        padding: 15px 0px;
+        white-space: nowrap;
+      }
+
+      td:nth-child(1) {
+        text-align: center;
+        width: 140px;
+      }
+
+      td:nth-child(2) {
+        text-align: left;
+      }
+
+      td:nth-child(3) {
+        text-align: right;
+      }
+    }
+
+    .tb-footer {
+      border-top: 1px solid black;
+
+      td {
+        text-align: right;
+      }
+    }
+  }
+}
+
+.contract-fee .tb-content {
+  td {
+    width: 100px !important;
+    text-align: center;
+  }
+}

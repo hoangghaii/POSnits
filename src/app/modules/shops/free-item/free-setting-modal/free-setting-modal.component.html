@@ -1,0 +1,124 @@
+<div class="create-modal" [ngClass]="open ? 'open' : ''">
+  <div class="create-modal-overlay" (click)="closeModal()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">
+      {{ "freeItemSetting.freeItemSetting" | translate }}
+    </div>
+    <span class="create-modal__header--modal" (click)="closeModal()"></span>
+    <div class="create-modal__body">
+      <form [formGroup]="formFreeSetting">
+        <div class="err pb-10">
+          <app-top-error *ngIf="submitted" [form]="formFreeSetting" [formMap]="formMap"></app-top-error>
+        </div>
+        <div class="input-group single">
+          <label class="input-group__label">{{
+            "freeItemSetting.contentsOfQuestion" | translate
+            }}</label>
+          <input type="text" class="input-text" placeholder="{{
+              'freeItemSetting.whatIsYourOccupation' | translate
+            }}" formControlName="question" />
+        </div>
+        <div class="input-group mt-10">
+          <label for="" class="input-group__label">{{
+            "freeItemSetting.inputMethod" | translate
+            }}</label>
+          <div class="radio-group">
+            <label class="radio-group__label" for="input">
+              <span class="flex-box">
+                <input class="radio-group__input" type="radio" id="input" name="htmlType" value="0"
+                  formControlName="htmlType" (change)="changeHtmlType()" />
+                <span class="fake-btn" [ngClass]="{
+                    'input-error': submitted && f.htmlType.errors
+                  }"></span>
+                <span class="text">
+                  {{ "freeItemSetting.input" | translate }}
+                </span>
+              </span>
+            </label>
+            <label class="radio-group__label" for="choice">
+              <span class="flex-box">
+                <input class="radio-group__input" type="radio" id="choice" name="htmlType" value="1"
+                  formControlName="htmlType" (change)="changeHtmlType()" />
+                <span class="fake-btn" [ngClass]="{
+                    'input-error': submitted && f.htmlType.errors
+                  }"></span>
+                <span class="text">
+                  {{ "freeItemSetting.choice" | translate }}
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div *ngIf="this.formFreeSetting.get('htmlType').value != '0'">
+          <div class="input-group mt-10 hide">
+            <label for="" class="input-group__label">{{
+              "freeItemSetting.choices" | translate
+              }}</label>
+            <div class="radio-group">
+              <label class="radio-group__label" for="singular">
+                <span class="flex-box">
+                  <input class="radio-group__input" type="radio" id="singular" name="multipleFlg" value="1"
+                    formControlName="multipleFlg" />
+                  <span class="fake-btn" [ngClass]="{
+                      'input-error': submitted && f.multipleFlg.errors
+                    }"></span>
+                  <span class="text">
+                    {{ "freeItemSetting.singularSelection" | translate }}
+                  </span>
+                </span>
+              </label>
+              <label class="radio-group__label" for="multiple">
+                <span class="flex-box">
+                  <input class="radio-group__input" type="radio" id="multiple" name="multipleFlg" value="2"
+                    formControlName="multipleFlg" />
+                  <span class="fake-btn" [ngClass]="{
+                      'input-error': submitted && f.multipleFlg.errors
+                    }"></span>
+                  <span class="text">
+                    {{ "freeItemSetting.multipleSelection" | translate }}
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="input-group mt-10 hide">
+            <label class="input-group__label">{{
+              "freeItemSetting.numberOfChoices" | translate
+              }}</label>
+            <div *ngFor="
+                let item of formFreeSetting.get('answer')['controls'];
+                let i = index
+              " class="mt-10" formArrayName="answer" style="display: flex;">
+              <input [formControlName]="i" type="text" class="input-text w-60"
+                placeholder="{{ 'freeItemSetting.employee' | translate }}" />
+              <div class="input-group__delete" (click)="removeItem(i)">
+                <a href="javascript:;"><img src="./assets/images/icon/ico_trash.svg" alt=""></a>
+              </div>
+            </div>
+            <div class="plus-left mt-10 plus" style="cursor: unset;">
+              <button class="plus-button" style="white-space: normal;" (click)="onAddAnwser()"><span style="position: relative; margin-left: 20px; bottom: 5px; white-space: nowrap;" >{{ "freeItemSetting.selectAChoice" | translate
+                  }}</span></button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="btn-grp mt-20" *ngIf="selectCurrent; else btnCreate">
+            <button type="submit" class="btn mt-20 btn-delete" (click)="handleDelete()">
+              {{ "common.btnDelete" | translate }}
+            </button>
+            <button type="submit" class="btn mt-20" (click)="handleUpdate()">
+              {{ "common.btnUpdate" | translate }}
+            </button>
+          </div>
+          <ng-template #btnCreate>
+            <button type="submit" class="btn mt-20" (click)="handleCreate()">
+              {{ "common.btnRegister" | translate }}
+            </button>
+          </ng-template>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<app-confirm-modal #confirmModal (confirm)="handleConfirm($event)"></app-confirm-modal>

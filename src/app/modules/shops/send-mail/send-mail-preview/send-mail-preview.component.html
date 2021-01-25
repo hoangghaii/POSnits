@@ -1,0 +1,32 @@
+<div class="create-modal" [ngClass]="open ? 'open' : null">
+    <div class="create-modal-overlay" (click)="closeModal()"></div>
+    <div class="create-modal__inner">
+      <div class="create-modal__header" style="padding: 15px;">
+        <span class="create-modal__header--modal" (click)="closeModal()"></span>
+      </div>
+      <div class="create-modal__body">
+     
+        <div class="input-group single mt-10">
+            <textarea
+            style="width:100%;   
+            border: 1px solid #dadbdb;
+             border-radius: 9.5px;
+             background-color: #fff;
+            resize: none;
+             font-size: 15px;
+            margin-top:10px ;
+            outline: none;"
+              name=""
+              cols="40"
+              rows="18"
+              class="textarea-big"
+              [(ngModel)]="body"
+              ></textarea
+            >
+            </div>
+        
+      </div>
+    </div>
+  </div>
+  
+  

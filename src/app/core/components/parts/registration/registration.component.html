@@ -1,0 +1,193 @@
+<div class="create-modal" [ngClass]="isOpen ? 'open' : ''">
+  <div class="create-modal-overlay" (click)="closeModal()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">
+      {{selectCurrent && !selectMenuStatus ? ("reservationRegistration.reservationDetailsChange" | translate) :
+      selectMenuStatus ? ("reservationRegistration.menuSelection" | translate) :
+      ("reservationRegistration.reservationRegistration" | translate)}}
+      <span class="create-modal__header-close" (click)="closeModal()">&times;</span>
+    </div>
+    <div class="create-modal__body create-modal__body__registration">
+      <div *ngIf="!selectMenuStatus">
+        <form [formGroup]="formRegistration">
+          <div class="list">
+            <div class="list-body list__body__registration">
+              <ul class="wrap-li">
+                <li class="line-bottom">
+                  <div class="pl-20 pr-20 mr-20">
+                    <p class="content-top">{{ "reservationRegistration.titleHeaderFirst" | translate }}<br>
+                      {{ "reservationRegistration.titleHeaderSecond" | translate }}</p>
+                  </div>
+                  <div class="err pl-20 pr-20 mr-20">
+                    <app-top-error *ngIf="submitted" [form]="formRegistration" [formMap]="formMap"></app-top-error>
+                  </div>
+                </li>
+                <li class="line-bottom">
+                  <div class="input-group__row pl-20 pr-20 inline-item cs-input-group__row">
+                    <div class="input-group pr-5">
+                      <label class="input-group__label">
+                        {{ "reservationRegistration.reservationDateAndTime" | translate }}
+                        <em class="pl-5 c-pink">{{ "reservationRegistration.required" | translate }}</em>
+                      </label>
+                      <input formControlName="reservationDate" class="input-text reservation-date-and-time mt-10 mb-10"
+                        [ngClass]="{'input-error': submitted && formRegistration.controls.reservationDate.errors}"
+                        type="date">
+                    </div>
+                    <div class="input-group pl-5 text-right">
+                      <label class="input-group__label label-right c-pink">
+                        <img class="icon" src="./assets/images/icon/ico_calendar.svg" alt="ico_calendar">
+                        {{ "reservationRegistration.selectFromCalendar" | translate }}
+                      </label>
+                      <select formControlName="reservationHour" class="mt-10 mb-10 input-text"
+                        [ngClass]="{'input-error': submitted && formRegistration.controls.reservationHour.errors}">
+                        <ng-container *ngFor="let time of timeList">
+                          <option [value]="time.value">{{ time.text }}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+                </li>
+                <li class="line-bottom">
+                  <div class="input-group__row pl-20 pr-20 inline-item">
+                    <div class="input-group">
+                      <label class="input-group__label">
+                        {{ "reservationRegistration.numberOfPeople" | translate }}
+                        <em class="pl-5 c-pink">{{ "reservationRegistration.required" | translate }}</em>
+                      </label>
+                      <select name="" id="" class="mt-10 mb-10" formControlName="numberOfPeople">
+                        <option *ngFor="let number of numberOfPeople" [value]="number.value">
+                          {{'reservationRegistration.people' | translate: {number: number.value} }}</option>
+                      </select>
+                    </div>
+                    <div class="add-row-btn mt-10 icon-add">
+                      <a (click)="addPeople()"><span></span></a>
+                    </div>
+                  </div>
+                </li>
+                <li class="line-bottom">
+                  <div class="input-group__row pl-20 pr-20 inline-item">
+                    <div class="input-group pr-5">
+                      <label class="input-group__label">
+                        {{ "reservationRegistration.name" | translate }}
+                        <em class="pl-5 c-pink">{{ "reservationRegistration.required" | translate }}</em>
+                      </label>
+                      <input formControlName="customerLastName" id="last-name" type="text" (change)="onChangeName()"
+                        [ngClass]="{'input-error': submitted && (formRegistration.controls.customerLastName.errors || formRegistration.controls.customerId.errors)}"
+                        class="input-text mb-10 mt-10" [placeholder]="'customer.name1' | translate">
+                    </div>
+                    <div class="input-group pl-5">
+                      <div class="input-group__label label-right">
+                        <span (click)="customerSearch()" class="c-pink customer-search">
+                          <img class="icon mr-7" src="./assets/images/icon/ico_pinksearch.svg" alt="ico_pinksearch">{{
+                          "reservationRegistration.customerSearch" | translate }}
+                        </span>
+                      </div>
+                      <input formControlName="customerFirtName" id="first-name" type="text" (change)="onChangeName()"
+                        [ngClass]="{'input-error': submitted && (formRegistration.controls.customerFirtName.errors || formRegistration.controls.customerId.errors)}"
+                        class="input-text mb-10 mt-10" [placeholder]="'customer.name2' | translate">
+                    </div>
+                  </div>
+                </li>
+                <li class="line-bottom">
+                  <div class="input-group__row pl-20 pr-20 mr-20">
+                    <div class="input-group single">
+                      <label class="input-group__label">
+                        {{ "reservationRegistration.menu" | translate }}
+                        <em class="pl-5 c-pink">{{ "reservationRegistration.required" | translate }}</em>
+                      </label>
+                      <div class="add-button mt-10">
+                        <button (click)="onSelectMenu()"><span></span><em>{{ "reservationRegistration.selectAMenu" |
+                            translate }}</em></button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <ng-container *ngFor="let item of arrSelect, let i = index" formArrayName="details">
+                  <ng-container [formGroupName]="i">
+                    <div class="pl-20 pr-20 pt-10 pb-10 line-bottom">
+                      <p class="content-top">{{item.menu_name}}</p>
+                    </div>
+                    <li class="line-bottom">
+                      <div class="input-group__row pl-20 pr-20">
+                        <div class="input-group">
+                          <label class="input-group__label">{{ "reservationRegistration.treatmentTable" | translate
+                            }}</label>
+                          <select formControlName="equipment1" class="mt-10 mb-10">
+                            <option selected value="">{{ "reservationRegistration.pleaseSelectATreatmentTable" |
+                              translate }}</option>
+                            <ng-container *ngFor="let equipment1Item of item.menuEquipments">
+                              <option
+                                *ngIf="equipment1Item.m_equipments && equipment1Item.m_equipments?.equpment_cd === '01'"
+                                [value]="equipment1Item.m_equipments?.id">
+                                {{ equipment1Item.m_equipments?.equpment_cd === '01' ? listEqupmentCd[0].value :
+                                listEqupmentCd[1].value }}
+                              </option>
+                            </ng-container>
+                          </select>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="line-bottom">
+                      <div class="input-group__row pl-20 pr-20">
+                        <div class="input-group">
+                          <label class="input-group__label">{{ "reservationRegistration.equipment" | translate
+                            }}</label>
+                          <select formControlName="equipment2" class="mt-10 mb-10">
+                            <option selected value="">{{ "reservationRegistration.pleaseSelectTheEquipment" | translate
+                              }}</option>
+                            <ng-container *ngFor="let equipment2Item of item.menuEquipments">
+                              <option
+                                *ngIf="equipment2Item.m_equipments && equipment2Item.m_equipments?.equpment_cd === '02'"
+                                [value]="equipment2Item.m_equipments?.id">
+                                {{ equipment2Item.m_equipments?.equpment_cd === '02' ? listEqupmentCd[1].value :
+                                listEqupmentCd[0].value }}
+                              </option>
+                            </ng-container>
+                          </select>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="line-bottom">
+                      <div class="input-group__row pl-20 pr-20">
+                        <div class="input-group">
+                          <label class="input-group__label">{{ "reservationRegistration.personInCharge" | translate
+                            }}</label>
+                          <select formControlName="staff_id" class="input-text mt-10 mb-10"
+                            [ngClass]="{'input-error': submitted && details.at(i).get('staff_id').errors}">
+                            <option selected value="">{{ "reservationRegistration.pleaseSelectAPersonInCharge" |
+                              translate }}</option>
+                            <ng-container *ngFor="let staffItem of item.menuStaffs">
+                              <option *ngIf="staffItem.staffs" [value]="staffItem.staffs?.id">{{ staffItem.staffs?.name
+                                }}</option>
+                            </ng-container>
+                          </select>
+                        </div>
+                      </div>
+                    </li>
+                  </ng-container>
+                </ng-container>
+              </ul>
+              <div class="pt-0 pb-0">
+                <div class="flex-row">
+                  <div (click)="closeModal()" class="w-half">
+                    {{ "reservationRegistration.cancel" | translate }}
+                  </div>
+                  <div (click)="onSubmit()" class="w-half w-half-pink">
+                    {{ "reservationRegistration.sregisterAReservation" | translate }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <app-select-menu [userLogin]="userLogin" [selectCurrent]="selectCurrent" [selectMenuStatus]="selectMenuStatus" [arrSelectParent]="arrSelect"
+        (confirm)="confirmModalFirst($event)" *ngIf="selectMenuStatus"></app-select-menu>
+
+      <app-search-popup [shopId]="userLogin?.shop_id" [status]="openSearch" (confirm)="searchResult($event)"
+        [registerBtn]="false" [isPopup]="true"></app-search-popup>
+    </div>
+  </div>
+</div>
+
+<app-confirm-modal #confirmModal (confirm)="handleConfirm($event)"></app-confirm-modal>

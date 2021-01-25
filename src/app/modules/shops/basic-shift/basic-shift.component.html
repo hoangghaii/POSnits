@@ -1,0 +1,105 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section class="free-item">
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span>
+              <span>{{ "basicShift.basicShiftRegistration" | translate }}</span>
+            </span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <div class="pl-0 pr-0">
+            <div class="mt-0 add-button">
+              <button (click)="openModal('create')">
+                <span></span>
+                <em>{{ "basicShift.basicShiftRegistration" | translate }}</em>
+              </button>
+            </div>
+          </div>
+
+          <div class="list mt-30">
+            <table class="free-item__table" cellspacing="0" cellpadding="0">
+              <thead class="free-item__table--thead">
+                <tr class="free-item__table--thead__items">
+                  <th
+                    class="free-item__table--thead__items_item free-item__table--thead__items_item--1"
+                  ></th>
+                  <th
+                    class="free-item__table--thead__items_item free-item__table--thead__items_item--2"
+                  >
+                  {{ "basicShift.shiftName" | translate }}
+                  </th>
+                  <th
+                    class="free-item__table--thead__items_item free-item__table--thead__items_item--3"
+                  >
+                  {{ "basicShift.startTime" | translate }}
+                  </th>
+                  <th
+                    class="free-item__table--thead__items_item free-item__table--thead__items_item--4"
+                  >
+                  {{ "basicShift.endTime" | translate }}
+                  </th>
+                  <th
+                    class="free-item__table--thead__items_item free-item__table--thead__items_item--6" style="position: sticky;" id="btn-toggle-bigList"
+                  ></th>
+                </tr>
+              </thead>
+              <tbody
+                class="free-item__table--tbody toggle" id="toggle-bigList"
+                cdkDropList
+                (cdkDropListDropped)="drop($event)"
+              >
+                <tr
+                  class="free-item__table--tbody__items"
+                  *ngFor="let item of listBasicShift"
+                  cdkDragLockAxis="y"
+                  cdkDragBoundary=".free-item__table--tbody"
+                  cdkDrag
+                >
+                  <td
+                    class="free-item__table--tbody__items_item free-item__table--tbody__items_item--1 edit"
+                    (click)="selectItem(item.id)"
+                  >
+                  {{ "common.edit" | translate }}
+                  </td>
+                  <td
+                    class="free-item__table--tbody__items_item free-item__table--tbody__items_item--2"
+                  >
+                    {{ item.name }}
+                  </td>
+                  <td
+                    class="free-item__table--tbody__items_item free-item__table--tbody__items_item--3"
+                  >
+                   {{ helper.formatTime(item.start_time) }}
+                  </td>
+                  <td
+                    class="free-item__table--tbody__items_item free-item__table--tbody__items_item--4"
+                  >
+                  {{ helper.formatTime(item.end_time) }}
+                  </td>
+                  <td
+                    class="free-item__table--tbody__items_item free-item__table--tbody__items_item--6 ico"
+                    cdkDragHandle
+                  >
+                    <div class="ico__arrow">
+                      <span class="ico__arrow--item ico__arrow--top"></span>
+                      <span class="ico__arrow--item ico__arrow--bottom"></span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+<app-basic-shift-create-modal
+  [shopId]="shopId"
+  [basicShiftId]="basicShiftId"
+  [open]="open"
+  (confirm)="closeModal($event)"
+></app-basic-shift-create-modal>

@@ -1,0 +1,20 @@
+.input-error {
+  border: 1px solid #ff648c;
+  background: #ffecf1;
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  padding: 8px 16px;
+  background-color: #fff;
+  outline: none;
+  border-radius: 24px;
+  margin-top: 5px;
+  color: #ff648c;
+  text-align: left;
+
+
+  .item-error {
+    padding: 5px 0px;
+  }
+
+  // font-weight: bold;
+}

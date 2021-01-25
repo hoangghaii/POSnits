@@ -1,0 +1,174 @@
+.w-20 {
+  width: 20% !important;
+  min-width: 70px !important;
+}
+
+.w-40 {
+  width: 40%;
+  min-width: 80px !important;
+}
+
+.w-50 {
+  width: 50% !important;
+  min-width: 100px !important;
+}
+
+.w-60 {
+  width: 60%;
+  min-width: 130px !important;
+}
+
+.w-70 {
+  width: 70%;
+  min-width: 150px !important;
+}
+
+.input-group__label-tab {
+  min-width: 150px !important;
+}
+
+.table-border {
+  width: 100%;
+  border: 1px solid black;
+  th,
+  td {
+    border: 1px solid black;
+    padding: 5px;
+    font-weight: 500;
+    text-align: center;
+    .d-flex {
+      padding: 0 !important;
+    }
+    &.a-left {
+      text-align: left;
+    }
+  }
+  .b-right {
+    border-right: 1px solid black;
+  }
+  .unset-border-top {
+    border-top: 0px;
+  }
+  .unset-border-bottom {
+    border-bottom: 0px;
+  }
+  .number {
+      text-align: right !important;
+  }
+}
+
+.item-group {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  .left {
+    vertical-align: baseline;
+    text-align: right;
+    padding: 15px 15px 15px 0px;
+    width: 100px;
+    min-width: 100px;
+  }
+
+  .right {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    width: 100%;
+    padding: 5px 5px;
+    .input-group {
+      padding-top: 0px;
+      input {
+        width: 100%;
+      }
+    }
+    .group-date {
+      display: flex;
+      flex-wrap: nowrap;
+      label {
+        padding: 10px 5px;
+      }
+      .input-group {
+        position: relative;
+        padding-top: 0px !important;
+        input {
+          width: 100%;
+        }
+      }
+    }
+
+    .group-line-delete {
+      display: flex;
+      text-align: center;
+      justify-content: space-between;
+      margin-top: 10px;
+      padding: 6px 20px;
+    }
+
+    .btn-row {
+      background: #ff648c;
+      em {
+        color: #fff;
+      }
+      span:before {
+        background: #fff;
+      }
+      span:after {
+        background: #fff;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .item-group {
+    display: block;
+    .left {
+      text-align: left;
+      padding: 15px 0 10px 15px;
+    }
+    .right {
+      padding-left: 10px;
+    }
+
+    &.label {
+      display: flex;
+      .right {
+        padding-left: 0;
+      }
+    }
+  }
+  .btn-down {
+    margin-left: 5px !important;
+  }
+}
+
+.btn-down {
+  padding: 0px 25px;
+  margin-left: 30px;
+}
+
+select {
+  width: 250px;
+}
+
+form .btn {
+  width: auto;
+}
+
+.bt:focus {
+  outline: none;
+}
+
+.white-box--links {
+  padding-bottom: 0!important;
+}
+
+.col-8 {
+  padding: 0!important;
+}
+
+.input-date  {
+  &.input-error {
+    border: 1px solid #ff648c !important;
+  }
+}

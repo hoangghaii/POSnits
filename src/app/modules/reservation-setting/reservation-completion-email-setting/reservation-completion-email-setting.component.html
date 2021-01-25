@@ -1,0 +1,66 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span>{{ "shopMail.title1" | translate }}</span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <form [formGroup]="mailForm">
+            <div class="white-box radius-none">
+              <app-reservation-step [stepNum]="7"></app-reservation-step>
+              <h2 class="inner-title title-bold">
+                <span>{{ "shopMail.title2" | translate }}</span>
+              </h2>
+              <div class="err pl-20 pr-20">
+                <app-top-error *ngIf="isSubmit" [form]="mailForm" [formMap]="formMap"></app-top-error>
+              </div>
+              <div class="input-group single mt-10">
+                <div class="input-group__label">{{ "shopMail.subject" | translate }}</div>
+                <textarea name="" cols="40" rows="2" class="textarea-small"
+                          placeholder="{{ 'shopMail.placeSubject' | translate }}" formControlName="subject"
+                          [ngClass]="{'input-error': isSubmit && mailForm.controls.subject.errors}"></textarea>
+              </div>
+              <div class="input-group single mt-10">
+                <div class="input-group__label">{{ "shopMail.text" | translate }}</div>
+                <div class="button-group">
+                  <button type="button" id="name" (click)="addCharacter($event)"
+                          class="button">{{ "shopMail.name" | translate }}</button>
+                  <button type="button" id="reservationDateTime" (click)="addCharacter($event)"
+                          class="button">{{ "shopMail.reservationDateTime" | translate }}</button>
+                  <button type="button" id="reservationMenu" (click)="addCharacter($event)"
+                          class="button">{{ "shopMail.reservationMenu" | translate }}</button>
+                  <button type="button" id="information" (click)="addCharacter($event)"
+                          class="button">{{ "shopMail.information" | translate }}</button>
+                  <button type="button" id="staffName" (click)="addCharacter($event)"
+                          class="button">{{ "shopMail.personInCharge" | translate }}</button>
+                  <button type="button" id="storeName" (click)="addCharacter($event)"
+                          class="button">{{ "shopMail.storeName" | translate }}</button>
+                  <button type="button" id="storeAddress" (click)="addCharacter($event)"
+                          class="button">{{ "shopMail.storeAddress" | translate }}</button>
+                  <button type="button" id="storePhoneNumber" (click)="addCharacter($event)"
+                          class="button">{{ "shopMail.storePhoneNumber" | translate }}</button>
+                </div>
+              </div>
+              <div class="input-group single mt-10">
+                              <textarea #textareaBody name="" cols="40" rows="8"
+                                        placeholder="{{ 'shopMail.placeText' | translate }}" class="textarea-big"
+                                        formControlName="body"
+                                        [ngClass]="{'input-error': isSubmit && mailForm.controls.body.errors}"
+                                        (click)="getPosition(textareaBody)"
+                                        (keyup)="getPosition(textareaBody)"></textarea>
+              </div>
+              <div class="btn-area flex-row">
+                <div class="bt next next_full open_dialog"
+                     (click)="submitShopMail()"
+                     [ngClass]="(flag==true)?'editBtn':'null'">{{ status}}</div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>

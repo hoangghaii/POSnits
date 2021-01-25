@@ -1,0 +1,225 @@
+.menu-cooperation__container {
+	.tech-box {
+    list-style: none;
+    position: relative;
+    padding: 10px 15px;
+    border-bottom: 2px solid #e5e5e5;
+
+    > &__item1 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 10px 0;
+
+      > &-1 {
+        width: calc(100% - 40px);
+      }
+    }
+
+    &__content {
+      margin-top: 0;
+      font-size: 18px;
+      font-size: 1.8rem;
+      letter-spacing: 0.1em;
+      margin-top: 10px;
+      font-weight: bold;
+
+      @media only screen and (max-width: 767px) {
+        font-size: 14px;
+        font-size: 1.4rem;
+      }
+
+      & .edit {
+        color: #ff648c;
+        margin: 0 12px 0 5px;
+
+        @media only screen and (max-width: 767px) {
+          margin: 0 5px 5px 0;
+        }
+      }
+
+      & .txt {
+        line-height: 1.3em;
+
+        & strong {
+          color: #ff648c;
+        }
+      }
+
+      span {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+
+    & .ico {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 35px;
+      width: 35px;
+      cursor: n-resize;
+
+      &__item1 {
+        border: 5px solid transparent;
+        border-bottom: 7px solid #4d4d4d;
+        top: 0;
+      }
+
+      &__item2 {
+        border: 5px solid transparent;
+        border-top: 7px solid #4d4d4d;
+        bottom: 0;
+      }
+
+      span {
+        position: absolute;
+        right: 0;
+      }
+    }
+
+    &__item2 {
+      font-size: 10px;
+      font-size: 1rem;
+      color: #808080;
+      white-space: nowrap;
+      margin-top: 10px;
+    }
+  }
+  .tech-box:last-child {
+    border-bottom: none;
+  }
+
+	.bg-white {
+		background-color: #fff;
+	}
+	.btn {
+		&-pink {
+			background-color: #ff648c !important;
+			border: 2px solid #ff648c !important;
+
+			span {
+				&::before,
+				&::after {
+					background-color: #fff !important;
+				}
+			}
+			em {
+				color: #fff !important;
+			}
+		}
+
+		&-more {
+			display: block;
+			position: relative;
+			width: 3.5rem;
+			height: 3.5rem;
+			margin-left: auto;
+			border: 1px solid #fff;
+			border-radius: 50%;
+			cursor: pointer;
+
+			&.animation {
+				&::before {
+					transform: rotate(0deg);
+				}
+			}
+
+			&::before {
+				content: "";
+				display: block;
+				position: absolute;
+				left: 50%;
+				top: 5px;
+				bottom: 5px;
+				background-color: #fff;
+				width: 2px;
+				margin-left: -0.5px;
+				transition: all 0.3s;
+				transform: rotate(-90deg);
+			}
+
+			&::after {
+				content: "";
+				display: block;
+				position: absolute;
+				margin-top: -1.5px;
+				top: 50%;
+				left: 5px;
+				right: 5px;
+				background-color: #fff;
+				height: 2px;
+				transition: all 0.3s;
+			}
+
+			&.color-pink {
+				border: 1px solid #ff648c;
+				width: 2.5rem;
+				height: 2.5rem;
+				margin-right: 0.4rem;
+
+				&::before,
+				&::after {
+					background-color: #ff648c;
+				}
+			}
+		}
+	}
+
+	.fw-bold {
+		font-weight: 600;
+	}
+	.w-100 {
+		width: 100% !important;
+	}
+	.trash-icon {
+    display: block;
+    width: 45%;
+    max-width: 45%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &__box {
+      background-color: #ff648c;
+      width: 4rem;
+      height: 4rem;
+      cursor: pointer;
+    }
+  }
+}
+
+.toggle {
+  &.animation {
+    height: 0px;
+    opacity: 0;
+    transition: height 1s ease-in;
+  }
+  &:not(.animation) {
+    transition: height 1s ease-in;
+    opacity: 1;
+    height: auto;
+  }
+}
+
+.select-error {
+  border: 1px solid #ff648c;
+  background: #ffecf1;
+}
+
+.collapsible-heading--menu {
+  background-color: #4d4d4d !important;
+  color: white !important;
+  a:before {
+    border: 1px solid white;
+    border-top-color: transparent;
+    border-right-color: transparent;
+  }
+}

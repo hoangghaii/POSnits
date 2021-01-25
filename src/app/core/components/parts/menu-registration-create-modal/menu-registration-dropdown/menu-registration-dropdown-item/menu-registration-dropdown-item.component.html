@@ -1,0 +1,12 @@
+<div
+  class="dropdown-content__item"
+  (click)="toggleBg()"
+  [ngClass]="{ focus: isFocusItem }"
+>
+  <div class="dropdown-content__item--left" [ngClass]="{ focus: isFocusItem }">
+    {{ detail.name }}
+  </div>
+  <div class="dropdown-content__item--right" [ngClass]="{ focus: isFocusItem }">
+    {{ helper.formatCurrency(detail.price) }}
+  </div>
+</div>

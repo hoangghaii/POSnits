@@ -1,0 +1,334 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="filtered-search filtered-search-screen-1">
+        <div class="flex-row">
+          <div class="col-12 mt-0">
+            <h2 class="title title-bold pl-10">
+              <span>{{"conditionalSearch.title"|translate}}</span>
+            </h2>
+          </div>
+          <div class="col-12">
+            <form [formGroup]="conditionalSearchForm">
+              <div class="white-box pt-5 pb-20 radius-none">
+                <div class="err pl-20 pr-20 pb-10">
+                  <app-top-error
+                    *ngIf="submitted"
+                    [form]="conditionalSearchForm"
+                    [formMap]="formMap"
+                  ></app-top-error>
+                </div>
+                <div class="search-header-btn">
+                  <button style="width: 50%;" class="btn" (click)="toScreenHistory()" >{{"conditionalSearch.toScreenHistory"|translate}}</button>
+                </div>
+                <div class="search-body">
+                  <div class="item-group mb--10">
+                    <div class="left">
+                      <label>{{"conditionalSearch.dayConditon"|translate}}</label>
+                    </div>
+                    <div class="radio-group">
+                      <label
+                        class="radio-group__label"
+                        *ngFor="let item of day_types"
+                        for="{{ item.key + item.value }}"
+                      >
+                          <span class="flex-box">
+                            <input
+                              class="radio-group__input"
+                              type="radio"
+                              id="{{ item.key + item.value }}"
+                              name="day_types"
+                              value="{{ item.value }}"
+                              formControlName="day_types"
+                            />
+                            <span class="fake-btn"></span>
+                            <span class="text">{{ item.key }}</span>
+                          </span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="item-group">
+                    <div class="left">
+                      <label>{{"conditionalSearch.target"|translate}}</label>
+                    </div>
+                    <div class="right">
+                      <div class="group-date">
+                        <div class="input-group">
+                          <input
+                            type="date"
+                            class="input-date"
+                            formControlName="target_day_from"
+                          />
+                        </div>
+                        <label>～</label>
+                        <div class="input-group">
+                          <input
+                            type="date"
+                            class="input-date"
+                            formControlName="target_day_to"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="item-group">
+                    <div class="left">
+                      <label>{{"conditionalSearch.birthday"|translate}}</label>
+                    </div>
+                    <div class="right">
+                      <div class="group-date">
+                        <div class="input-group">
+                          <input
+                            type="date"
+                            class="input-date"
+                            formControlName="birthday_from"
+                          />
+                        </div>
+
+                        <label>～</label>
+                        <div class="input-group">
+                          <input
+                            type="date"
+                            class="input-date"
+                            formControlName="birthday_to"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="item-group">
+                    <div class="left">
+                      <label>{{"conditionalSearch.age"|translate}}</label>
+                    </div>
+                    <div class="right">
+                      <div class="group">
+                        <div class="input-group">
+                          <input
+                            type="text"
+                            class="input-text"
+                            formControlName="age_from"
+                          />
+                          <label>{{"conditionalSearch.labelAge"|translate}}</label>
+                        </div>
+                        <label class="align">～</label>
+                        <div class="input-group">
+                          <input
+                            type="text"
+                            class="input-text"
+                            formControlName="age_to"
+                          />
+                          <label>{{"conditionalSearch.labelAge"|translate}}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="item-group mt-0 mb--10">
+                    <div class="left">
+                      <label>{{"conditionalSearch.sex"|translate}}</label>
+                    </div>
+                    <div class="radio-group">
+                      <label
+                        class="radio-group__label"
+                        *ngFor="let item of sex_types"
+                        for="{{ item.key + item.value }}"
+                      >
+                          <span class="flex-box">
+                            <input
+                              class="radio-group__input"
+                              type="radio"
+                              id="{{ item.key + item.value }}"
+                              name="sex_types"
+                              value="{{ item.value }}"
+                              formControlName="sex_types"
+                            />
+                            <span class="fake-btn"></span>
+                            <span class="text">{{ item.key }}</span>
+                          </span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="item-group">
+                    <div class="left" style="margin-bottom: 25px;">
+                      <label>{{"conditionalSearch.visit"|translate}}</label>
+                    </div>
+                    <div class="right">
+                      <div class="group  mb-10">
+                        <div class="input-group">
+                          <input
+                            type="text"
+                            class="input-text"
+                            formControlName="visit_amount_from"
+                          />
+                          <label>{{"conditionalSearch.labelTime"|translate}}</label>
+                        </div>
+                        <label class="align">～</label>
+                        <div class="input-group">
+                          <input
+                            type="text"
+                            class="input-text"
+                            formControlName="visit_amount_to"
+                          />
+                          <label>{{"conditionalSearch.labelTime"|translate}}</label>
+                        </div>
+                      </div>
+                      <div class="radio-group mt-2">
+                        <label
+                          class="radio-group__label"
+                          *ngFor="let item of visit_amount_types"
+                          for="{{ item.key + item.value }}">
+                            <span class="flex-box">
+                              <input
+                                class="radio-group__input"
+                                type="radio"
+                                id="{{ item.key + item.value }}"
+                                name="visit_amount_types"
+                                value="{{ item.value }}"
+                                formControlName="visit_amount_types"
+                              />
+                              <span class="fake-btn"></span>
+                              <span class="text">{{ item.key }}</span>
+                            </span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-group">
+                    <div class="left" style="margin-bottom: 25px;">
+                      <label>{{"conditionalSearch.sale"|translate}}</label>
+                    </div>
+                    <div class="right">
+                      <div class="group  mb-10">
+                        <div class="input-group">
+                          <input
+                            type="text"
+                            class="input-text"
+                            formControlName="sale_from"
+                          />
+                          <label>{{"conditionalSearch.labelSale"|translate}}</label>
+                        </div>
+                        <label class="align">～</label>
+                        <div class="input-group">
+                          <input type="text" class="input-text"
+                                 formControlName="sale_to"/>
+                          <label>{{"conditionalSearch.labelSale"|translate}}</label>
+                        </div>
+                      </div>
+                      <div class="radio-group mt-2">
+                        <label class="radio-group__label" *ngFor="let item of sale_types"
+                               for="{{ item.key + item.value }}">
+                              <span class="flex-box">
+                                <input
+                                  formControlName="sale_types"
+                                  class="radio-group__input"
+                                  type="radio"
+                                  id="{{ item.key + item.value }}"
+                                  name="sale_types"
+                                  value="{{ item.value }}"
+                                />
+                                <span class="fake-btn"></span>
+                                <span class="text">{{ item.key }}</span>
+                              </span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-group">
+                    <div class="left">
+                      <label>{{"conditionalSearch.labelMenu"|translate}}</label>
+                    </div>
+                    <div class="right">
+                      <div class="add-button">
+                        <button
+                          class="btn btn-row"
+                          (click)="openModal('create')"
+                          style="width: 90%;">
+                          <span></span><em>{{"conditionalSearch.openMenu"|translate}}</em>
+                        </button>
+                      </div>
+                      <div
+                        formArrayName="listMenus"
+                        *ngFor="
+                            let item of conditionalSearchForm.get('listMenus')[
+                              'controls'
+                            ];
+                            let i = index
+                          ">
+                        <div [formGroupName]="i" *ngIf="listMenu[i]">
+                          <div class="group-line-delete" *ngIf="listMenu[i].category_cd == '01'">
+                            <label>{{"conditionalSearch.skill"|translate}}　{{ listMenu[i].name }}</label>
+                            <div class="input-group__delete">
+                              <a>
+                                <img src="assets/images/icon/ico_trash.svg" (click)="deleteItem(listMenu[i])"/>
+                              </a>
+                            </div>
+                          </div>
+                          <div
+                            class="group-line-delete" *ngIf="listMenu[i].category_cd == '02'">
+                            <label>{{"conditionalSearch.course"|translate}}　{{ listMenu[i].name }}</label>
+                            <div class="input-group__delete">
+                              <a>
+                                <img
+                                  src="assets/images/icon/ico_trash.svg"
+                                  (click)="deleteItem(listMenu[i])"
+                                />
+                              </a>
+                            </div>
+                          </div>
+                          <div class="group-line-delete" *ngIf="listMenu[i].category_cd == '03'">
+                            <label>{{"conditionalSearch.item"|translate}}　 {{ listMenu[i].name }}</label>
+                            <div class="input-group__delete">
+                              <a>
+                                <img
+                                  src="assets/images/icon/ico_trash.svg"
+                                  (click)="deleteItem(listMenu[i])"
+                                />
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-group">
+                    <div class="left">
+                      <label>{{"conditionalSearch.menu"|translate}}</label>
+                    </div>
+                    <div class="radio-group spec_class">
+                      <label
+                        class="radio-group__label spec_label"
+                        *ngFor="let item of menu_select_types"
+                        for="{{ item.key + item.value }}"
+                      >
+                          <span class="flex-box">
+                            <input
+                              class="radio-group__input"
+                              type="radio"
+                              id="{{ item.key + item.value }}"
+                              name="menu_select_types"
+                              value="{{ item.value }}"
+                              formControlName="menu_select_types"
+                            />
+                            <span class="fake-btn"></span>
+                            <span class="text">{{ item.key }}</span>
+                          </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="btn-area flex-row cus-searh-footer">
+            <div class="bt" (click)="backToMenu()">{{"conditionalSearch.btnBack"|translate}}</div>
+            <div class="bt" (click)="register()">{{"conditionalSearch.btnRegister"|translate}}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+<app-menu-registration-create-modal [open]="isOpen" (confirm)="closeModal($event)"></app-menu-registration-create-modal>

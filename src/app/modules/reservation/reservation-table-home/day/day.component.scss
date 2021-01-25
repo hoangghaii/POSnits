@@ -1,0 +1,195 @@
+$gridHeight: 57px;
+$gridBaseLineheight: 57px;
+
+$color-grey--35: #c7c7c7;
+$color-grey--40: #dadada;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.calender-wrap {
+  overflow: hidden;
+  height: 100%;
+}
+
+.calender-flex {
+  display: flex;
+}
+
+.calender {
+  overflow-y: auto;
+  height: 100%;
+  padding: 10px 0px;
+  .grid {
+    width: calc(100% - 80px);
+    position: relative;
+    .grid__baselines {
+      pointer-events: none;
+      height: calc(100% - #{$gridHeight});
+      position: absolute;
+      width: 100%;
+      border-top: 1px solid $color-grey--35;
+      span {
+        pointer-events: none;
+        display: block;
+        width: 100%;
+        height: $gridBaseLineheight;
+        position: relative;
+        &:after {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 1px;
+          background: $color-grey--35;
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+        }
+      }
+    }
+
+    .container-task {
+      position: relative;
+      display: flex;
+      width: 100%;
+      height: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+  }
+
+  .time {
+    background: white;
+    text-align: right;
+    width: 60px;
+    height: 100%;
+    padding-right: 10px;
+    position: relative;
+    .time-opacity {
+      opacity: 0.5;
+    }
+    time {
+      position: relative;
+      top: -6px;
+      display: block;
+      flex-grow: 1;
+      font-size: 12px;
+      width: 100%;
+      height: $gridBaseLineheight;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    font-size: 0;
+    &.calender-header {
+      height: $gridHeight;
+      position: fixed;
+      left: 100px;
+      right: 0;
+      z-index: 1;
+      border-bottom: 1px solid $color-grey--40;
+      li {
+        border-right: 1px solid $color-grey--35;
+        height: 100%;
+        line-height: $gridHeight;
+        font-size: 14px;
+        display: inline-block;
+        width: calc(100% / 7);
+        padding: 0 10px;
+        background: white;
+        &:last-child {
+          border: none;
+        }
+      }
+    }
+    &.days {
+      display: flex;
+      flex-direction: column;
+      // width: 100%;
+      // padding: 1px 2px;
+      margin-bottom: -1px;
+      > li {
+        // border-right: 5px solid white;
+        font-size: 14px;
+        margin: 0px 2px 1px 2px;
+        text-align: center;
+        // height: 105px;
+        // max-height: 105px;
+        min-height: 105px;
+        ul {
+          &.events {
+            height: calc(100% - #{$gridHeight});
+          }
+          li {
+            text-align: left;
+            background: white;
+            color: white;
+            font-size: 14px;
+            min-height: $gridBaseLineheight;
+            padding: 10px 5px;
+            border: none;
+            position: relative;
+            border-radius: 5px;
+            border: 1px solid #ff648c;
+            &.disable {
+              border: 1px solid #ababab;
+            }
+            &.content-item {
+              min-height: 105px;
+              white-space: nowrap;
+              cursor: pointer;
+              span {
+                background: none;
+                font-size: 1.2rem;
+                padding: 2px 2px;
+              }
+              .img-content {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                a img {
+                  width: 25px;
+                  height: 25px;
+                  border-radius: 25px;
+                }
+                span {
+                  font-size: 1.1rem;
+                  margin-top: 5px;
+                  margin-left: 5px;
+                }
+
+              }
+            }
+          }
+        }
+        span {
+          background: $color-grey--35;
+          padding: 20px;
+          display: block;
+        }
+      }
+    }
+    .ellipsis-span {
+      color: red;
+      text-overflow: ellipsis;
+      max-width: 109px;
+      width: 100px;
+      overflow: hidden;
+    }
+    &.days-none-30 {
+      height: 57px !important;
+    }
+    &.days-none-1h {
+      height: 114px !important;
+    }
+  }
+}
+a {
+  cursor: pointer;
+}

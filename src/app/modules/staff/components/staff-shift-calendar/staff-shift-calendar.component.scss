@@ -1,0 +1,60 @@
+td {
+  position: relative;
+
+  &.choice {
+    em {
+      color: #ffffff;
+    }
+  }
+
+  em {
+      font-size: 1rem;
+      color: #fe658d;
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+  }
+}
+
+#showDate {
+  td {
+    font-weight: bold;
+  }
+
+  tbody {
+    td {
+      border: 1px solid #dadbdb;
+      height: 70px;
+      text-align: right;
+      vertical-align: top;
+      padding: 7px 5px;
+      position: relative;
+
+      &.point {
+        span {
+          position: absolute;
+          top: 56%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 1.1rem;
+          padding: 5px 0px;
+          color: white;
+          width: 98%;
+          text-align: center;
+
+          &.non-empty {
+            background-color: #ff648c;
+          }
+        }
+      }
+    }
+  }
+}
+
+.calendar table tbody tr .point.choice {
+  background-color: transparent;
+  border-radius: none;
+  color: #000000;
+}

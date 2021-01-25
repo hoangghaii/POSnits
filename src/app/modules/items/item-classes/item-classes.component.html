@@ -1,0 +1,77 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span>
+              {{"product-classification.titleRegisterProductClassification"| translate}}
+            </span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <div class="pl-0 pr-0">
+            <div class="add-button mt-0">
+              <button (click)="openModal('create')">
+                <span></span>
+                <em>
+                  {{
+                  "product-classification.btnRegisterProductClassification"
+                    | translate
+                  }}
+                </em>
+              </button>
+            </div>
+          </div>
+
+          <div class="list mt-30">
+            <div class="list__header" style="position: sticky;" id="btn-toggle-bigList">
+              {{
+              "product-classification.listProductClassifications" | translate
+              }}
+<!--              <span class="dropdown-icon"></span>-->
+            </div>
+            <div class="list__body list02 arrow toggle" id="toggle-bigList">
+              <ul
+                class="product-list"
+                cdkDropList
+                (cdkDropListDropped)="drop($event)"
+              >
+                <li
+                  *ngFor="let pc of productClassificationList"
+                  cdkDragLockAxis="y"
+                  cdkDragBoundary=".product-list"
+                  cdkDrag
+                  class="product-box"
+                >
+                  <div class="product-box__item1-1">
+                    <div class="product-box__content">
+                      <p class="product-box-content">
+                        <span class="edit" (click)="selectItem(pc)">
+                          {{ "common.edit" | translate }}
+                        </span>
+                        <span class="txt">{{ pc.name }}</span>
+                        <input type="hidden" value="{{ pc.sort }}"/>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="ico product-box__item2" cdkDragHandle>
+                    <span class="ico__item1"></span>
+                    <span class="ico__item2"></span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<app-modal-item-class
+  [userLogin]="userLogin"
+  [open]="open"
+  [selectCurrent]="selectCurrent"
+  (confirm)="closeModal($event)"
+></app-modal-item-class>

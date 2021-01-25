@@ -1,0 +1,604 @@
+.next_full {
+  width: 100% !important;
+}
+
+.button-week {
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.button-week .button {
+  padding: 5px 10px;
+  margin-top: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #dadbdb;
+}
+
+.date_title {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.date_title .pre {
+  font-size: 25px;
+}
+
+.date_title .next {
+  font-size: 25px;
+}
+
+.date_title .date_label {
+  padding-top: 6px;
+}
+
+.move_now {
+  border-radius: 15%;
+  border: 1px solid;
+  padding: 0.5px 5px;
+}
+
+.move_now span {
+  font-size: 14px;
+}
+
+.dis {
+  color: gray;
+  cursor: not-allowed;
+}
+
+.point {
+  cursor: pointer;
+
+  &.read-only {
+    cursor: pointer;
+  }
+}
+
+.mini {
+  font-size: 12px;
+}
+
+.event {
+  height: 35px !important;
+  padding-top: 10px;
+  background-color: #fe658d;
+  border-radius: 20%;
+  color: white;
+}
+
+.calendar table {
+  width: 100%;
+}
+
+.calendar table thead .cn {
+  color: #fe658d;
+  font-weight: 600;
+}
+
+.calendar table thead .t7 {
+  color: blue;
+  font-weight: 600;
+}
+
+.calendar table thead tr td {
+  text-align: center;
+  width: 40px;
+  height: 40px;
+}
+
+.calendar table tbody tr td {
+  text-align: center;
+  width: 40px;
+  height: 40px;
+}
+
+.calendar table tbody tr .point.choice {
+  background-color: #fe658d;
+  border-radius: 20%;
+  color: #fff;
+}
+
+.button.color {
+  background-color: #fe658d;
+  color: #fff;
+}
+
+.customer-info-tab {
+  .cus-info-tab {
+    display: flex;
+    width: 100%;
+
+    li {
+      width: 100%;
+      display: inline-block;
+      position: relative;
+      text-align: center;
+      padding-top: 10px;
+      height: 20px;
+
+      a {
+        padding: 5px 5px 5px 5px;
+        white-space: nowrap;
+        color: #666;
+        margin-bottom: 2px;
+      }
+
+      a:after {
+        content: "";
+        display: block;
+        margin: auto;
+        padding: 5px 5px 5px 5px;
+        // padding-bottom: 8px;
+        width: 0px;
+        transition: width 0.3s ease-in;
+        color: #4d4d4d;
+      }
+
+      a:hover:after {
+        border-bottom: 2px solid #ff648c;
+        width: 80%;
+        color: #4d4d4d;
+        font-weight: bold;
+      }
+
+      a.is-active:after {
+        border-bottom: 2px solid #ff648c;
+        color: #4d4d4d;
+        font-weight: bold;
+        width: 80%;
+        content: "";
+      }
+    }
+  }
+
+  .tab-content {
+    display: none;
+    padding: 6px 20px;
+
+    &.none-padding {
+      padding: 0 !important;
+    }
+
+    .input-group-tab {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-items: baseline;
+
+      .input-group__label-tab {
+        color: #4d4d4d;
+        font-weight: bold;
+        font-size: 1.4rem;
+        margin-top: 0px;
+        padding-top: 10px;
+        padding-right: 10px;
+        text-align: center;
+        min-width: 140px;
+        max-width: 140px;
+        white-space: normal;
+      }
+
+      .group {
+        display: inline-flex;
+        width: 100%;
+
+        input:nth-child(2) {
+          margin-left: 20px !important;
+        }
+      }
+
+      .group-checkbox {
+        display: inline-flex;
+        width: 100%;
+        flex-direction: column;
+
+        .input-group-checkbox {
+          margin-top: 10px;
+
+          .checkbox-label {
+            margin-left: 10px;
+          }
+        }
+      }
+
+      .input-text-tab,
+      .select-tab {
+        width: 100%;
+
+        &.w-260 {
+          width: 260px !important;
+        }
+
+        &.w-200 {
+          width: 200px !important;
+        }
+      }
+    }
+
+    @media only screen and (max-width: 767px) {
+      .col-8 {
+        width: 83.33333% !important;
+      }
+    }
+  }
+}
+
+.border-bottom {
+  border-bottom: 1px solid #000;
+}
+
+.table-border {
+  width: 100%;
+  border: 1px solid black;
+
+  th,
+  td {
+    border: 1px solid black;
+    padding: 5px;
+    font-weight: 500;
+    text-align: center;
+
+    .d-flex {
+      padding: 0 !important;
+    }
+
+    &.a-left {
+      text-align: left;
+    }
+  }
+
+  .b-right {
+    border-right: 1px solid black;
+  }
+}
+
+.btn-table-bill {
+  padding: 5px;
+  background: #ff648c;
+  font-size: 1.2rem;
+  color: #fff;
+
+  &.right {
+    float: right;
+  }
+}
+
+.mr-5 {
+  margin-right: 5px;
+}
+
+.border-btn {
+  border: 1px solid;
+}
+
+.reservation-month {
+  .date_title {
+    padding: 10px 6% !important;
+    border-bottom: 1px solid #e7e7e7;
+  }
+
+  .choiceDate,
+  td {
+    font-weight: bold;
+  }
+
+  .point.choice {
+    border-radius: 50px !important;
+  }
+
+  .calendar {
+    padding: 0;
+  }
+
+  .date_title {
+    margin-top: 0 !important;
+  }
+}
+
+.create-modal__header {
+  .create-modal__header-close {
+    cursor: pointer;
+    top: 50%;
+    right: 0%;
+    padding: 10px 0px;
+    transform: translate(37%, -27%);
+    float: right;
+    color: white;
+  }
+}
+
+.dialog-cancel {
+  .close_dialog {
+    min-width: 100px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .sp {
+    &.show-all-device {
+      display: block !important;
+    }
+
+    &.style-footer {
+      max-width: 1060px;
+      padding: 0 40px;
+      left: 50% !important;
+      transform: translateX(-50%);
+    }
+  }
+
+  body {
+    padding-bottom: 60px;
+  }
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 99.5%;
+  background-position-y: 5px;
+  border: 1px solid #dfdfdf;
+  border-radius: 9rem;
+  padding: 8px 16px;
+  font-size: 1.6rem;
+}
+
+.create-modal__header {
+  position: relative;
+}
+
+.create-modal__header--modal {
+  display: inline-block;
+  position: absolute;
+  top: 45%;
+  right: 15px;
+  width: 12px;
+  height: 12px;
+  transform: rotate(45deg) translateY(-50%);
+  cursor: pointer;
+
+  &::before {
+    display: inline-block;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+  }
+
+  &::after {
+    display: inline-block;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+    width: 2px;
+    background-color: #fff;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.radio-group {
+  display: flex;
+  margin-top: 15px;
+  margin-left: 15px;
+
+  &__label {
+    position: relative;
+    cursor: pointer;
+
+    &:not(:last-child){
+      margin-right: 40px;
+    }
+
+    .text {
+      cursor: pointer;
+    }
+  }
+
+  .fake-btn {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #dfdfdf;
+
+    &::before {
+      display: inline-block;
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      height: 60%;
+      border-radius: 50%;
+      background-color: transparent;
+      transition: all 0.3s;
+    }
+  }
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  input[type="radio"]:checked + .fake-btn::before {
+    background-color: #ff648c;
+  }
+
+  .fake-btn.input-error {
+    border-color: #ff648c;
+  }
+
+  .flex-box {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 767px){
+  .radio-group { 
+    &__label {
+      &:not(:last-child){
+        margin-right: 10px;
+      }
+    }
+    .fake-btn {
+      width: 15px;
+      height: 15px;
+    }
+  }
+  
+}
+
+@media only screen and (max-width: 600px) {
+  select {
+    background-position-y: 2px;
+  }
+}
+
+input[type="date"] {
+  padding: 1px 10px;
+  background-color: #fff;
+  font-size: 1.3rem !important;
+  outline: none;
+  line-height: 3rem;
+  font-style: normal;
+  font-family: auto;
+  border: 1px solid #dfdfdf;
+  border-radius: 9rem;
+}
+
+input[type=date]::-webkit-calendar-picker-indicator /* datepicker*/
+{
+  background-image: url("assets/images/icon/ico_calendar.svg");
+  background-size: 15px 15px;
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: 0px;
+  outline: none;
+  padding-top: 0px !important;
+  padding-left: 3px !important;
+}
+
+.dropdown-bigicon {
+  position: absolute;
+  top: 5%;
+  transform: rotate(-45deg) translateX(-50%);
+  right: 20px;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #fff;
+  border-top-color: transparent;
+  border-right-color: transparent;
+}
+
+.dropdown-icon:before {
+  position: absolute;
+  top: 0px;
+  transform: rotate(-45deg) translateX(-50%);
+  right: 20px;
+  height: 12px;
+  width: 12px;
+  border: 1px solid #4d4d4d;
+  border-top-color: transparent;
+  border-right-color: transparent;
+}
+
+.toggle {
+  &.animation {
+    height: 0px;
+    opacity: 0;
+    transition: height 1s ease-in;
+  }
+
+  &:not(.animation) {
+    transition: height 1s ease-in;
+    opacity: 1;
+    height: auto;
+  }
+}
+
+.collapsible {
+  .collapsible-heading {
+    background-color: #eee;
+    color: black;
+    cursor: pointer;
+    padding: 10px 5px 10px 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    position: relative;
+    border-bottom: 1px solid #e5e5e5 !important;
+  }
+
+  .collapsible-heading a:before {
+    content: "";
+    font-size: 24px;
+    position: absolute;
+    font-family: "Material Icons";
+    width: 10px;
+    height: 10px;
+    border: 1px solid #4d4d4d;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    right: 20px;
+    top: 12px;
+    transform: rotate(315deg);
+    transition: all 0.5s;
+  }
+
+  .collapsible-heading.active a:before {
+    transform: rotate(135deg);
+    transition: all 0.5s;
+  }
+
+  .collapsible-heading.active + .collapsible-content {
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+    &.collapsible-content__1 {
+      max-height: unset;
+    } 
+  }
+
+  .collapsible-content {
+    padding: 0 18px;
+    height: auto;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    &.collapsible-content__1 {
+      max-height: 0;
+    } 
+  }
+}
+
+.menu-list {
+  .collapsible {
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+  }
+}

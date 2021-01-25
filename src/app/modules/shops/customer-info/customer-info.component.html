@@ -1,0 +1,3 @@
+<app-customer-list [customerList]="customerList" (confirmEmit)="confirmCustomerList($event)"></app-customer-list>
+
+<app-search-popup [shopId]="shopId" [status]="status" (confirm)="confirmModal($event)" [registerBtn]="true"></app-search-popup>

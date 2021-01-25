@@ -1,0 +1,65 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span>{{ "tech.techRegistration" | translate }}</span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <div class="pl-0 pr-0">
+            <div class="add-button mt-0">
+              <button (click)="openModal('create')">
+                <span></span><em>{{ "tech.techRegistration" | translate }}</em>
+              </button>
+            </div>
+          </div>
+
+          <div class="list mt-30">
+            <div class="list__header">{{ "tech.techList" | translate }}
+            </div>
+            <div class="list__body list02">
+              <ul class="tech__ul collapsible" *ngFor="let tcl of classArr; let i = index" cdkDropListGroup>
+                <li class="collapsible-heading" #collapsible (click)="toggleAccordian(collapsible, i)"
+                  *ngIf="filterItemsOfType(tcl.id)?.length > 0"><a>{{ tcl.name }}</a>
+                </li>
+                <div class="tech__listGroup collapsible-content" cdkDropList
+                  (cdkDropListDropped)="handleDropList($event, tcl.id)">
+                  <div class="tech-list toggle" [id]="'toogle-list' + i">
+                    <li class="tech-box" *ngFor="let tl of filterItemsOfType(tcl.id)" cdkDragLockAxis="y"
+                      cdkDragBoundary=".tech-list" cdkDrag>
+                      <div class="tech-box__item1" *ngIf="tcl.id === tl.class_id">
+                        <div class="tech-box__item1-1">
+                          <p class="tech-box__content">
+                            <span class="edit" (click)="selectedRow(tl)">
+                              {{ "common.edit" | translate }}
+                            </span>
+                            <span class="txt">
+                              {{ tl.name + ' (' + (tl.treatment_time + tl.buffer_time) + '分) '}}
+                              <strong>
+                                {{ helper.formatCurrency(tl.price) }}
+                              </strong>
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="ico tech-box__item2" style="right: 3px;" *ngIf="tcl.id === tl.class_id" cdkDragHandle>
+                        <span class="ico__item1"></span>
+                        <span class="ico__item2"></span>
+                      </div>
+                    </li>
+                  </div>
+                </div>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<app-modal-skill [userLogin]="userLogin" [open]="isOpen" [techClassList]="classArr" [listTaxes]="listTaxes"
+  [selectCurrent]="selectCurrent" (confirm)="closeModal($event)"></app-modal-skill>

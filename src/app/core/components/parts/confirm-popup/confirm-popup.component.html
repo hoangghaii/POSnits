@@ -1,0 +1,20 @@
+<div class="dialog-cancel" [ngClass]="showPop ? 'show-dialog' : 'hide-dialog'">
+  <div class="in" [ngStyle]="optStyle">
+    <p class="mb-20">
+      {{ message }}
+    </p>
+    <div class="btn-grp" *ngIf="useBtnCancel; else showBtnOk">
+      <button class="btn mt-20 btn-delete close_dialog" (click)="cancel()">
+        {{ "button.cancel" | translate }}
+      </button>
+      <button class="btn mt-20 close_dialog" (click)="ok()">
+        {{ "button.save" | translate }}
+      </button>
+    </div>
+    <ng-template #showBtnOk>
+      <button class="btn mt-20 close_dialog" (click)="ok()">
+        {{ "button.save" | translate }}
+      </button>
+    </ng-template>
+  </div>
+</div>

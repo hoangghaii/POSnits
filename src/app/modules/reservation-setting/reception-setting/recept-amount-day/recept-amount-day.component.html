@@ -1,0 +1,52 @@
+
+<div class="create-modal" [ngClass]="open ? 'open' : null">
+    <div class="create-modal-overlay" (click)="closeModal()"></div>
+    <div class="create-modal__inner">
+      <div class="create-modal__header">
+          <span style="color:white">{{"receptAmountDay.title"|translate}}</span>
+        <span class="create-modal__header--modal" (click)="closeModal()"></span>
+      </div>
+      <div class="create-modal__body">
+        <app-top-error
+        *ngIf="submitted"
+        [form]="formRecept"
+        [formMap]="formMap"
+      ></app-top-error>
+           <form [formGroup]="formRecept">
+        <app-reservation-calendar
+        #calendarComponent
+        [multi]="false"
+        [days]="listDateChoice"
+        (select)="choiceDate($event)"
+        ></app-reservation-calendar>
+            <div class="input-group pl-20 pr-20 pt-0 mt-10 input-group col02" style="    transform: translateX(20px);">
+                <div class="input-group__label mt-0" style="display:inline-block;width: 28%;">
+                  {{"receptAmountDay.acceptNumber"|translate}}
+                  </div>
+                  <input
+                  style="width: 50%;"
+                  type="text"
+                  class="mt-10 input-text my-input"
+                  placeholder=""
+                  formControlName="amount"
+                  [ngClass]="{
+                    'input-error': submitted && f.amount.errors
+                  }"
+                />
+                <div class="btn" style="width: 18%;" (click)="process()">
+                   <span style="color: white;"> {{"receptAmountDay.btnProcess"|translate}}</span> 
+                </div>
+            </div>
+            <div class="input-group pl-20 pr-20 pt-0 mt-10 input-group col02"
+            style="    border: solid thin;
+            text-align: center;
+            line-height: initial;
+            font-size: medium;"
+            (click)="closeModal()">
+            {{"receptAmountDay.btnClose"|translate}}
+            </div>
+          
+        </form> 
+      </div>
+    </div>
+  </div>

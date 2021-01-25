@@ -1,0 +1,72 @@
+<div class="create-modal" [ngClass]="open ? 'open' : null">
+  <div class="create-modal-overlay" (click)="closeModal()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">
+      {{ "basicShift.basicShiftRegistration" | translate }}
+      <span class="create-modal__header-close" (click)="closeModal()">&times;</span>
+    </div>
+    <div class="create-modal__body">
+      <form action="" [formGroup]="basicShiftForm">
+        <div class="err">
+          <app-top-error *ngIf="submitted" [form]="basicShiftForm" [formMap]="formMap"></app-top-error>
+        </div>
+        <div class="col-12 pt-10">
+          <div class="col-12 pl-10 pr-10">
+            <div class="list_header_special">
+              <div class="input_group_label w-40">
+                {{ "basicShift.shiftName" | translate }}
+              </div>
+              <div class="input_group_label w-30">
+                {{ "basicShift.startTime" | translate }}
+              </div>
+              <div class="input_group_label w-30">
+                {{ "basicShift.endTime" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 mt-10 pl-10 pr-10">
+          <div class="row-data">
+            <div class="input-group single w-40">
+              <input type="text" class="input-text"
+                     [ngClass]="{'input-error': submitted && f.name.errors}" placeholder="" value=""
+                     formControlName="name"/>
+            </div>
+            <div class="input-group single w-30 pt-10">
+              <select [ngClass]="{'input-error': submitted && f.startTime.errors}" name="startTime"
+                      (change)="basicShiftForm.controls.endTime.updateValueAndValidity()"
+                      formControlName="startTime">
+                <ng-container *ngFor="let cst of openingTimeList">
+                  <option [value]="cst.value">{{ cst.text }}</option>
+                </ng-container>
+              </select>
+            </div>
+            <div class="input-group single w-30 pt-10">
+              <select [ngClass]="{'input-error': submitted && f.endTime.errors}"
+                      name="endTime" formControlName="endTime">
+                <ng-container *ngFor="let cst of closingTimeList">
+                  <option [value]="cst.value">{{ cst.text }}</option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="btn-grp mt-20" *ngIf="basicShiftId; else btnCreate">
+          <button type="submit"
+                  class="btn mt-20 btn-delete" (click)="handleDelete()">
+            {{ "common.btnDelete" | translate }}
+          </button>
+          <button type="submit" class="btn mt-20" (click)="handleUpdate()">
+            {{ "common.btnUpdate" | translate }}
+          </button>
+        </div>
+        <ng-template #btnCreate>
+          <button type="submit" class="btn mt-20" (click)="handleCreate()">
+            {{ "common.btnRegister" | translate }}
+          </button>
+        </ng-template>
+      </form>
+    </div>
+  </div>
+</div>
+<app-confirm-modal #confirmModal (confirm)="handleConfirm($event)"></app-confirm-modal>

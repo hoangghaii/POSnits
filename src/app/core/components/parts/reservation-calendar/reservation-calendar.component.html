@@ -1,0 +1,31 @@
+<div class="input-group pl-20 pr-20 pt-0 date_title">
+  <div class="pre" (click)="handlePre()">
+    <a href="javascript:void(0)" class="previous">&#8249;</a>
+  </div>
+  <div class="date_label">
+      <span class="choiceDate">
+        <span class="currentDay">{{this.choiceDate?.year}} 年{{this.choiceDate?.month}} 月 
+          <!-- {{this.choiceDate?.date}} 日 ({{this.choiceDate?.day}}) --> 
+        </span>
+      </span>
+  </div>
+  <div class="next" (click)="handleNext()">
+    <a href="javascript:void(0)">&#8250;</a>
+  </div>
+</div>
+<div class="input-group single mt-10 calendar">
+  <table id="showDate" #showDate>
+    <thead>
+    <tr class="tr">
+      <td class="cn">日</td>
+      <td>月</td>
+      <td>火</td>
+      <td>水</td>
+      <td>木</td>
+      <td>金</td>
+      <td class="t7">土</td>
+    </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>

@@ -1,0 +1,90 @@
+<main class="pb-50">
+    <article class="wrap">
+        <section>
+            <div class="flex-row">
+                <div class="col-12">
+                    <div class="white-box__whole mt-15">
+                        <form action="" class="reservation-container">
+                            <div class="col-12 mt-0">
+                                <h2 class="title title--type02 mt-15 pl-10">
+                                    <span>
+                                        {{ "listReservation.numberOfReservations" | translate }} /
+                                        <em>{{displayDay}}</em>
+                                    </span>
+                                </h2>
+                            </div>
+
+                            <div class="pl-10 pr-10">
+                                <div class="white-box mt-15">
+                                    <div class="white-box white-box--half">
+                                        <div class="white-box--type01">
+                                            <span> {{ "listReservation.numberOfReservations" | translate }}</span>
+                                            <em>
+                                                {{totalCustomer}}
+                                                <small> {{ "listReservation.name" | translate }}</small>
+                                            </em>
+                                        </div>
+                                        <div class="white-box--type02">
+                                            <span>
+                                                {{ "listReservation.expectedSales" | translate }}
+                                                <small> {{ "listReservation.customerUnitPrice" | translate }}</small>
+                                            </span>
+                                            <em>
+                                                {{totalPrice}}
+                                                <small>
+                                                    {{customerUnitPrice}}</small>
+                                            </em>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mt-0 pl-10 pr-10">
+                                <h2 class="title  mt-15 pl-10 border-bottom-white">
+                                    <span>
+                                        {{ "listReservation.listReservation" | translate }} /
+                                        <em style="color: #ff648c">{{displayDay}}</em>
+                                    </span>
+                                    <a routerLink="/reservations/table">{{ "listReservation.nextDay" | translate }}</a>
+                                </h2>
+                            </div>
+
+                            <div class="pl-10 pr-10">
+                                <div class="white-box mt-15" *ngFor="let item of listReservations" (click)="selectedRow(item)">
+                                    <div class="white-box--type03">
+                                        <a>
+                                            <span>
+                                                <small>{{ "listReservation.today" | translate }}</small>
+                                                <b>{{item?.reservation_time?.substring(11,16)}}</b>
+                                                <em>{{ "listReservation.unaccounted" | translate }}</em>
+                                            </span>
+                                            <span>
+                                                <em>{{ "listReservation.inCharge" | translate }}：{{item.staff_name}}</em>
+                                                <b class="bold">{{item?.customer_name}} <small
+                                                        *ngIf="item?.customer_sex==0">({{ "listReservation.male" | translate }})</small>
+                                                    <small
+                                                        *ngIf="item?.customer_sex==1">({{ "listReservation.female" | translate }})</small></b>
+                                                <br>
+                                                <div style="display: inline-flex;">
+                                                    <span *ngFor="let subItem of item.details ;let i = index" style="color: black;">{{subItem.menu.name}}
+                                                        <label *ngIf="item.details.length-i-1 > 0">|</label>
+                                                    </span>
+                                                </div>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pl-20 pr-20 pt-30 pb-30">
+                                <button routerLink="/reservations/list-of-visit-today" class="btn">{{ "listReservation.numberOfVisitors" | translate }}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+    </main>
+    <app-reservation-details-modal [open]="open" [selectCurrent]="selectCurrent" (confirmEmit)="closeModal($event)"
+        [userLogin]="userLogin"></app-reservation-details-modal>

@@ -1,0 +1,147 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section class="free-item">
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span>
+              {{ "freeItemList.title" | translate }}
+            </span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <div class="pl-0 pr-0">
+            <div class="mt-0 add-button">
+              <button (click)="openModal('create')">
+                <span></span>
+                <em>{{ "freeItemList.btnOpenModal" | translate }}</em>
+              </button>
+            </div>
+          </div>
+
+          <div class="list mt-30">
+            <table class="free-item__table" cellspacing="0" cellpadding="0">
+              <thead class="free-item__table--thead">
+                <tr class="free-item__table--thead__items">
+                  <th
+                    class="free-item__table--thead__items_item free-item__table--thead__items_item--1"
+                  ></th>
+                  <th
+                    class="free-item__table--thead__items_item free-item__table--thead__items_item--2"
+                  >
+                    {{ "freeItemList.question" | translate }}
+                  </th>
+                  <th
+                    class="free-item__table--thead__items_item free-item__table--thead__items_item--3"
+                  >
+                    {{ "freeItemList.enter" | translate }}/
+                    {{ "freeItemList.selectTH" | translate }}
+                  </th>
+                  <th
+                    class="free-item__table--thead__items_item free-item__table--thead__items_item--4"
+                  >
+                    {{ "freeItemList.number" | translate }}
+                  </th>
+                  <th
+                    class="free-item__table--thead__items_item free-item__table--thead__items_item--5"
+                  >
+                    {{ "freeItemList.multipleTH" | translate }}
+                  </th>
+                  <th
+                    class="free-item__table--thead__items_item free-item__table--thead__items_item--6" style="position: sticky;" id="btn-toggle-bigList"
+                  ></th>
+                </tr>
+              </thead>
+              <tbody
+                class="free-item__table--tbody toggle" id="toggle-bigList"
+                cdkDropList
+                (cdkDropListDropped)="drop($event)"
+              >
+                <tr
+                  class="free-item__table--tbody__items"
+                  *ngFor="let fi of free_itemList"
+                  cdkDragLockAxis="y"
+                  cdkDragBoundary=".free-item__table--tbody"
+                  cdkDrag
+                >
+                  <td
+                    class="free-item__table--tbody__items_item free-item__table--tbody__items_item--1 edit"
+                    (click)="selectedRow(fi)"
+                  >
+                    {{ "freeItemList.edit" | translate }}
+                  </td>
+                  <td
+                    class="free-item__table--tbody__items_item free-item__table--tbody__items_item--2"
+                  >
+                    {{ fi.question }}
+                  </td>
+                  <td
+                    class="free-item__table--tbody__items_item free-item__table--tbody__items_item--3"
+                    *ngIf="fi.html_type == '0'"
+                  >
+                    {{ "freeItemList.input" | translate }}
+                  </td>
+                  <td
+                    class="free-item__table--tbody__items_item free-item__table--tbody__items_item--3"
+                    *ngIf="fi.html_type == '1'"
+                  >
+                    {{ "freeItemList.select" | translate }}
+                  </td>
+                  <td
+                    class="free-item__table--tbody__items_item free-item__table--tbody__items_item--4"
+                  >
+                    {{ fi.html_type == '1' && ( fi.answer != null || fi.answer != '') ? countAnswer(fi.answer) : '-'}}
+                  </td>
+                  <td
+                    class="free-item__table--tbody__items_item free-item__table--tbody__items_item--5"
+                    *ngIf="fi.multiple_flg == '0'"
+                  >
+                    -
+                  </td>
+                  <td
+                    class="free-item__table--tbody__items_item free-item__table--tbody__items_item--5"
+                    *ngIf="fi.multiple_flg == '1'"
+                  >
+                    {{ "freeItemList.single" | translate }}
+                  </td>
+                  <td
+                    class="free-item__table--tbody__items_item free-item__table--tbody__items_item--5"
+                    *ngIf="fi.multiple_flg == '2'"
+                  >
+                    {{ "freeItemList.multiple" | translate }}
+                  </td>
+                  <td
+                    class="free-item__table--tbody__items_item free-item__table--tbody__items_item--6 ico"
+                    cdkDragHandle
+                  >
+                    <div class="ico__arrow">
+                      <span class="ico__arrow--item ico__arrow--top"></span>
+                      <span class="ico__arrow--item ico__arrow--bottom"></span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+<app-free-setting-modal
+  [open]="isOpen"
+  [selectCurrent]="selectCurrent"
+  (confirm)="closeModal($event)"
+  [userLogin]="userLogin"
+></app-free-setting-modal>
+
+<div class="dialog-cancel">
+  <div class="in">
+    <p class="mb-20">
+      {{ "errors.confirmErrors.defaul" | translate }}
+    </p>
+    <button class="btn close_dialog">
+      {{ "login.btnCancel" | translate }}
+    </button>
+  </div>
+</div>

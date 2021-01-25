@@ -1,0 +1,117 @@
+.automatic-mail-delivery-settings {
+  .group {
+    display: flex;
+    flex-wrap: nowrap;
+    .input-group {
+      width: 100%;
+      display: flex;
+    }
+    label {
+      padding: 10px 5px;
+    }
+  }
+
+  .radio-group{
+    margin-left: 0 !important;
+    margin-top: 6px !important;
+    padding-bottom: 6px !important;
+    @media only screen and (max-width: 767px) {
+      &.screen-max767 {
+        display: block;
+      }
+    }
+  }
+
+  .group-span {
+    display: flex;
+    flex-wrap: wrap;
+    span {
+      margin-right: 5px;
+      margin-top: 5px;
+    }
+  }
+
+  .mail-delivery-settings-main {
+    padding-left: 10px;
+    padding-right: 10px;
+    .item-setting-row {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: nowrap;
+      .left {
+        vertical-align: baseline;
+        text-align: center;
+        width: 80px;
+        min-width: 80px;
+        padding: 10px 5px 15px 0px;
+
+      }
+      .right {
+        width: 100%;
+        .input-group {
+          padding-top: 0px;
+          width: 100%;
+          &.input-group-date {
+            margin-right: 10px;
+            width: auto !important;
+          }
+          .input-date-setting {
+            width: 140px !important;
+          }
+        }
+      }
+    }
+
+    .area {
+      .area-footer {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+        span {
+          padding: 5px 15px;
+        }
+      }
+    }
+    .mail-setting-footer {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .cus-searh-footer {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    width: 100%;
+    &.cus-searh-footer-screen-1 {
+      grid-template-columns: 100%;
+    }
+  }
+}
+.textarea-small {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  margin-top: 10px;
+  box-sizing: border-box;
+  border: 1px solid #dadbdb;
+  border-radius: 9.5px;
+  background-color: #fff;
+  resize: none;
+  font-size: 15px;
+}
+
+form .btn {
+  width: unset;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.input-error {
+  border: 1px solid #ff648c;
+  background: #ffecf1;
+}
+
+textarea:focus {
+  outline: unset !important;
+}

@@ -1,0 +1,54 @@
+<main class="pb-50">
+    <article class="wrap">
+        <section>
+            <div class="filtered-search filtered-search-screen-2">
+                <div class="flex-row">
+                    <div class="col-12 mt-0">
+                        <h2 class="title title-bold pl-10">
+                            <span>  {{ "listResult.title" | translate }}</span>
+                        </h2>
+                    </div>
+                    <div class="col-12">
+                        <div class="white-box pt-5 pb-20 radius-none ">
+                            <h2 class="title mt-10">
+                                <span> {{ "listResult.listResult" | translate }}</span>
+                                <a class="title-a">{{ "listResult.result" | translate }}：{{this.countCustomer}}{{"listResult.numberResult" | translate}}</a>
+                            </h2>
+                            <div class="content-list mt-20 pr-10 pl-10">
+                                <div class="table-main">
+                                    <table>
+                                        <tbody *ngFor="let item of this.data">
+                                            <tr>
+                                                <td >
+                                                    <img style="margin-left: 25%;" src="{{item.customer_img}}" alt="">
+                                                </td>
+                                                <td>{{ "listResult.customer" | translate }}Ｎｏ.{{item.customer_no}}</td>
+                                                <td>{{item.firstname}}　{{item.lastname}}</td>
+                                                <td>{{item.age}}{{ "listResult.age" | translate }}</td>
+                                                <td *ngIf="item.sex=='0'">{{ "listResult.male" | translate }}</td>
+                                                <td *ngIf   ="item.sex=='1'">{{ "listResult.female" | translate }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">{{ "listResult.lastVisit" | translate }}:{{item.last_visit.substring(0,10)}}</td>
+                                                <td>{{ "listResult.numberOfVisit" | translate }}:{{item.count_visit}}{{ "listResult.times" | translate }}</td>
+                                                <td colspan="2">{{ "listResult.sale" | translate }}:{{item.totalPrice}}{{ "listResult.money" | translate }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="content-footer">
+                                    <button class="btn" (click)="exportCSV()">{{ "listResult.btnExportCSV" | translate }}</button>
+                                    <button class="btn" (click)="toSendMail()">{{ "listResult.btnSendMail" | translate }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-area flex-row cus-searh-footer cus-searh-footer-screen-1">
+                        <div class="bt" (click)="backToSearch()">{{ "listResult.btnBack" | translate }}</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+</main>

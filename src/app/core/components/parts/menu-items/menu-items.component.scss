@@ -1,0 +1,60 @@
+.collapse-head {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 10px 0;
+  position: relative;
+  background-color: #eee;
+  border-bottom: 1px solid #e2e2e2;
+
+  .dropdown-icon {
+    position: absolute;
+    top: 32%;
+    transform: rotate(315deg);
+    transition: all 0.5s;
+    right: 20px;
+    height: 12px;
+    width: 12px;
+    border-color: transparent transparent #4d4d4d #4d4d4d;
+    border-style: solid;
+    border-width: 1px;
+  }
+
+  &.active {
+    .dropdown-icon {
+      transform: rotate(135deg);
+      transition: all 0.5s;
+    }
+  }
+}
+
+.collapse-items {
+  display: none;
+
+  .child-item {
+    display: flex;
+    border-bottom: 1px solid #e9e9e9;
+
+    .col-6 {
+      margin: 10px 0px !important;
+    }
+
+    .item-price {
+      margin-left: auto;
+      color: #ff648c;
+      font-weight: 600;
+      transition: color .3s;
+      text-align: right;
+    }
+
+    &.choice {
+      background-color: #ff648c;
+      color: #ffffff;
+
+      .item-price {
+        color: #ffffff;
+      }
+    }
+  }
+
+}

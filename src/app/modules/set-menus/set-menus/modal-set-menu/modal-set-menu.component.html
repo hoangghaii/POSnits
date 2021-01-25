@@ -1,0 +1,147 @@
+<div class="create-modal" [ngClass]="isOpen ? 'open' : null">
+  <div class="create-modal-overlay" (click)="close()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">
+      {{'setMenu.btnCreate' | translate}} <span class="create-modal__header-close"
+                                                (click)="close()">&times;</span>
+    </div>
+    <div class="create-modal__body pt-0">
+      <div class="coupon-menu-registration">
+        <div class="flex-row">
+          <div class="col-12 mt-0">
+            <form action="" [formGroup]="setMenuForm">
+              <div class="white-box pt-5 pb-20 radius-none">
+                <div class="err pl-20 pr-20">
+                  <app-top-error
+                    *ngIf="submitted"
+                    [form]="setMenuForm"
+                    [formMap]="formMap"
+                  ></app-top-error>
+                </div>
+                <div class="input-group single mt-15">
+                  <label for="" class="input-group__label">
+                    {{ "menuRegistration.title" | translate }}
+                  </label>
+                  <input
+                    type="text"
+                    class="input-text"
+                    formControlName="name"
+                    [ngClass]="{
+                      'input-error': submitted && setMenuForm.controls.name.errors
+                    }"
+                  />
+                </div>
+                <div class="input-group single">
+                  <button class="btn mt-20 mb-10" style="width: 100%" (click)="openMenuItemsModal('create')">
+                    {{ "menuRegistration.btnOpenModal" | translate }}
+                  </button>
+                </div>
+
+                <div class="list_data" formArrayName="details">
+                  <div class="input-group single coupon-list-regis"
+                       *ngFor="let detail of details.controls; let i = index" [formGroupName]="i">
+                    <div class="coupon-list">
+                      <div> {{ details.controls[i].get("name")?.value }}</div>
+                      <div style="text-align: right">
+                        {{ details.controls[i].get("price")?.value }}
+                        {{ "menuRegistration.circle" | translate }}
+                      </div>
+                      <div>{{ "menuRegistration.discount" | translate }}</div>
+                      <div>
+                        <div class="input-group single single-coupon pt-0">
+                          <input
+                            type="text"
+                            class="input-text"
+                            formControlName="discount"
+                            placeholder="{{
+                              'menuRegistration.discount' | translate
+                            }}"
+                            [ngClass]="{
+                              'input-error':
+                                submitted &&   details.controls[i].get('discount').errors
+                            }"
+                          />
+                          <span>
+                            {{ "menuRegistration.circle" | translate }}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="input-group single mt-10">
+                  <label for="" class="input-group__label">
+                    {{ "menuRegistration.webReservation" | translate }}
+                  </label>
+                  <div class="radio-group">
+                    <label
+                      class="radio-group__label" *ngFor="let item of listWeb" for="{{ item.key + item.value }}">
+                      <span class="flex-box">
+                        <input
+                          class="radio-group__input"
+                          type="radio"
+                          id="{{ item.key + item.value }}"
+                          name="webFlg"
+                          value="{{ item.key }}"
+                          formControlName="webFlg"
+                        />
+                        <span
+                          class="fake-btn"
+                          [ngClass]="{
+                            'input-error': submitted && setMenuForm.controls.webFlg.errors
+                          }"
+                        ></span>
+                        <span class="text">{{ item.value }}</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="input-group mt-10">
+                  <label for="" class="input-group__label">
+                    {{ "common.selectColor" | translate }}
+                  </label>
+                  <input
+                    class="inputColorPicker mt-10"
+                    [value]="currentPickedColor"
+                    [style.background]="currentPickedColor"
+                    [(colorPicker)]="currentPickedColor"
+                    [cpPresetColors]="presetColors"
+                    [cpPosition]="'top'"
+                    [cpPositionOffset]="'9%'"
+                    [cpOutputFormat]="'hex'"
+                    [cpAlphaChannel]="'disabled'"
+                    (colorPickerChange)="getValueColor($event)"
+                    [ngClass]="{
+                      'input-error': submitted && setMenuForm.controls.colorCode.errors
+                    }"
+                  />
+                </div>
+
+                <div class="btn-grp mt-20" *ngIf="setMenu != undefined; else btnCreate">
+                  <button type="submit" class="btn mt-20 btn-delete" (click)="updateMenu(true)">
+                    {{ "common.btnDelete" | translate }}
+                  </button>
+                  <button type="submit" class="btn mt-20" (click)="updateMenu()">
+                    {{ "common.btnUpdate" | translate }}
+                  </button>
+                </div>
+                <ng-template #btnCreate>
+                  <button type="submit" class="btn mt-20" (click)="createMenu()">
+                    {{ "menuRegistration.btnCreate" | translate }}
+                  </button>
+                </ng-template>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-menu-items [isOpen]="isOpenMenu" [currentMenus]="menuSelected" (select)="updateMenuItems($event)" ></app-menu-items>
+<app-confirm-modal
+  #confirmModal
+  (confirm)="handleConfirm($event)"
+></app-confirm-modal>

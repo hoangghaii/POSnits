@@ -1,0 +1,66 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span>{{'addStaff.staffList.staffRegistration' | translate}}</span>
+          </h2>
+        </div>
+        <div class="col-12">
+
+          <div class="pl-0 pr-0">
+            <div class="add-button mt-0">
+              <button (click)="openModal('create')">
+                <span></span><em>{{'addStaff.staffList.newRegistration' | translate}}</em></button>
+            </div>
+          </div>
+
+          <div class="list mt-30">
+            <div class="list__header" style="position: sticky;">{{'addStaff.staffList.staffList' | translate}}
+            </div>
+            <div class="list__body toggle" id="toggle-bigList" cdkDropList
+                 (cdkDropListDropped)="handleDropList($event)">
+              <ul
+                class="tech-list"
+              >
+                <li
+                  *ngFor="let item of staffList"
+                  class="tech-box" cdkDragLockAxis="y"
+                  cdkDragBoundary=".list__body" cdkDrag
+                >
+                  <div class="tech-box__item1" style="justify-content: unset; display: flex !important;">
+                    <div class="tech-box__item1-1" style="width: calc(100% - 70px);">
+                      <small>{{item?.name_kana}}</small>
+                      <p class="tech-box__content">
+                        <span class="edit" (click)="selectedRow(item)">
+                          {{ "common.edit" | translate }}
+                        </span>
+                        <span>{{item?.name}}
+                          <small>（{{item?.sex === '0' ? ('sex.male' | translate) : ('sex.female' | translate)}}）</small><span
+                            *ngIf="showStoreName">{{ shopName }}</span></span>
+                      </p>
+                    </div>
+                    <div>
+                      <img style="width: 40px; height: 40px; border-radius: 40px;"
+                           onerror="this.onerror=null;this.src='assets/images/icon/no-img-staff.svg';"
+                           *ngIf="item.staff_img !== '' && item.staff_img !== null" [src]="item.staff_img"/>
+                    </div>
+
+                  </div>
+                  <div class="ico tech-box__item2" cdkDragHandle>
+                    <span class="ico__item1"></span>
+                    <span class="ico__item2"></span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+<app-staff-create-modal [userLogin]="userLogin" [open]="open" [selectCurrent]="selectCurrent" [shopList]="shopList"
+                        (confirm)="closeModal($event)">
+</app-staff-create-modal>

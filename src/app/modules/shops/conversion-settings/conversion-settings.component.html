@@ -1,0 +1,49 @@
+<main class="pb-50">
+    <article class="wrap">
+        <section>
+            <div class="coupon-menu-registration">
+                <div class="flex-row" id="listPage">
+                    <div class="col-12 mt-0">
+                        <h2 class="title title-bold pl-10">
+                            <span>{{'conversionSettings.comparisonList' | translate}}</span>
+                        </h2>
+                    </div>
+                    <div class="col-12">
+                        <div class="pl-0 pr-0">
+                            <div class="add-button mt-0">
+                                <button class="bg-pink"
+                                    (click)="openModal('create')"><span></span><em>{{'conversionSettings.addConversion' | translate}}</em></button>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-20 pl-10 pr-10">
+                            <table class="table-border b-gray">
+                                <tr>
+                                    <th class="a-left">{{'conversionSettings.conversionName' | translate}}</th>
+                                    <th style="text-align: center;">{{'conversionSettings.editAndDelete' | translate}}
+                                    </th>
+                                </tr>
+                                <tr *ngFor="let item of listConversionSettings">
+                                    <td class="a-left">{{item?.name}}</td>
+                                    <td>
+                                        <img id="edit1" style="width: 2rem; height: 2rem; margin-right: 5px;"
+                                            src="assets/images/icon/edit-list.svg" alt="" class="trash-icon"
+                                            (click)="selectedRow(item)" />
+                                        <img id="delete" style="width: 2rem; height: 2rem; margin-right: 5px;"
+                                            src="assets/images/icon/trash-alt-solid.svg" alt="" class="trash-icon"
+                                            (click)="handleDelete(item)" />
+                                    </td>
+                            </table>
+
+                        </div>
+                        <div class="btn-area flex-row">
+                            <button class="bt skip next_full open_dialog border-btn" (click)="handleBackTo()">{{'conversionSettings.btnBack' | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+</main>
+<app-conversion-registration-modal [userLogin]="userLogin" [open]="open" (confirm)="closeModal($event)"
+    [selectCurrent]="selectCurrent"></app-conversion-registration-modal>
+<app-confirm-modal #confirmModal (confirm)="handleConfirm($event)"></app-confirm-modal>

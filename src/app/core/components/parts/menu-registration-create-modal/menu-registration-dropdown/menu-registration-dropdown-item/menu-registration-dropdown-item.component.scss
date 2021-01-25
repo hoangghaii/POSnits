@@ -1,0 +1,32 @@
+.dropdown {
+  &-content {
+    &__item {
+      display: flex;
+      border-top: 1px solid #e9e9e9;
+      background-color: none;
+      transition: background-color 0.3s;
+      &.focus {
+        background-color: #ff648c;
+      }
+      &:last-child {
+        border-bottom: 1px solid #e9e9e9;
+      }
+      padding: 10px;
+      &--left {
+        line-height: 1.3em;
+        &.focus {
+          color: #fff;
+        }
+      }
+      &--right {
+        margin-left: auto;
+        color: #ff648c;
+        font-weight: 600;
+        transition: color 0.3s;
+        &.focus {
+          color: #fff;
+        }
+      }
+    }
+  }
+}

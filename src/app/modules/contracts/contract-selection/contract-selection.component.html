@@ -1,0 +1,91 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="customer-info-tab">
+        <div class="flex-row">
+          <div class="col-12 mt-0">
+            <h2 class="title title-bold pl-10">
+              <span>{{ 'contractors.selectDetail.title' | translate}}</span>
+            </h2>
+          </div>
+          <div class="col-12">
+            <div class="white-box pt-5 pb-20 radius-none">
+            <form [formGroup]="formDetail">
+              <div class="err ml-20 mr-20" style="margin: 0 20px 10px 20px;">
+                <app-top-error
+                  *ngIf="submitted"
+                  [form]="formDetail"
+                  [formMap]="formMap"
+                ></app-top-error>
+              </div>
+              <div class="input-group single mt-20 coupon-list-regis">
+                <div class="coupon-list">
+                  <div style="text-align: left;">
+                    <label>{{ 'contractors.selectDetail.standardFeature' | translate}}</label>
+                  </div>
+                  <div style="text-align: left;">
+                    {{ 'contractors.selectDetail.pos' | translate}}
+                  </div>
+                  <div>
+                    <label>
+                      {{helper.formatCurrency(formDetail.get('standard')?.value)
+                    + ('contractors.selectDetail.perMonth'| translate)}}</label>
+                  </div>
+                </div>
+                <div class="coupon-list">
+                  <div style="text-align: left;">
+                    <label>{{ 'contractors.selectDetail.option' | translate}}</label>
+                  </div>
+                  <div class="input-group-checkbox" style="text-align: left;">
+                    <input type="checkbox" (change)="updateTotal()" name="web" id="web" formControlName="web">
+                    <label class="checkbox-label" for="web">{{ 'contractors.selectDetail.web' | translate}}</label>
+                  </div>
+                  <div>
+                    <label>{{ helper.formatCurrency(formDetail.get('webFee')?.value)
+                    + ('contractors.selectDetail.perMonth'
+                      | translate)}}</label>
+                  </div>
+                </div>
+                <div class="coupon-list">
+                  <div style="text-align: left;">
+                    <label></label>
+                  </div>
+                  <div class="input-group-checkbox" style="text-align: left;">
+                    <input type="checkbox" (change)="updateTotal()" name="payment" id="payment"
+                           formControlName="payment">
+                    <label class="checkbox-label"
+                           for="payment">{{ 'contractors.selectDetail.payment' | translate}}</label>
+                  </div>
+                  <div>
+                    <label>{{ helper.formatCurrency(formDetail.get('paymentFee')?.value)
+                    + ('contractors.selectDetail.perMonth'| translate)}}</label>
+                  </div>
+                </div>
+                <hr>
+                <div class="coupon-list">
+                  <div style="text-align: left;">
+                    <label></label>
+                  </div>
+                  <div>
+                    <label>{{ 'contractors.selectDetail.total' | translate}}</label>
+                  </div>
+                  <div>
+                    <label>{{ helper.formatCurrency(formDetail.get('total')?.value)
+                    + ('contractors.selectDetail.perMonth'| translate)}}</label>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-area flex-row">
+        <button type="button" (click)="back()"
+                class="bt skip">{{ 'contractors.selectDetail.btnBack' | translate}}</button>
+        <button type="button" (click)="goToConfirm()"
+                class="bt next">{{ 'contractors.selectDetail.btnNext' | translate}}</button>
+      </div>
+    </section>
+  </article>
+</main>

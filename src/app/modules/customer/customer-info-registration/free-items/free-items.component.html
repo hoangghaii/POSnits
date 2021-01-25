@@ -1,0 +1,28 @@
+<form class="pt-10">
+  <app-top-error
+  *ngIf="submitted"
+  [form]="form"
+  [formMap]="formMap"
+></app-top-error>
+  <div class="input-group mt-10 input-group-tab" *ngFor="let item of freeItemList, let i = index">
+    <label class="input-group__label input-group__label-tab">{{item.question}}</label>
+    <select *ngIf="item.multiple_flg === '1' && item.html_type !== '0'" class="select-tab"
+    [(ngModel)]="item.result" [ngModelOptions]="{standalone: true}"
+    [ngClass]="{'input-error':submitted && item.result == ''}">
+      <option value="0" *ngFor="let answer of item.answer" value="{{answer}}">{{answer}}</option>
+    </select>
+    <input *ngIf="item.multiple_flg === '0' || item.html_type === '0'" type="text" class="input-text input-text-tab"
+      value="{{item.answer}}" [(ngModel)]="item.result" [ngModelOptions]="{standalone: true}"
+      [ngClass]="{'input-error':submitted && item.result == ''}">
+    <div class="group-checkbox" *ngIf="item.multiple_flg === '2' && item.html_type !== '0'">
+      <div class="input-group-checkbox" *ngFor="let answer of item.answer; let i = index">
+        <input type="checkbox" [name]="item.question + i" [id]="item.question + i" [(ngModel)]="item.result[i]" [ngModelOptions]="{standalone: true}">
+        <label class="checkbox-label" [for]="item.question + i" [id]="item.question + i">{{answer}}</label>
+      </div>
+    </div>
+  </div>
+  <div class="btn-area flex-row">
+    <div class="bt skip" (click)="changeRouter()">{{'customer.btnBack' | translate}}</div>
+    <div class="bt next open_dialog" (click)="submitForm()">{{'customer.btnSingUp' | translate}}</div>
+  </div>
+</form>

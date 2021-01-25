@@ -1,0 +1,50 @@
+.w-px {
+  &.w-200 {
+    width: 200px;
+  }
+  &.w__100 {
+    width: 100%;
+  }
+}
+
+.add-button {
+  button {
+    &.bg-pink {
+      background: #ff648c;
+      border: none;
+      em {
+        color: #fff;
+      }
+      span {
+        &:after,
+        &:before {
+          background: #fff;
+        }
+      }
+    }
+  }
+}
+
+.table-border {
+  width: 100%;
+  &.b-gray {
+    border: 1px solid gray !important;
+    th,
+    td {
+      border: 1px solid gray !important;
+      padding: 4px;
+    }
+    td:last-child {
+        text-align: center;
+        img: {
+            margin: 0px 2px;
+        }
+    }
+  }
+}
+
+.open_dialog {
+  padding: 7px 0 4px !important;
+  max-width: 960px;
+  margin: auto;
+}

@@ -1,0 +1,143 @@
+<div *ngIf="showErrors()" class="mt-10 input-error">
+  <div *ngFor="let item of formMap | keyvalue">
+    <div *ngIf="(item.value | typeof) != 'object'">
+      <div class="item-error" *ngIf="form.get(item.key) && form.get(item.key).errors?.required">
+        {{ "validatorMsgError.required" | translate: {name: item.value} }}
+      </div>
+      <div class="item-error" *ngIf="form.get(item.key) && form.get(item.key).errors?.selectRequired">
+        {{
+        "validatorMsgError.selectedRequired" | translate: {name: item.value}
+        }}
+      </div>
+      <div class="item-error" *ngIf="form.get(item.key) && form.get(item.key).errors?.dateRequired">
+        {{ "validatorMsgError.dateRequired" | translate: {name: item.value} }}
+      </div>
+      <div class="item-error" *ngIf="form.get(item.key) && form.get(item.key).errors?.max">
+        {{ "validatorMsgError.max" | translate: {name: item.value} }}
+      </div>
+      <div class="item-error" *ngIf="form.get(item.key) && form.get(item.key).errors?.min">
+        {{ "validatorMsgError.min" | translate: {name: item.value} }}
+      </div>
+      <div class="item-error" *ngIf="form.get(item.key) && form.get(item.key).errors?.minlength">
+        {{ "validatorMsgError.minlength" | translate: {
+        name: item.value,
+        length: form.get(item.key).errors?.minlength?.requiredLength
+      } }}
+      </div>
+      <div class="item-error" *ngIf="form.get(item.key) && form.get(item.key).errors?.maxlength">
+        {{"validatorMsgError.maxlength"| translate: {
+        name: item.value,
+        length: form.get(item.key).errors?.maxlength?.requiredLength
+      } }}
+      </div>
+      <div class="item-error" *ngIf="form.get(item.key) && form.get(item.key).errors?.email">
+        {{ "validatorMsgError.email" | translate: {name: item.value} }}
+      </div>
+      <div class="item-error" *ngIf="form.get(item.key) && form.get(item.key).errors?.isNumber">
+        {{ "validatorMsgError.isNumber" | translate: {name: item.value} }}
+      </div>
+      <div class="item-error" *ngIf="form.get(item.key) && form.get(item.key).errors?.isLteDate">
+        {{"validatorMsgError.isLteDate"| translate: {a: item.value} }}
+      </div>
+      <div class="item-error" *ngIf="form.get(item.key) && form.get(item.key).errors?.isGteDate">
+        {{"validatorMsgError.isGteDate"| translate: {a: item.value} }}
+      </div>
+      <div class="item-error" *ngIf="form.get(item.key) && form.get(item.key).errors?.isTelNumber">
+        {{ "validatorMsgError.isTelNumber" | translate: {
+        name: item.value
+        , length: form.get(item.key).errors?.length
+      } }}
+      </div>
+      <div class="item-error" *ngIf="form.get(item.key) && form.get(item.key).errors?.pattern">
+        {{"validatorMsgError.isNumber"| translate: {name: item.value} }}
+      </div>
+      <div class="item-error" *ngIf="form.get(item.key) && form.get(item.key).errors?.isNumberZipCode">
+        {{"validatorMsgError.isNumberZipCode"| translate: {name: item.value} }}
+      </div>
+      <div class="item-error" *ngIf="form.get(item.key) && form.get(item.key).errors?.isCharacterKatakana">
+        {{"validatorMsgError.isCharacterKatakana"| translate }}
+      </div>
+      <div class="item-error" *ngIf="form.get(item.key) && form.get(item.key).errors?.isDay">
+        {{"validatorMsgError.isDay"| translate: {name: item.value} }}
+      </div>
+      <div class="item-error" *ngIf="form.get(item.key) && form.get(item.key).errors?.isPostalCdNumber">
+        {{"validatorMsgError.isPostalCdNumber"| translate: {length: form.get(item.key).errors?.length} }}
+      </div>
+    </div>
+    <div *ngIf="(item | typeof) == 'object'">
+      <ng-container *ngFor="let itemErr of getFormChildErr(form, item.key)| keyvalue">
+        <div *ngFor="let childItem of item.value | keyvalue">
+          <div class="item-error"
+               *ngIf="itemErr.key == childItem.key && itemErr.value?.errors?.required">
+            {{ "validatorMsgError.required" | translate: {name: childItem.value} }}
+          </div>
+          <div class="item-error"
+               *ngIf="itemErr.key == childItem.key && itemErr.value?.errors?.selectRequired">
+            {{"validatorMsgError.selectedRequired" | translate: {name: childItem.value} }}
+          </div>
+          <div class="item-error"
+               *ngIf="itemErr.key == childItem.key && itemErr.value?.errors?.dateRequired">
+            {{ "validatorMsgError.dateRequired" | translate: {name: childItem.value} }}
+          </div>
+          <div class="item-error"
+               *ngIf="itemErr.key == childItem.key && itemErr.value?.errors?.max">
+            {{ "validatorMsgError.max" | translate: {name: childItem.value} }}
+          </div>
+          <div class="item-error"
+               *ngIf="itemErr.key == childItem.key && itemErr.value?.errors?.min">
+            {{ "validatorMsgError.min" | translate: {name: childItem.value} }}
+          </div>
+          <div class="item-error"
+               *ngIf="itemErr.key == childItem.key && itemErr.value?.errors?.minlength">
+            {{ "validatorMsgError.minlength" | translate: {
+            name: childItem.value,
+            length: itemErr.value?.errors?.minlength?.requiredLength
+          } }}
+          </div>
+          <div class="item-error"
+               *ngIf="itemErr.key == childItem.key && itemErr.value?.errors?.maxlength">
+            {{"validatorMsgError.maxlength"| translate: {
+            name: childItem.value,
+            length: itemErr.value?.errors?.maxlength?.requiredLength
+          } }}
+          </div>
+          <div class="item-error"
+               *ngIf="itemErr.key == childItem.key && itemErr.value?.errors?.email">
+            {{ "validatorMsgError.email" | translate: {name: childItem.value} }}
+          </div>
+          <div class="item-error"
+               *ngIf="itemErr.key == childItem.key && itemErr.value?.errors?.isNumber">
+            {{ "validatorMsgError.isNumber" | translate: {name: childItem.value} }}
+          </div>
+          <div class="item-error"
+               *ngIf="itemErr.key == childItem.key && itemErr.value?.errors?.isLteDate">
+            {{"validatorMsgError.isLteDate"| translate: {a: childItem.value} }}
+          </div>
+          <div class="item-error"
+               *ngIf="itemErr.key == childItem.key && itemErr.value?.errors?.isGteDate">
+            {{"validatorMsgError.isGteDate"| translate: {a: childItem.value} }}
+          </div>
+          <div class="item-error"
+               *ngIf="itemErr.key == childItem.key && itemErr.value?.errors?.isTelNumber">
+            {{ "validatorMsgError.isTelNumber" | translate: {
+            name: childItem.value
+            , length: itemErr.value?.errors?.length
+          } }}
+          </div>
+          <div class="item-error"
+               *ngIf="itemErr.key == childItem.key && itemErr.value?.errors?.pattern">
+            {{"validatorMsgError.isNumber"| translate: {name: childItem.value} }}
+          </div>
+          <div class="item-error"
+               *ngIf="itemErr.key == childItem.key && itemErr.value?.errors?.isNumberZipCode">
+            {{"validatorMsgError.isNumberZipCode"| translate: {name: childItem.value} }}
+          </div>
+          <div class="item-error"
+               *ngIf="itemErr.key == childItem.key && itemErr.value?.errors?.isCharacterKatakana">
+            {{"validatorMsgError.isCharacterKatakana"| translate }}
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

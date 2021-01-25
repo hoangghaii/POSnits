@@ -1,0 +1,89 @@
+<div class="create-modal" [ngClass]="open ? 'open' : null">
+  <div class="create-modal-overlay" (click)="closeModal()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">
+      {{ "equipment.title" | translate }} <span class="create-modal__header-close" (click)="closeModal()">&times;</span>
+    </div>
+    <div class="create-modal__body">
+      <form action="" [formGroup]="equipmentForm">
+        <div class="err ">
+          <app-top-error
+            *ngIf="submitted"
+            [form]="equipmentForm"
+            [formMap]="formMap"
+          ></app-top-error>
+        </div>
+        <div class="input-group single mt-15">
+          <label for="" class="input-group__label">{{"equipment.type" | translate}}</label>
+          <div class="radio-group">
+            <label class="radio-group__label"
+                   *ngFor="let item of listEquipmentCd"
+                   for="{{ item.key + item.value }}">
+              <span class="flex-box">
+                <input
+                  class="radio-group__input"
+                  type="radio"
+                  id="{{ item.key + item.value }}"
+                  name="equipmentCd"
+                  value="{{ item.key }}"
+                  formControlName="equipmentCd"/>
+                <span
+                  class="fake-btn" [ngClass]="{'input-error': submitted && f.equipmentCd.errors}"></span>
+                <span class="text">{{ item.value }}</span>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="input-group single mt-15">
+          <label for="" class="input-group__label">{{
+            "equipment.name" | translate
+            }}</label>
+          <input
+            type="text"
+            class="input-text"
+            placeholder="{{ 'equipment.placeholderName' | translate }}"
+            formControlName="name"
+            [ngClass]="{
+              'input-error': submitted && f.name.errors
+            }"
+          />
+        </div>
+        <div class="input-group single mt-15">
+          <label for="" class="input-group__label">{{
+            "equipment.amount" | translate
+            }}</label>
+          <input
+            type="text"
+            class="input-text"
+            placeholder="{{ 'equipment.placeholderAmount' | translate }}"
+            formControlName="amount"
+            [ngClass]="{
+              'input-error': submitted && f.amount.errors
+            }"
+          />
+        </div>
+        <div class="btn-grp mt-20" *ngIf="equipmentId; else btnCreate">
+          <button
+            type="submit"
+            class="btn mt-20 btn-delete"
+            (click)="handleDelete()"
+          >
+            {{ "common.btnDelete" | translate }}
+          </button>
+          <button type="submit" class="btn mt-20" (click)="handleUpdate()">
+            {{ "common.btnUpdate" | translate }}
+          </button>
+        </div>
+        <ng-template #btnCreate>
+          <button type="submit" class="btn mt-20" (click)="handleCreate()">
+            {{ "common.btnRegister" | translate }}
+          </button>
+        </ng-template>
+      </form>
+    </div>
+  </div>
+</div>
+<app-confirm-modal
+  #confirmModal
+  (confirm)="handleConfirm($event)"
+></app-confirm-modal>

@@ -1,0 +1,32 @@
+.textarea-big {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  margin-top: 10px;
+  box-sizing: border-box;
+  border: 1px solid #dadbdb;
+  border-radius: 9.5px;
+  background-color: #fff;
+  resize: none;
+  font-size: 15px;
+}
+.textarea-big:focus {
+  outline: none;
+}
+.open_dialog {
+  padding: 15px 0 !important;
+}
+
+.d-flex{
+  display: flex;
+}
+
+.w-px {
+  &.w-200 {
+    width: 200px;
+  }
+  &.w__100 {
+    width: 100%;
+  }
+}
+

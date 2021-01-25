@@ -1,0 +1,130 @@
+<div class="create-modal" [ngClass]="open ? 'open' : null">
+  <div class="create-modal-overlay" (click)="closeModal()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">
+      {{ "addStaff.staffCreate.staffInformationRegistration" | translate }}
+      <span class="create-modal__header-close" (click)="closeModal()"
+        >&times;</span
+      >
+    </div>
+    <div class="create-modal__body">
+      <form [formGroup]="formRegister">
+        <div class="err">
+          <app-top-error
+            *ngIf="submitted"
+            [form]="formRegister"
+            [formMap]="formMap"
+          ></app-top-error>
+        </div>
+        <div class="input-group file">
+          <label class="input-group__label">{{
+            "addStaff.staffCreate.staffPhoto" | translate
+          }}</label>
+          <app-upload-file *ngIf="open" [label]="'mt-10'" [imagesUrl]="imagesUrl" [fileSelectionLabel]="'addStaff.staffCreate.fileSelection' | translate" (confirm)="fileSelected($event)"></app-upload-file>
+        </div>
+        <div class="input-group single mt-15">
+          <label class="input-group__label">{{
+            "addStaff.staffCreate.staffName" | translate
+          }}</label>
+          <input
+            [ngClass]="{
+              'input-error': submitted && formRegister.controls.name.errors
+            }"
+            type="text"
+            class="input-text"
+            formControlName="name"
+            placeholder="{{
+              'addStaff.staffCreate.pleaseEnterTheStaffName' | translate
+            }}"
+          />
+        </div>
+        <div class="input-group single mt-15">
+          <label class="input-group__label">{{
+            "addStaff.staffCreate.frigana" | translate
+          }}</label>
+          <input
+            [ngClass]="{
+              'input-error': submitted && formRegister.controls.nameKana.errors
+            }"
+            type="text"
+            class="input-text"
+            placeholder="{{
+              'addStaff.staffCreate.pleaseEnterFrigana' | translate
+            }}"
+            formControlName="nameKana"
+          />
+        </div>
+        <div class="input-group mt-10">
+          <label class="input-group__label">{{
+            "addStaff.staffCreate.sex" | translate
+          }}</label>
+          <div class="radio-group">
+            <label
+              class="radio-group__label"
+              *ngFor="let item of sexList"
+              for="{{ item.key + item.value }}"
+            >
+              <span class="flex-box">
+                <input
+                  class="radio-group__input"
+                  type="radio"
+                  id="{{ item.key + item.value }}"
+                  name="sex"
+                  value="{{ item.key }}"
+                  formControlName="sex"
+                />
+                <span
+                  class="fake-btn"
+                  [ngClass]="{
+                    'input-error': submitted && formRegister.controls.sex.errors
+                  }"
+                ></span>
+                <span class="text">{{ item.value }}</span>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="input-group mt-10">
+          <label class="input-group__label">{{
+            "addStaff.staffCreate.affiliationStore" | translate
+          }}</label>
+          <select
+            [ngClass]="{
+              'input-error input-text':
+                submitted && formRegister.controls.shopId.errors
+            }"
+            name="shopId"
+            id="shopId"
+            class="mt-10"
+            formControlName="shopId"
+          >
+            <option *ngFor="let item of shopList" [value]="item.company_id">
+              {{ item.name }}
+            </option>
+          </select>
+        </div>
+        <div class="btn-grp mt-20" *ngIf="selectCurrent; else btnCreate">
+          <button
+            type="submit"
+            class="btn mt-20 btn-delete"
+            (click)="handleDelete()"
+          >
+            {{ "addStaff.staffCreate.delete" | translate }}
+          </button>
+          <button type="submit" class="btn mt-20" (click)="handleUpdate()">
+            {{ "addStaff.staffCreate.update" | translate }}
+          </button>
+        </div>
+        <ng-template #btnCreate>
+          <button type="submit" class="btn mt-20" (click)="handleCreate()">
+            {{ "addStaff.staffCreate.signUp" | translate }}
+          </button>
+        </ng-template>
+      </form>
+    </div>
+  </div>
+</div>
+<app-confirm-modal
+  #confirmModal
+  (confirm)="handleConfirm($event)"
+></app-confirm-modal>

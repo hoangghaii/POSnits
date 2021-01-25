@@ -1,0 +1,135 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span>{{ "inputItemSetting.title" | translate }}</span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <div class="white-box radius-none pt-15 table-input-item-setting">
+            <div class="err pl-20 pr-20">
+              <app-top-error
+                *ngIf="submitted"
+                [form]="errForm"
+                [formMap]="formMap"
+              ></app-top-error>
+            </div>
+            <form action="" [formGroup]="inputItemSettingForm"  #appendflex>
+              <div class="header-flex">
+                <div class="input-group__label">
+                  {{ "inputItemSetting.itemName" | translate }}
+                </div>
+
+                <div class="input-group__label">
+                  {{ "inputItemSetting.viewFlg" | translate }}
+                </div>
+
+                <div class="input-group__label">
+                  {{ "inputItemSetting.requiredFlg" | translate }}
+                </div>
+
+                <div class="input-group__label">
+                  {{ "inputItemSetting.description" | translate }}
+                </div>
+              </div>
+              <div class="list-data" formArrayName="items">
+                <div
+                  *ngFor="let item of items.controls; let i = index"
+
+                >
+                <div [formGroupName]="i">
+                  <div class="div-flex"  >
+                    <div class="lable">
+                      {{ items.controls[i].get("name")?.value }}
+                    </div>
+
+                      <div class="radio-group">
+                        <label
+                          class="radio-group__label"
+                          *ngFor="let subItem of listViewFlg"
+                          for="{{ subItem.key + subItem.value +i}}"
+                        >
+                            <span class="flex-box">
+                              <input
+                                class="radio-group__input"
+                                type="radio"
+                                id="{{ subItem.key + subItem.value +i }}"
+
+                                value="{{ subItem.value }}"
+                                formControlName="viewFlg"
+                              />
+                              <span class="fake-btn"></span>
+                              <span class="text">{{ subItem.key }}</span>
+                            </span>
+                        </label>
+                      </div>
+                      <div class="radio-group">
+                        <label
+                          class="radio-group__label"
+                          *ngFor="let subItem of listRequiredFlg"
+                          for="{{ subItem.key + subItem.value+i+1}}"
+                        >
+                            <span class="flex-box">
+                              <input
+                                class="radio-group__input"
+                                type="radio"
+                                id="{{ subItem.key + subItem.value +i+1}}"
+
+                                value="{{ subItem.value }}"
+                                formControlName="requiredFlg"
+                              />
+                              <span class="fake-btn" id=""></span>
+                              <span class="text">{{ subItem.key }}</span>
+                            </span>
+                        </label>
+                      </div>
+
+
+                    <div class="add-row-btn" style="margin-top: 0px">
+                      <a (click)="appendDescription(i)"><span></span></a>
+                    </div>
+                  </div>
+                  <div class="append-flex a{{i}}" [ngClass]="{
+                          'show': (items.controls[i].get('description').value || items.controls[i].get('descriptionType').value )
+                        }" >
+                    <div class="pl-10">
+                      <input
+                        type="text"
+                        placeholder=""
+                        class="input-text w-px w__100"
+                        formControlName="description"
+                      />
+                    </div>
+                    <div class="pt-5 pb-5">
+                      <select  class="combobox2"
+                      formControlName="descriptionType">
+                        <option
+                          *ngFor="let item of listDescriptionType"
+                          value="{{ item.value }}"
+                        >
+                          {{ item.key }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </form>
+
+            <div class="btn-area flex-row">
+              <div class="bt skip" routerLink="/reservations">
+                {{ "inputItemSetting.back" | translate }}
+              </div>
+              <div class="bt next open_dialog" (click)="handledSubmit()">
+                {{ "inputItemSetting.confirm" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>

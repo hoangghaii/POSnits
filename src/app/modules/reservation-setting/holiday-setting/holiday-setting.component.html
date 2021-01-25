@@ -1,0 +1,31 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span>{{ "holidaySetting.title1" | translate }}</span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <form action="">
+            <div class="white-box radius-none">
+              <app-reservation-step [stepNum]="5"></app-reservation-step>
+              <h2 class="inner-title title-bold">
+                <span>{{ "holidaySetting.title2" | translate }}</span>
+              </h2>
+              <app-reservation-calendar #calendarComponent
+                                        [days]="days"
+                                        [multi]="true"
+                                        (select)="choiceDate($event)"></app-reservation-calendar>
+              <div class="btn-area flex-row">
+                <div class="bt next next_full open_dialog" (click)="nextStep()"
+                [ngClass]="(flag==true)?'editBtn':'null'">{{status }}</div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>

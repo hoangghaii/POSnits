@@ -1,0 +1,97 @@
+<main class="pb-50">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span>{{ "staffShiftRegistration.staffShiftRegistration" | translate }}</span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <form [formGroup]="shiftFrom">
+            <div class="err pl-20 pr-20 mr-20 pt-15">
+              <app-top-error *ngIf="submitted" [form]="shiftFrom" [formMap]="formMap"></app-top-error>
+            </div>
+            <div class="white-box pt-5 pb-20 radius-none">
+              <div class="input-group single mt-15">
+                <label class="input-group__label">{{ "staffShiftRegistration.setMonth" | translate }}</label>
+                <!-- <input (change)="onSelectCondition()" formControlName="month" id="month" type="date" class="input-text"
+                  [ngClass]="{'input-error': submitted && shiftFrom.controls.month.errors}"> -->
+                <select (change)="onSelectCondition()" formControlName="month" class="mt-10 input-text"
+                        [ngClass]="{'input-error': submitted && shiftFrom.controls.month.errors}">
+                  <option *ngFor="let item of monthAndYear" [value]="item.value">{{ item.label }}</option>
+                </select>
+              </div>
+              <div class="input-group single mt-10">
+                <label for="staff"
+                       class="input-group__label">{{ "staffShiftRegistration.staffSelection" | translate }}</label>
+                <select (change)="onSelectCondition()" formControlName="staffId" id="staff" class="mt-10 input-text"
+                        [ngClass]="{'input-error': submitted && shiftFrom.controls.staffId.errors}">
+                  <ng-container *ngFor="let item of listStaff">
+                    <option [value]="item.id">{{ item.name }}</option>
+                  </ng-container>
+                </select>
+              </div>
+              <div class="input-group single mt-10">
+                <label for="all-day"
+                       class="input-group__label">{{ "staffShiftRegistration.appliesToAllDays" | translate }}</label>
+                <div class="input-group-select--btn mt-10">
+                  <select formControlName="applyAllShift" id="all-day" class="input-text"
+                          [ngClass]="{'input-error': submitted && shiftFrom.controls.applyAllShift.errors}">
+                    <option value="">{{ "staffShiftRegistration.shiftPattern" | translate }}</option>
+                    <ng-container *ngFor="let item of listBasicShift">
+                      <option [value]="item.id">{{ item.name }}</option>
+                    </ng-container>
+                  </select>
+                  <button (click)="applyAll()"
+                          class="btn btn-right">{{ "staffShiftRegistration.apply" | translate }}</button>
+                </div>
+              </div>
+              <div class="input-group single mt-10">
+                <label class="input-group__label">{{ "staffShiftRegistration.applyByDayOfTheWeek" | translate }}</label>
+                <div class="mt-10 flex-display">
+                  <div class="w-100">
+                    <select formControlName="dayOfWeek"
+                            [ngClass]="{'input-error': submitted && shiftFrom.controls.dayOfWeek.errors}">
+                      <ng-container *ngFor="let item of dayOfWeeks">
+                        <option [value]="item.value">{{ item.key }}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                  <div class="w-100 ml-15 input-group pt-0">
+                    <select formControlName="applyOptionShift"
+                            [ngClass]="{'input-error': submitted && shiftFrom.controls.applyOptionShift.errors}">
+                      <option value="">{{ "staffShiftRegistration.shiftPattern" | translate }}</option>
+                      <ng-container *ngFor="let item of listBasicShift">
+                        <option [value]="item.id">{{ item.name }}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                  <button (click)="applyOption()" class="btn btn-right apply-button">
+                    {{ "staffShiftRegistration.apply" | translate }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-12 mt-0">
+          <div class="calendar-month calendar-month-staff-shift pb-45">
+            <app-staff-shift-calendar [listStaffShift]="listStaffShiftSort"
+                                      [days]="[currentMonth]" (selectDay)="handleCalender($event)"
+                                      class="staff-shift-registratiion-calendar">
+            </app-staff-shift-calendar>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<app-staff-shift-registration-detail *ngIf="detailOpen"
+                                     [isOpen]="detailOpen"
+                                     (confirm)="detailShift($event)"
+                                     [staff]="currentStaff"
+                                     [detailDate]="detailDate"
+                                     [listBasicShift]="listBasicShift">
+</app-staff-shift-registration-detail>

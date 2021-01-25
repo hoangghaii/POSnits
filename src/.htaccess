@@ -1,0 +1,16 @@
+AuthType Basic
+AuthUserFile /var/www/html/.htpasswd
+AuthName "Please enter your ID and password"
+Require valid-user
+
+# RewriteEngine on
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
+    RewriteRule ^ - [L]
+
+    RewriteRule ^ /index.html [L]
+</IfModule>

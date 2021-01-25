@@ -1,0 +1,151 @@
+<div class="create-modal" [ngClass]="open ? 'open' : null">
+  <div class="create-modal-overlay" (click)="closeModal()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">
+      {{ "discount.headerModal" | translate }}
+      <span class="create-modal__header-close" (click)="closeModal()"
+        >&times;</span
+      >
+    </div>
+    <div class="create-modal__body">
+      <form action="" [formGroup]="addDiscount">
+        <div class="err pb-10">
+          <app-top-error
+            *ngIf="submitted"
+            [form]="addDiscount"
+            [formMap]="formMap"
+          ></app-top-error>
+        </div>
+        <div class="input-group single">
+          <label for="" class="input-group__label">
+            {{ "discount.name" | translate }}
+          </label>
+          <input
+            type="text"
+            formControlName="name"
+            class="input-text"
+            placeholder="{{ 'discount.namePlaceholder' | translate }}"
+            [ngClass]="{
+              'input-error': submitted && f.name.errors
+            }"
+          />
+        </div>
+        <div class="input-group mt-10">
+          <label for="" class="input-group__label">
+            {{ "discount.discountType" | translate }}
+          </label>
+          <div class="radio-group">
+            <label
+              class="radio-group__label"
+              *ngFor="let item of listDiscountType"
+              for="{{ item.key + item.value }}"
+            >
+              <span class="flex-box">
+                <input
+                  class="radio-group__input"
+                  type="radio"
+                  id="{{ item.key + item.value }}"
+                  name="discountType"
+                  value="{{ item.key }}"
+                  formControlName="discountType"
+                />
+                <span
+                  class="fake-btn"
+                  [ngClass]="{
+                    'input-error': submitted && f.discountType.errors
+                  }"
+                ></span>
+                <span class="text">{{ item.value }}</span>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div
+          *ngIf="addDiscount.value.discountType == '1'"
+          class="input-group single mt-15 unit"
+        >
+          <label for="" class="input-group__label">
+            {{ "discount.discount" | translate }}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </label>
+          <div style="display: flex; flex-wrap: nowrap; width: 100%">
+            <input
+            type="text"
+            formControlName="discount"
+            class="input-text"
+            placeholder="{{ 'discount.discountPlaceholder' | translate }}"
+            [ngClass]="{
+              'input-error': submitted && f.discount.errors
+            }"
+          /><span style="padding-top: 20px;" class="txt">{{ "common.percent" | translate }}</span>
+          </div>
+          
+        </div>
+        <div
+          *ngIf="addDiscount.value.discountType == '2'"
+          class="input-group single mt-15 unit"
+        >
+          <label for="" class="input-group__label">
+            {{ "discount.discount" | translate }}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </label>
+          <input
+            type="text"
+            formControlName="discount"
+            class="input-text"
+            placeholder="{{ 'discount.discountPlaceholder' | translate }}"
+            [ngClass]="{
+              'input-error': submitted && f.discount.errors
+            }"
+          />
+          <span class="txt">
+            {{ "common.price" | translate }}
+          </span>
+        </div>
+        <div class="input-group mt-10">
+          <label for="" class="input-group__label">
+            {{ "discount.discountCd" | translate }}
+          </label>
+          <select
+            formControlName="discountCd"
+            class="mt-10 select-form"
+            [ngClass]="{
+              'input-error': submitted && f.discountCd.errors
+            }"
+          >
+            <option
+              *ngFor="let item of listDiscountCd"
+              value="{{ item.value }}"
+            >
+              {{ item.key }}
+            </option>
+          </select>
+        </div>
+        <input type="hidden" name="id" formControlName="id" />
+        <input type="hidden" name="sort" formControlName="sort" />
+        <input type="hidden" formControlName="updateAt" />
+        <div class="btn-grp mt-20" *ngIf="selectCurrent; else btnCreate">
+          <button
+            type="submit"
+            class="btn mt-20 btn-delete"
+            (click)="handleDelete()"
+          >
+            {{ "common.btnDelete" | translate }}
+          </button>
+          <button type="submit" class="btn mt-20" (click)="handleUpdate()">
+            {{ "common.btnUpdate" | translate }}
+          </button>
+        </div>
+        <ng-template #btnCreate>
+          <button type="submit" class="btn mt-20" (click)="handleCreate()">
+            {{ "common.btnRegister" | translate }}
+          </button>
+        </ng-template>
+      </form>
+    </div>
+  </div>
+</div>
+<app-confirm-modal
+  #confirmModal
+  (confirm)="handleConfirm($event)"
+></app-confirm-modal>

@@ -1,0 +1,71 @@
+<div class="create-modal" [ngClass]="isOpen ? 'open' : null">
+  <div class="create-modal-overlay" (click)="close()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">
+      {{ "menuRegistration.btnOpenModal" | translate }}
+      <span class="create-modal__header--modal" (click)="close()"></span>
+    </div>
+    <div class="create-modal__body">
+      <div #menuItem class="menus">
+        <div class="list mt-15 pr-15 pl-15">
+          <div class="list__header" style="position: sticky;" id="btn-toggle-bigList">
+            {{ "menuRegistration.technology" | translate }}
+          </div>
+          <ul class="menu-list">
+            <li *ngFor="let menu of menuItems" class="dropdown-content">
+              <ng-container *ngIf="menu.category_cd === '01'">
+                <div class="collapse">
+                  <div class="collapsible collapse-head">
+                    {{ menu.name }}
+                    <span class="dropdown-icon"></span>
+                  </div>
+                  <div class="collapse-items">
+                    <div class="child-item" [attr.data-item]="menu?.id +'_'+item?.id+'_'+item?.category_cd"
+                         *ngFor="let item of getItem(menu.id)">
+                      <div class="col-6 item-name">{{item?.name}}</div>
+                      <div class="col-6 item-price">{{ helper.formatCurrency(item?.price) }}</div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </li>
+          </ul>
+        </div>
+        <div class="list pr-15 pl-15">
+          <div class="list__header" style="position: sticky;" id="btn-toggle-bigList">
+            {{ "menuRegistration.course" | translate }}
+          </div>
+          <ul class="menu-list">
+            <li *ngFor="let menu of menuItems" class="dropdown-content">
+              <ng-container *ngIf="menu.category_cd === '02'">
+                <div class="collapse">
+                  <div class="collapsible collapse-head">
+                    {{ menu.name }}
+                    <span class="dropdown-icon"></span>
+                  </div>
+                  <div class="collapse-items">
+                    <div class="child-item" [attr.data-item]="menu?.id +'_'+item?.id+'_'+item?.category_cd"
+                         *ngFor="let item of getItem(menu.id)">
+                      <div class="col-6 item-name">{{item?.name}}</div>
+                      <div class="col-6 item-price">{{ helper.formatCurrency(item?.price) }}</div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-grp mt-20 mb-20 pr-15 pl-15">
+      <button type="submit" class="btn mt-20 btn-delete" (click)="reset()">
+        {{ "menuRegistration.btnDeselection" | translate }}
+      </button>
+      <button type="submit" class="btn mt-20 btn-submit" (click)="close(true)">
+        {{ "menuRegistration.btnCreateModal" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

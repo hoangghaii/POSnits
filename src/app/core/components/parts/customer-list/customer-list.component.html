@@ -1,0 +1,90 @@
+<main class="pb-50" *ngIf="!isPopup">
+  <article class="wrap">
+    <section>
+      <div class="flex-row">
+        <div class="col-12 mt-0">
+          <h2 class="title title-bold pl-10">
+            <span>{{'customer.customerInfoSearch' | translate}}</span>
+          </h2>
+        </div>
+        <div class="col-12">
+          <div class="pl-0 pr-0 align-center">
+            <button class="btn w-30" (click)="nextPage()"><img class="icon-serch custom"
+                src="assets/images/icon/ico_pinkplus.svg" alt="">&nbsp;{{'customer.registerNew' | translate}}</button>
+            <button class="btn w-30" (click)="openPopup()"><img class="icon-serch custom"
+                src="assets/images/icon/ico_pinksearch.svg" alt="">&nbsp;{{'customer.search' | translate}}</button>
+          </div>
+          <div class="list mt-30">
+            <div class="list__header">
+              {{'customer.customerInfoList' | translate}}
+            </div>
+            <div class="list__body toggle" [ngClass]="showList ? '' : 'animation'">
+              <ul>
+                <li class="item-cus-modal" *ngFor="let cus of customerList">
+                  <div>
+                    <div>
+                      <small>{{'customer.customerNo' | translate}}.{{cus.customer_no}}</small>
+                      <p><span class="cursor-pointer" (click)="moveEditPage(cus)">{{cus.firstname + ' ' +
+                          cus.lastname}}</span><small>（{{ helper.getSex(cus.sex) }}）
+                           </small></p>
+                    </div>
+                    <div>
+                      <label>
+                        <img onerror="this.onerror=null;this.src='assets/images/icon/no-img-staff.svg';" [src]="cus?.customer_img" />
+                      </label>
+                    </div>
+                  </div>
+                  <div class="mt-0 pb-10 row-visit">
+                    {{'customer.numberOfVisit1' | translate}}：<span
+                      style="color: #ff648c; margin: 0px 5px;">{{ cus?.visit_cnt }} {{'customer.times'
+                      | translate}}</span>
+                      {{'customer.fistVisitDate' | translate}}：<span
+                      style="margin: 0px 5px;">{{ cus?.visit_cnt !== 0 ? (cus?.first_visit | date : "yyyy-MM-dd") : '-' }}</span>
+                    {{'customer.lastVisitDate' | translate}}：<span
+                      style="margin: 0px 5px;">{{ cus?.visit_cnt !== 0 ? (cus?.last_visit | date : "yyyy-MM-dd") : '-' }}</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<div class="create-modal" [ngClass]="status ? 'open' : ''" *ngIf="isPopup">
+  <div class="create-modal-overlay" (click)="closePopup()"></div>
+  <div class="create-modal__inner">
+    <div class="create-modal__header">
+      {{'customer.customerInfoSearchPopup' | translate}}
+      <span class="create-modal__header-close" (click)="closePopup()">&times;</span>
+    </div>
+    <div class="list">
+      <div class="list__header gray">
+        {{'customer.customerInfoList' | translate}}
+      </div>
+      <div class="list__body toggle" [ngClass]="showList ? '' : 'animation'">
+        <ul>
+          <li class="item-cus-modal" *ngFor="let cus of customerList">
+            <div style="padding: 5px 0px;">
+              <div>
+                <small>{{'customer.customerNo' | translate}}.{{cus.customer_no}}</small>
+                <p><span class="cursor-pointer" (click)="moveEditPage(cus)">{{cus.firstname + ' ' +
+                    cus.lastname}}</span><small>(
+                    {{ helper.getSex(cus.sex) }} )</small></p>
+              </div>
+              <div class="avatar-cus-modal">
+                <label>
+                  <img onerror="this.onerror=null;this.src='assets/images/icon/no-img-staff.svg';" [src]="cus.customer_img" />
+                </label>
+              </div>
+            </div>
+            <div class="mt-0 pb-10">{{'customer.fistVisitDate' | translate}}：{{cus.first_visit}}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

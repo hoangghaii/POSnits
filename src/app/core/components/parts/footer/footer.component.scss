@@ -1,0 +1,92 @@
+.footer .sp {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+}
+.footer .sp nav {
+  background: #fff;
+  border-radius: 32px 32px 0 0;
+  padding: 0 25px;
+  padding-bottom: 18px;
+  padding-top: 12px;
+  position: relative;
+}
+.footer .sp nav > div {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: 72px;
+  top: -15px;
+  margin: auto;
+  background: #fff;
+}
+.footer .sp nav > div a {
+  display: block;
+  width: 60px;
+  height: 60px;
+  background: #ff648c;
+  border-radius: 60px;
+  text-align: center;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.footer .sp nav > div a em {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  width: 100%;
+}
+.footer .sp nav > div a img {
+  width: 20px;
+}
+.footer .sp nav > div a span {
+  font-size: 10px;
+  font-size: 1rem;
+  display: block;
+  margin-top: 5px;
+  color: #fff;
+}
+.footer .sp nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.footer .sp nav ul li {
+  width: 40px;
+  text-align: center;
+}
+.footer .sp nav ul li a {
+  display: block;
+}
+.footer .sp nav ul li a img {
+  height: 22px;
+}
+.footer .sp nav ul li a span {
+  font-size: 10px;
+  font-size: 1rem;
+  display: block;
+  margin-top: 5px;
+}
+.footer .sp nav ul li a .type02 {
+  display: none;
+}
+.footer .sp nav ul li a.on .type01 {
+  display: none;
+}
+.footer .sp nav ul li a.on .type02 {
+  display: block;
+  margin: auto;
+}
+.cursor-pointer {
+  cursor: pointer;
+}

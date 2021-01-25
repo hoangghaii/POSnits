@@ -1,0 +1,43 @@
+<div class="dialog-cancel" [ngClass]="isOpen ? 'show-dialog' : 'hide-dialog'">
+  <div class="in staff-regis">
+    <div class="mb-20">
+      <form>
+        <div class="pt-0 pb-0">
+          <div style="position: relative; width: 100%;">
+            <span (click)="closeModal()" class="create-modal__header-close close">&times;</span>
+          </div>
+
+          <div class="input-group p-0">
+            <div class="pt-2 pl-2">
+              {{ staff?.name }}&nbsp;&nbsp;{{ detailDate | date:'MM月dd日'}}{{ "staffShiftRegistration.detail.title" |
+              translate}}
+            </div>
+          </div>
+          <div class="input-group mt-10">
+            <label for="staff" class="input-group__label">
+              {{ "staffShiftRegistration.detail.shiftTitle" | translate}}
+            </label>
+            <select id="staff" class="mt-10 input-text" [(ngModel)]="selectShiftId"
+                    [ngModelOptions]="{standalone: true}">
+              <option [ngValue]="''"
+                      selected>{{ "staffShiftRegistration.detail.shiftSelectTitle" | translate }}</option>
+              <ng-container *ngFor="let item of listBasicShift">
+                <option [ngValue]="item?.id">{{ item?.name }}</option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="btn-grp pt-10">
+      <div class="flex-row" style="width: 100%; flex-wrap: nowrap;">
+        <button (click)="closeModal()" class="btn w-half " style="background: #95a5a6;">
+          {{ "staffShiftRegistration.detail.btnCancel" | translate }}
+        </button>
+        <button (click)="onSubmit()" class="btn w-half w-half-pink">
+          {{ "staffShiftRegistration.detail.btnUpdate" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
